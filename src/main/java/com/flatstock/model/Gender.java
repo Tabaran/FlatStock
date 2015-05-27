@@ -3,13 +3,13 @@ package com.flatstock.model;
 /**
  * Created by Valentin on 25.05.2015.
  */
-public enum Sex {
+public enum Gender {
     MALE("male"),
     FEMALE("female");
 
     String name;
 
-    Sex(String name){
+    Gender(String name){
         this.name = name;
     }
 }

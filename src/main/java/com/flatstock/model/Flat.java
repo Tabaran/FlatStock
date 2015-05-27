@@ -3,7 +3,7 @@ package com.flatstock.model;
 /**
  * Created by Valentin on 25.05.2015.
  */
-public class Flat implements Apartment{
+public class Flat implements Apartments {
 
     private int id;
     private int price;
@@ -13,7 +13,7 @@ public class Flat implements Apartment{
     private int rating;
     private String photoUrl;
     private String description;
-    private Owner owner;
+    private int ownerId;
 
     public Integer getId() {
         return id;
@@ -79,11 +79,11 @@ public class Flat implements Apartment{
         this.description = description;
     }
 
-    public Owner getOwner() {
-        return owner;
+    public int getOwnerId() {
+        return ownerId;
     }
 
-    public void setOwner(Owner owner) {
-        this.owner = owner;
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
     }
 }

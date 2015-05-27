@@ -7,12 +7,12 @@ public interface Person{
     String getFirstName();
     String getLastName();
     String getEmail();
-    Sex getSex();
+    Gender getGender();
     String getPhotoUrl();
     void setFirstName(String firstName);
     void setLastName(String lastName);
     void setEmail(String email);
-    void setSex(Sex sex);
+    void setGender(Gender gender);
     void setPhotoUrl(String photoUrl);
 
 }

@@ -3,7 +3,7 @@ package com.flatstock.model;
 /**
  * Created by Valentin on 25.05.2015.
  */
-public interface Apartment extends Id<Integer> {
+public interface Apartments extends Id<Integer> {
     int getPrice();
     void setPrice(int price);
     String getAddress();
@@ -18,6 +18,6 @@ public interface Apartment extends Id<Integer> {
     void setPhotoUrl(String photoUrl);
     String getDescription();
     void setDescription(String description);
-    Owner getOwner();
-    void setOwner(Owner owner);
+    int getOwnerId();
+    void setOwnerId(int ownerId);
 }
