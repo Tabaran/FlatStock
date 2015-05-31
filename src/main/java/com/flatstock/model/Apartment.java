@@ -3,15 +3,16 @@ package com.flatstock.model;
 /**
  * Created by Valentin on 25.05.2015.
  */
-public class Flat implements Apartments {
+public class Apartment implements IApartment {
 
     private int id;
     private int price;
     private String address;
-    private int room_number;
+    private int roomNumber;
     private int floor;
     private int rating;
     private String photoUrl;
+    private ApartmentsType type;
     private String description;
     private int ownerId;
 
@@ -39,12 +40,12 @@ public class Flat implements Apartments {
         this.address = address;
     }
 
-    public int getRoom_number() {
-        return room_number;
+    public int getRoomNumber() {
+        return roomNumber;
     }
 
-    public void setRoom_number(int room_number) {
-        this.room_number = room_number;
+    public void setRoomNumber(int room_number) {
+        this.roomNumber = room_number;
     }
 
     public int getFloor() {
@@ -85,5 +86,12 @@ public class Flat implements Apartments {
 
     public void setOwnerId(int ownerId) {
         this.ownerId = ownerId;
+    }
+    public ApartmentsType getType() {
+        return type;
+    }
+
+    public void setType(ApartmentsType type) {
+        this.type = type;
     }
 }
