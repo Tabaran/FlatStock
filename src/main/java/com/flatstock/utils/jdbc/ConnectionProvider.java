@@ -10,23 +10,26 @@ import java.sql.SQLException;
  * Created by Valentin on 26.05.2015.
  */
 public class ConnectionProvider {
-    private static Connection connection = null;
-
+    private static Credentials credentials;
+    static {
+        credentials = CredentialsPropsLoader.getCredentials(CredentialsPropsLoader.PROPERTIES_NAME);
+        try {
+            Class.forName(credentials.getDriver());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static Connection getConnection() {
-        if (connection == null) {
-            Credentials credentials = CredentialsPropsLoader.getCredentials(CredentialsPropsLoader.PROPERTIES_NAME);
-            try {
-                Class.forName(credentials.getDriver());
-                connection = DriverManager.getConnection(credentials.getURL(),
-                        credentials.getUser(),
-                        credentials.getPassword());
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+        try {
+            Connection connection = DriverManager.getConnection(credentials.getURL(),
+                    credentials.getUser(),
+                    credentials.getPassword());
+            return connection;
         }
-        return connection;
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
