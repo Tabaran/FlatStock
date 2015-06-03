@@ -1,8 +1,8 @@
 package com.flatstock.dao;
 
 import com.flatstock.model.*;
-import com.flatstock.utils.jdbc.ConnectionProvider;
-
+import com.flatstock.utils.db.ConnectionProvider;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,6 +13,7 @@ import java.util.List;
  * Created by Valentin on 31.05.2015.
  */
 public class ReservationDaoImpl implements ReservationDao{
+    private ConnectionProvider provider = new ConnectionProvider();
     private static final String TABLE_NAME = "Reservation";
     private static final String RES_ID = "res_id";
     private static final String USER_ID = "user_id";
@@ -31,8 +32,11 @@ public class ReservationDaoImpl implements ReservationDao{
     private static final String DELETE_RESERVATION = "DELETE FROM " + TABLE_NAME + " WHERE " + RES_ID + "=%s1";
 
     public List<IReservation> getAllReservation() {
+        Statement statement = null;
+        Connection connection = null;
         try {
-            Statement statement = ConnectionProvider.getConnection().createStatement();
+            connection = provider.getConnection();
+            statement = connection.createStatement();
             statement.execute(SELECT_ALL_QUERY);
             ResultSet result = statement.getResultSet();
             List<IReservation> reservations = new ArrayList<IReservation>();
@@ -50,13 +54,24 @@ public class ReservationDaoImpl implements ReservationDao{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        finally {
+            try {
+                if (statement != null)  statement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
         return null;
     }
 
 
     public IReservation getReservation(Integer id) {
+        Statement statement = null;
+        Connection connection = null;
         try {
-            Statement statement = ConnectionProvider.getConnection().createStatement();
+            connection = provider.getConnection();
+            statement = connection.createStatement();
             statement.execute(String.format(SELECT_BY_ID, id));
             ResultSet result = statement.getResultSet();
             if(!result.first())return null;
@@ -70,12 +85,23 @@ public class ReservationDaoImpl implements ReservationDao{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        finally {
+            try {
+                if (statement != null)  statement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
         return null;
     }
 
     public void addReservation(IReservation reservation) {
+        Statement statement = null;
+        Connection connection = null;
         try {
-            Statement statement = ConnectionProvider.getConnection().createStatement();
+            connection = provider.getConnection();
+            statement = connection.createStatement();
             String query = String.format(ADD_RESERVATION,
                    reservation.getId(),
                    reservation.getUserId(),
@@ -87,11 +113,22 @@ public class ReservationDaoImpl implements ReservationDao{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        finally {
+            try {
+                if (statement != null)  statement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void updateReservation(IReservation reservation) {
+        Statement statement = null;
+        Connection connection = null;
         try {
-            Statement statement = ConnectionProvider.getConnection().createStatement();
+            connection = provider.getConnection();
+            statement = connection.createStatement();
             String query = String.format(UPDATE_RESERVATION,
                     reservation.getId(),
                     reservation.getUserId(),
@@ -102,14 +139,33 @@ public class ReservationDaoImpl implements ReservationDao{
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        finally {
+            try {
+                if (statement != null)  statement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void deleteReservation(Integer id) {
+        Statement statement = null;
+        Connection connection = null;
         try {
-            Statement statement = ConnectionProvider.getConnection().createStatement();
+            connection = provider.getConnection();
+            statement = connection.createStatement();
             statement.execute(String.format(DELETE_RESERVATION, id));
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+        finally {
+            try {
+                if (statement != null)  statement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

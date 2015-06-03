@@ -14,5 +14,9 @@
         <servlet-name>flat</servlet-name>
         <url-pattern>/s</url-pattern>
     </servlet-mapping>-->
-
+    <resource-ref>
+        <res-ref-name>jdbc/flatStock</res-ref-name>
+        <res-type>javax.sql.DataSource</res-type>
+        <res-auth>Container</res-auth>
+    </resource-ref>
 </web-app>

@@ -3,8 +3,8 @@ package com.flatstock.dao;
 import com.flatstock.model.Gender;
 import com.flatstock.model.User;
 import com.flatstock.model.IUser;
-import com.flatstock.utils.jdbc.ConnectionProvider;
-
+import com.flatstock.utils.db.ConnectionProvider;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,6 +15,7 @@ import java.util.List;
  * Created by Valentin on 27.05.2015.
  */
 public class UserDaoImpl implements UserDao {
+    private ConnectionProvider provider = new ConnectionProvider();
     private static final String TABLE_NAME = "Users";
     private static final String ID = "id";
     private static final String FIRST_NAME = "first_name";
@@ -31,8 +32,11 @@ public class UserDaoImpl implements UserDao {
     private static final String UPDATE_USER = "UPDATE "+TABLE_NAME+" SET " +ID +"=%s1,"+ FIRST_NAME+"=%s2,"+ LAST_NAME+"=%s3,"+ GENDER +"=%s4,"+ EMAIL+"=%s5,"+ LOGIN +"=%s6,"+ PASSWORD +"=%s7,"+ PHOTO_URL+"=%s8";
     private static final String DELETE_USER = "DELETE FROM "+TABLE_NAME+" WHERE " +ID +"=%s1";
     public List<IUser> getAllUsers() {
+        Statement statement = null;
+        Connection connection = null;
         try {
-            Statement statement = ConnectionProvider.getConnection().createStatement();
+            connection = provider.getConnection();
+            statement = connection.createStatement();
             statement.execute(SELECT_ALL_QUERY);
             ResultSet result = statement.getResultSet();
             List<IUser> users = new ArrayList<IUser>();
@@ -52,12 +56,23 @@ public class UserDaoImpl implements UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        finally {
+            try {
+                if (statement != null)  statement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
         return null;
     }
 
     public IUser getUser(Integer id) {
+        Statement statement = null;
+        Connection connection = null;
         try {
-            Statement statement = ConnectionProvider.getConnection().createStatement();
+            connection = provider.getConnection();
+            statement = connection.createStatement();
             statement.execute(String.format(SELECT_BY_ID, id));
             IUser user = new User();
             ResultSet result = statement.getResultSet();
@@ -74,12 +89,23 @@ public class UserDaoImpl implements UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        finally {
+            try {
+                if (statement != null)  statement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
         return null;
     }
 
     public void addUser(IUser user) {
+        Statement statement = null;
+        Connection connection = null;
         try {
-            Statement statement = ConnectionProvider.getConnection().createStatement();
+            connection = provider.getConnection();
+            statement = connection.createStatement();
             String query = String.format(ADD_USER,
                     user.getId(),
                     user.getFirstName(),
@@ -93,11 +119,22 @@ public class UserDaoImpl implements UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        finally {
+            try {
+                if (statement != null)  statement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void updateUser(IUser user) {
+        Statement statement = null;
+        Connection connection = null;
         try {
-            Statement statement = ConnectionProvider.getConnection().createStatement();
+            connection = provider.getConnection();
+            statement = connection.createStatement();
             String query = String.format(UPDATE_USER,
                     user.getId(),
                     user.getFirstName(),
@@ -111,15 +148,34 @@ public class UserDaoImpl implements UserDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        finally {
+            try {
+                if (statement != null)  statement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void deleteUser(Integer id) {
+        Statement statement = null;
+        Connection connection = null;
         try {
-            Statement statement = ConnectionProvider.getConnection().createStatement();
+            connection = provider.getConnection();
+            statement = connection.createStatement();
             String query = String.format(DELETE_USER, id);
             statement.execute(query);
         } catch (SQLException e) {
             e.printStackTrace();
+        }
+        finally {
+            try {
+                if (statement != null)  statement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 }

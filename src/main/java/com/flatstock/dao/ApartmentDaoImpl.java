@@ -1,8 +1,8 @@
 package com.flatstock.dao;
 
 import com.flatstock.model.*;
-import com.flatstock.utils.jdbc.ConnectionProvider;
-
+import com.flatstock.utils.db.ConnectionProvider;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -13,6 +13,7 @@ import java.util.List;
  * Created by Valentin on 31.05.2015.
  */
 public class ApartmentDaoImpl implements ApartmentDao {
+    private ConnectionProvider provider = new ConnectionProvider();
     private static final String TABLE_NAME = "Apartments";
     private static final String APARTMENT_ID = "apartment_id";
     private static final String ADDRESS = "address";
@@ -37,8 +38,11 @@ public class ApartmentDaoImpl implements ApartmentDao {
     private static final String DELETE_APARTMENT = "DELETE FROM "+TABLE_NAME+" WHERE " +APARTMENT_ID +"=%s1";
     private static final String SELECT_BY_OWNER_ID = "SELECT * FROM "+TABLE_NAME+" WHERE "+OWNER_ID+ "=%s";
     public List<IApartment> getAllApartments() {
+        Statement statement = null;
+        Connection connection = null;
         try {
-            Statement statement = ConnectionProvider.getConnection().createStatement();
+            connection = provider.getConnection();
+            statement = connection.createStatement();
             statement.execute(SELECT_ALL_QUERY);
             ResultSet result = statement.getResultSet();
             List<IApartment> apartments = new ArrayList<IApartment>();
@@ -60,12 +64,24 @@ public class ApartmentDaoImpl implements ApartmentDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        finally {
+            try {
+                if (statement != null)  statement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
         return null;
     }
 
     public List<IApartment> getApartmentsByOwnerId(Integer ownerId) {
+        Statement statement = null;
+        Connection connection = null;
         try {
-            Statement statement = ConnectionProvider.getConnection().createStatement();
+            connection = provider.getConnection();
+            statement = connection.createStatement();
             statement.execute(String.format(SELECT_BY_OWNER_ID, ownerId));
             ResultSet result = statement.getResultSet();
             List<IApartment> apartments = new ArrayList<IApartment>();
@@ -87,12 +103,24 @@ public class ApartmentDaoImpl implements ApartmentDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        finally {
+            try {
+                if (statement != null)  statement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
         return null;
     }
 
     public IApartment getApartment(Integer id) {
+        Statement statement = null;
+        Connection connection = null;
         try {
-            Statement statement = ConnectionProvider.getConnection().createStatement();
+            connection = provider.getConnection();
+            statement = connection.createStatement();
             statement.execute(String.format(SELECT_BY_ID, id));
             IApartment apartment = new Apartment();
             ResultSet result = statement.getResultSet();
@@ -111,12 +139,24 @@ public class ApartmentDaoImpl implements ApartmentDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        finally {
+            try {
+                if (statement != null)  statement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
         return null;
     }
 
     public void addApartment(IApartment apartment) {
+        Statement statement = null;
+        Connection connection = null;
         try {
-            Statement statement = ConnectionProvider.getConnection().createStatement();
+            connection = provider.getConnection();
+            statement = connection.createStatement();
             String query = String.format(ADD_APARTMENT,
                     apartment.getId(),
                     apartment.getAddress(),
@@ -132,11 +172,22 @@ public class ApartmentDaoImpl implements ApartmentDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        finally {
+            try {
+                if (statement != null)  statement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void updateApartment(IApartment apartment) {
+        Statement statement = null;
+        Connection connection = null;
         try {
-            Statement statement = ConnectionProvider.getConnection().createStatement();
+            connection = provider.getConnection();
+            statement = connection.createStatement();
             String query = String.format(UPDATE_APARTMENT,
                     apartment.getId(),
                     apartment.getAddress(),
@@ -152,14 +203,36 @@ public class ApartmentDaoImpl implements ApartmentDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        finally {
+            try {
+                if (statement != null)  statement.close();
+                if (connection != null) connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 
     public void deleteApartment(Integer id) {
+        Connection connection = null;
+        Statement statement = null;
         try {
-            Statement statement = ConnectionProvider.getConnection().createStatement();
+            connection = provider.getConnection();
+            statement = connection.createStatement();
             statement.execute(String.format(DELETE_APARTMENT, id));
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        finally {
+               try {
+                    if (statement != null)  statement.close();
+                    if (connection != null) connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
+        }
+
     }
 }

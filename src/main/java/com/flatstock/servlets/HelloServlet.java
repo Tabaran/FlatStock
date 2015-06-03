@@ -1,6 +1,12 @@
 package com.flatstock.servlets;
 
+import com.flatstock.dao.ApartmentDao;
+import com.flatstock.dao.ApartmentDaoImpl;
+import com.flatstock.model.IApartment;
+import com.flatstock.utils.db.ConnectionProvider;
+
 import java.io.*;
+import java.util.List;
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -25,7 +31,10 @@ public class HelloServlet extends HttpServlet {
 
         // Actual logic goes here.
         PrintWriter out = response.getWriter();
-        out.println("<h1>" + message + "</h1>");
+        ApartmentDao apartment = new ApartmentDaoImpl();
+        ConnectionProvider provider = new ConnectionProvider();
+
+        out.println("<h1>" + provider.getConnection() + "</h1>");
     }
 
     public void destroy()
