@@ -5,14 +5,14 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
          version="2.4">
 
-    <!--<servlet>
-        <servlet-name>flat</servlet-name>
-        <servlet-class>com.flatstock.servlets.HelloServlet</servlet-class>
+   <!-- <servlet>
+        <servlet-name>add_user</servlet-name>
+        <servlet-class>com.flatstock.controllers.AddUserController</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>flat</servlet-name>
-        <url-pattern>/s</url-pattern>
+        <servlet-name>add_user</servlet-name>
+        <url-pattern>/add_user</url-pattern>
     </servlet-mapping>-->
     <resource-ref>
         <res-ref-name>jdbc/flatStock</res-ref-name>

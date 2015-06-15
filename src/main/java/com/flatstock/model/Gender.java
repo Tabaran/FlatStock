@@ -16,4 +16,14 @@ public enum Gender {
         if (name.equals("male")) return MALE;
         else return FEMALE;
     }
+
+    public static boolean toBoolean(Gender gender){
+        if(gender.name.equals("male")) return true;
+        return false;
+    }
+
+    public static Gender fromBoolean(boolean gender){
+        if(gender) return Gender.MALE;
+        return Gender.FEMALE;
+    }
 }

@@ -28,9 +28,9 @@ public class UserDaoImpl implements UserDao {
 
     private static final String SELECT_ALL_QUERY = "SELECT * FROM "+TABLE_NAME;
     private static final String SELECT_BY_ID = "SELECT * FROM "+TABLE_NAME+" WHERE " +ID+ "=%s";
-    private static final String ADD_USER = "INSERT INTO "+TABLE_NAME+" COLUMNS ("+ ID+", "+ FIRST_NAME+", "+ LAST_NAME+", "+ GENDER+", "+ EMAIL+", "+ LOGIN +", "+ PASSWORD+", "+ PHOTO_URL+", "+") VALUES (%s1, %s2, %s3, %s4, %s5, %s6, %s7, %s8 )";
-    private static final String UPDATE_USER = "UPDATE "+TABLE_NAME+" SET " +ID +"=%s1,"+ FIRST_NAME+"=%s2,"+ LAST_NAME+"=%s3,"+ GENDER +"=%s4,"+ EMAIL+"=%s5,"+ LOGIN +"=%s6,"+ PASSWORD +"=%s7,"+ PHOTO_URL+"=%s8";
-    private static final String DELETE_USER = "DELETE FROM "+TABLE_NAME+" WHERE " +ID +"=%s1";
+    private static final String ADD_USER = "INSERT INTO "+TABLE_NAME+" (" + FIRST_NAME + ", " + LAST_NAME + ", " + GENDER+", "+ EMAIL+", "+ LOGIN +", "+ PASSWORD+", "+ PHOTO_URL+") VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')";
+    private static final String UPDATE_USER = "UPDATE "+TABLE_NAME+" SET " +ID +"=%s,"+ FIRST_NAME+"=%s,"+ LAST_NAME+"=%s,"+ GENDER +"=%s,"+ EMAIL+"=%s,"+ LOGIN +"=%s,"+ PASSWORD +"=%s,"+ PHOTO_URL+"=%s";
+    private static final String DELETE_USER = "DELETE FROM "+TABLE_NAME+" WHERE " +ID +"=%s";
     public List<IUser> getAllUsers() {
         Statement statement = null;
         Connection connection = null;
@@ -45,7 +45,7 @@ public class UserDaoImpl implements UserDao {
                 user.setId(result.getInt(ID));
                 user.setFirstName(result.getString(FIRST_NAME));
                 user.setLastName(result.getString(LAST_NAME));
-                user.setGender(Gender.fromString(result.getString(GENDER)));
+                user.setGender(Gender.fromBoolean(result.getBoolean(GENDER)));
                 user.setEmail(result.getString(EMAIL));
                 user.setLogin(result.getString(LOGIN));
                 user.setPassword(result.getString(PASSWORD));
@@ -107,17 +107,17 @@ public class UserDaoImpl implements UserDao {
             connection = provider.getConnection();
             statement = connection.createStatement();
             String query = String.format(ADD_USER,
-                    user.getId(),
                     user.getFirstName(),
                     user.getLastName(),
-                    user.getGender(),
+                    Gender.toBoolean(user.getGender()),
                     user.getEmail(),
                     user.getLogin(),
                     user.getPassword(),
                     user.getPhotoUrl());
-            statement.execute(query);
+                    statement.execute(query);
         } catch (SQLException e) {
             e.printStackTrace();
+            throw new RuntimeException(e.getMessage());
         }
         finally {
             try {
@@ -162,6 +162,7 @@ public class UserDaoImpl implements UserDao {
         Statement statement = null;
         Connection connection = null;
         try {
+
             connection = provider.getConnection();
             statement = connection.createStatement();
             String query = String.format(DELETE_USER, id);

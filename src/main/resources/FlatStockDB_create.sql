@@ -7,7 +7,7 @@
 -- tables
 -- Table: Apartment
 CREATE TABLE Apartment (
-    apartment_id int  NOT NULL,
+    id serial  NOT NULL,
     user_id int  NOT NULL,
     address varchar(400)  NOT NULL,
     room_number int  NOT NULL,
@@ -18,26 +18,26 @@ CREATE TABLE Apartment (
     type varchar(100)  NOT NULL,
     description text  NOT NULL,
     square int  NOT NULL,
-    CONSTRAINT Apartment_pk PRIMARY KEY (apartment_id)
+    CONSTRAINT Apartment_pk PRIMARY KEY (id)
 );
 
 
 
 -- Table: Reservation
 CREATE TABLE Reservation (
-    res_id int  NOT NULL,
+    id serial  NOT NULL,
     user_id int  NOT NULL,
     apartment_id int  NOT NULL,
     start_time time  NOT NULL,
     end_time time  NOT NULL,
-    CONSTRAINT Reservation_pk PRIMARY KEY (res_id)
+    CONSTRAINT Reservation_pk PRIMARY KEY (id)
 );
 
 
 
 -- Table: Users
 CREATE TABLE Users (
-    id int  NOT NULL,
+    id serial  NOT NULL,
     first_name varchar(100)  NOT NULL,
     last_name varchar(100)  NOT NULL,
     gender boolean  NOT NULL,
@@ -70,7 +70,7 @@ ALTER TABLE Apartment ADD CONSTRAINT Flats_Users
 
 ALTER TABLE Reservation ADD CONSTRAINT Reservation_Flats 
     FOREIGN KEY (apartment_id)
-    REFERENCES Apartment (apartment_id)
+    REFERENCES Apartment (id)
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE 
 ;
