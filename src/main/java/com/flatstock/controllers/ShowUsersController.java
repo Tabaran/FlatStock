@@ -3,15 +3,14 @@ package com.flatstock.controllers;
 import com.flatstock.dao.UserDao;
 import com.flatstock.dao.UserDaoImpl;
 import com.flatstock.model.IUser;
-
 import java.io.*;
 import java.util.List;
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
-@WebServlet("/usersList")
-public class UsersController extends HttpServlet {
+@WebServlet("/users")
+public class ShowUsersController extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
