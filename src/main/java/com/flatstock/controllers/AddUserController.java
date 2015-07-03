@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.logging.Logger;
+
 
 /**
  * Created by Valentin on 09.06.2015.
@@ -20,7 +21,7 @@ import java.io.PrintWriter;
 
 @WebServlet("/add_user")
 public class AddUserController extends HttpServlet {
-
+    static Logger LOG = Logger.getLogger(AddUserController.class.getName());
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         UserDao dao = new UserDaoImpl();
@@ -30,12 +31,9 @@ public class AddUserController extends HttpServlet {
         user.setLogin(request.getParameter("login"));
         user.setEmail(request.getParameter("email"));
         user.setPassword(request.getParameter("password"));
-        //user.setPhotoUrl(request.getParameter("first_name"));
         user.setGender(Gender.fromString(request.getParameter("gender")));
+        LOG.info("Trying to add logger");
         dao.addUser(user);
-
+        response.sendRedirect("/users");
     }
-
-
-
 }

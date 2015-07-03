@@ -3,6 +3,8 @@ package com.flatstock.controllers;
 import com.flatstock.dao.UserDao;
 import com.flatstock.dao.UserDaoImpl;
 import com.flatstock.model.IUser;
+import org.apache.log4j.Logger;
+
 import java.io.*;
 import java.util.List;
 import javax.servlet.*;
@@ -11,6 +13,7 @@ import javax.servlet.http.*;
 
 @WebServlet("/users")
 public class ShowUsersController extends HttpServlet {
+    static Logger LOG = Logger.getLogger(ShowUsersController.class.getName());
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -19,6 +22,7 @@ public class ShowUsersController extends HttpServlet {
         request.setAttribute("users", users);
         RequestDispatcher view = request.getRequestDispatcher("users.jsp");
         view.forward(request, response);
+        LOG.info(users.size() + " users loaded.");
     }
 
 }

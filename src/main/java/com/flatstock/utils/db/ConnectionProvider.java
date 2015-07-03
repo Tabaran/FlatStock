@@ -12,7 +12,7 @@ import java.sql.SQLException;
  */
 public class ConnectionProvider {
     public Connection getConnection(){
-        InitialContext initContext= null;
+        InitialContext initContext;
         try {
             initContext = new InitialContext();
             Context envContext  = (Context)initContext.lookup("java:/comp/env");

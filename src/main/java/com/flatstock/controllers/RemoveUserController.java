@@ -21,8 +21,8 @@ public class RemoveUserController extends HttpServlet{
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         UserDao dao = new UserDaoImpl();
-        dao.deleteUser(Integer.parseInt(request.getParameter("user_id")));
-        RequestDispatcher view = request.getRequestDispatcher("/usersList");
+        dao.deleteUser(Integer.parseInt(request.getParameter("id")));
+        RequestDispatcher view = request.getRequestDispatcher("/users");
         view.forward(request, response);
     }
 }
