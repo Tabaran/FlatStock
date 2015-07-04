@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
+import java.util.List;
 
 
 @WebServlet("/update_reservation")
@@ -44,9 +44,15 @@ public class UpdateReservationController extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ReservationDao dao = new ReservationDaoImpl();
-        IReservation reservation = dao.getReservation(Integer.parseInt(request.getParameter("id")));
+        ReservationDao reservationDao = new ReservationDaoImpl();
+        IReservation reservation = reservationDao.getReservation(Integer.parseInt(request.getParameter("id")));
         request.setAttribute("reservation", reservation);
+        UserDao userDao = new UserDaoImpl();
+        List<IUser> users = userDao.getAllUsers();
+        request.setAttribute("users", users);
+        ApartmentDao apartmentDao = new ApartmentDaoImpl();
+        List<IApartment> apartments = apartmentDao.getAllApartments();
+        request.setAttribute("apartments", apartments);
         RequestDispatcher view = request.getRequestDispatcher("updateReservation.jsp");
         view.forward(request, response);
     }

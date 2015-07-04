@@ -32,7 +32,7 @@ public class AddReservationController extends HttpServlet {
             SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
             IReservation reservation = new Reservation();
             reservation.setApartmentId(Integer.parseInt(request.getParameter("apartment")));
-            reservation.setUserId(Integer.parseInt(request.getParameter("user")));
+            reservation.setUserId(Integer.parseInt(request.getParameter("owner")));
             reservation.setStartTime(format.parse(request.getParameter("start")));
             reservation.setEndTime(format.parse(request.getParameter("end")));
             dao.addReservation(reservation);

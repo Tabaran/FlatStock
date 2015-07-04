@@ -5,15 +5,8 @@
 <head>
   <title></title>
   <link rel='stylesheet' href='webjars/bootstrap/3.2.0/css/bootstrap.min.css'>
-  <link rel='stylesheet' href='webjars/bootstrap-datepicker/1.4.0/css/bootstrap-datepicker3.css'>
-  <link rel='stylesheet' href='webjars/bootstrap-datepicker/1.4.0/css/bootstrap-datepicker.css'>
-  <link rel='stylesheet' href='webjars/bootstrap-datepicker/1.4.0/css/bootstrap-datepicker.min.css'>
-  <link rel='stylesheet' href='webjars/bootstrap-datepicker/1.4.0/css/bootstrap-datepicker3.min.css'>
-
   <link rel='stylesheet' href='main.css'>
   <script type="text/javascript" src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="webjars/bootstrap-datepicker/1.4.0/js/bootstrap-datepicker.min.js"></script>
-  <script type="text/javascript" src="webjars/bootstrap-datepicker/1.4.0/js/bootstrap-datepicker.js"></script>
   <script type="text/javascript" src="webjars/jquery/2.1.1/jquery.min.js"></script>
  </head>
 <body>
@@ -49,16 +42,27 @@
       </div>
     </div>
     <div class="row">
-        <div class='col-sm-6'>
-          <div class="form-group">
-            <input type="text" value="02-16-2012">
-          </div>
-        </div>
+      <div class='col-md-2'>
+        Start date:
+      </div>
+      <div class="col-md-10">
+        <input type="text" name="start" placeholder="dd.MM.yyyy">
+      </div>
+
+    </div>
+    <div class="row">
+      <div class='col-md-2'>
+        End date:
+      </div>
+      <div class="col-md-10">
+        <input type="text" name="end" placeholder="dd.MM.yyyy">
+      </div>
+
     </div>
     <div class="row">
       <input type="submit" value="Submit"/>
     </div>
-    </div>
+  </div>
 </form>
 </body>
 </html>
