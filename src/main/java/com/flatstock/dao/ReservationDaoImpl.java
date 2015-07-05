@@ -111,7 +111,7 @@ public class ReservationDaoImpl implements ReservationDao{
         try {
             connection = provider.getConnection();
             statement = connection.createStatement();
-            SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
             String query = String.format(ADD_RESERVATION,
                    reservation.getUserId(),
                    reservation.getApartmentId(),
@@ -139,7 +139,7 @@ public class ReservationDaoImpl implements ReservationDao{
         try {
             connection = provider.getConnection();
             statement = connection.createStatement();
-            SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
             String query = String.format(UPDATE_RESERVATION,
                     reservation.getUserId(),
                     reservation.getApartmentId(),

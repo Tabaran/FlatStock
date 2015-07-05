@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 
 @WebServlet("/update_apartments")
@@ -39,9 +40,12 @@ public class UpdateApartmentsController extends HttpServlet {
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ApartmentDao dao = new ApartmentDaoImpl();
-        IApartment apartment = dao.getApartment(Integer.parseInt(request.getParameter("id")));
+        ApartmentDao apartmentDao = new ApartmentDaoImpl();
+        IApartment apartment = apartmentDao.getApartment(Integer.parseInt(request.getParameter("id")));
         request.setAttribute("apartment", apartment);
+        UserDao userDao = new UserDaoImpl();
+        List<IUser> users = userDao.getAllUsers();
+        request.setAttribute("users", users);
         RequestDispatcher view = request.getRequestDispatcher("updateApartments.jsp");
         view.forward(request, response);
     }

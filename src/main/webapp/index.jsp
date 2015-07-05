@@ -12,11 +12,15 @@
     <link rel='stylesheet' href='webjars/bootstrap/3.2.0/css/bootstrap.min.css'>
 </head>
 <body>
-
+<div class="navbar-form">
+  <div class="form-group container">
+    <div class="row">
   <a href='/users'><button type="button" class="btn btn-primary">Users</button></a>
   <a href='/apartments'><button type="button" class="btn btn-primary">Apartments</button></a>
   <a href='/reservations'><button type="button" class="btn btn-primary">Reservations</button></a>
-
+</div>
+    </div>
+  </div>
 
   <script type="text/javascript" src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="webjars/jquery/2.1.1/jquery.min.js"></script>

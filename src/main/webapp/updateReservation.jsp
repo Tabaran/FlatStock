@@ -3,6 +3,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="com.flatstock.model.IReservation"%>
 <%@ page import="com.flatstock.model.IApartment" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <html>
  <%IReservation reservation = (IReservation)request.getAttribute("reservation");%>
 <html>
@@ -12,6 +13,30 @@
   <link rel='stylesheet' href='main.css'>
   <script type="text/javascript" src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="webjars/jquery/2.1.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+  <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+  <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <link rel="stylesheet" href="/resources/demos/style.css">
+  <script>
+    $(function() {
+      $( "#from" ).datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 1,
+        onClose: function( selectedDate ) {
+          $( "#to" ).datepicker( "option", "minDate", selectedDate );
+        }
+      });
+      $( "#to" ).datepicker({
+        defaultDate: "+1w",
+        changeMonth: true,
+        numberOfMonths: 1,
+        onClose: function( selectedDate ) {
+          $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+        }
+      });
+    });
+  </script>
 </head>
 <body>
 <form method="POST" action="/update_reservation" class="navbar-form">
@@ -55,20 +80,22 @@
         Start date:
       </div>
       <div class="col-md-10">
-        <input type="text" name="start" placeholder="dd.MM.yyyy" value="<%= reservation.getStartTime()%>">
+        <input class="form-control" type="text" id="from" name="start" placeholder="MM.dd.yyyy" value="<%= (new SimpleDateFormat("MM/dd/yyyy")).format(reservation.getStartTime())%>">
       </div>
-
-    </div>
-    <div class="row">
+      </div>
+      <div class="row">
       <div class='col-md-2'>
         End date:
       </div>
       <div class="col-md-10">
-        <input type="text" name="end" placeholder="dd.MM.yyyy" value="<%= reservation.getEndTime()%>">
+        <input class="form-control" type="text" id="to" name="end" placeholder="MM.dd.yyyy" value="<%= (new SimpleDateFormat("MM/dd/yyyy")).format(reservation.getEndTime())%>">
       </div>
     </div>
-  <input type="submit" value="Submit"/>
+    <div class="row">
+      <input  class="btn" type="submit" value="Submit"/>
+    </div>
   </div>
+
 </form>
 </body>
 </html>

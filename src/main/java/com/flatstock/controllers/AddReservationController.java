@@ -29,7 +29,7 @@ public class AddReservationController extends HttpServlet {
             throws ServletException, IOException {
         ReservationDao dao = new ReservationDaoImpl();
         try {
-            SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
+            SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
             IReservation reservation = new Reservation();
             reservation.setApartmentId(Integer.parseInt(request.getParameter("apartment")));
             reservation.setUserId(Integer.parseInt(request.getParameter("owner")));

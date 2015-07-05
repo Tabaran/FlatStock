@@ -10,8 +10,6 @@
   <script type="text/javascript" src="webjars/jquery/2.1.1/jquery.min.js"></script>
 </head>
 <body>
-
-
 <form method="POST" action="/add_apartments" class="navbar-form">
   <div class="form-group container">
     <div class="row">
@@ -51,7 +49,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="col-md-12">  <input type="submit" value="Submit"/></div>
+      <input  class="btn" type="submit" value="Submit"/>
     </div>
   </div>
 

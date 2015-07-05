@@ -1,4 +1,10 @@
 .row{
     margin-top: 10px;
 }
-
+.col-md-10 .form-control[readonly] {
+    cursor: pointer;
+     background-color: #fff;
+}
+select.form-control{
+    cursor: pointer;
+}
