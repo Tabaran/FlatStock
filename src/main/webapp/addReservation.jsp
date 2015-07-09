@@ -1,6 +1,8 @@
 <%@ page import="com.flatstock.model.IUser" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.flatstock.model.IApartment" %>
+<%@ page import="static com.flatstock.model.Names.*"%>
+<%@ page import="static com.flatstock.model.Reservation.*"%>
 <html>
 <head>
   <title></title>
@@ -34,14 +36,14 @@
   </script>
  </head>
 <body>
-<form method="POST" action="/add_reservation" class="navbar-form">
+<form method="POST" action="<%= ADD_RESERVATION_PATH%>" class="navbar-form">
   <div class="form-group container">
     <div class="row">
       <div class="col-md-2">User: </div>
       <div class="col-md-10">
-        <select class="form-control" name="owner">
+        <select class="form-control" name="<%= USER_ID%>">
           <%
-            List<IUser> users = (List<IUser>)request.getAttribute("users");
+            List<IUser> users = (List<IUser>)request.getAttribute(USERS);
             for(IUser user: users){
               out.print("<option value=" + user.getId() + ">" + user.getFirstName() + " " + user.getLastName() +
                               " (" + user.getEmail() + ")</option>"
@@ -54,9 +56,9 @@
     <div class="row">
       <div class="col-md-2">Apartments: </div>
       <div class="col-md-10">
-        <select class="form-control" name="apartment">
+        <select class="form-control" name="<%= APARTMENTS%>">
           <%
-            List<IApartment> apartments = (List<IApartment>)request.getAttribute("apartments");
+            List<IApartment> apartments = (List<IApartment>)request.getAttribute(APARTMENTS);
             for(IApartment apartment: apartments){
               out.print("<option value=" + apartment.getId() + ">" + apartment.getAddress() + ")</option>"
               );
@@ -70,7 +72,7 @@
         Start date:
       </div>
       <div class="col-md-10">
-        <input class="form-control" type="text" id="from" name="start" placeholder="mm/dd/yyyy" readonly>
+        <input class="form-control" type="text" id="from" name="<%= START_TIME%>" placeholder="mm/dd/yyyy" readonly>
       </div>
 
     </div>
@@ -79,7 +81,7 @@
         End date:
       </div>
       <div class="col-md-10">
-        <input class="form-control" type="text" id="to" name="end" placeholder="mm/dd/yyyy" readonly>
+        <input class="form-control" type="text" id="to" name="<%= END_TIME%>" placeholder="mm/dd/yyyy" readonly>
       </div>
 
     </div>

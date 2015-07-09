@@ -7,6 +7,11 @@ import java.util.Date;
  */
 public class Reservation implements IReservation {
 
+    public static final String USER_ID = "user_id";
+    public static final String APARTMENT_ID = "apartment_id";
+    public static final String START_TIME = "start_time";
+    public static final String END_TIME = "end_time";
+
     private Integer id;
     private Integer userId;
     private Integer apartmentId;

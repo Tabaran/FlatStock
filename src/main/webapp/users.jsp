@@ -1,6 +1,6 @@
 <%@ page import="java.util.*" %>
 <%@ page import="com.flatstock.model.IUser"%>
-
+<%@ page import="static com.flatstock.model.Names.*"%>
 
 <html>
 <head>
@@ -32,7 +32,7 @@
             </thead>
             <tbody>
             <%
-                List<IUser> users = (List<IUser>)request.getAttribute("users");
+                List<IUser> users = (List<IUser>)request.getAttribute(USERS);
                 for(IUser user: users){
                     out.println("<tr>");
                     out.println("<td>" + user.getId() + "</td>");
@@ -42,8 +42,8 @@
                     out.println("<td>" + user.getLogin() + "</td>");
                     out.println("<td>" + user.getPassword() + "</td>");
                     out.println("<td>" + user.getGender() + "</td>");
-                    out.println("<td><a href='/remove_user?id=" + user.getId() + "'><button class='btn'>Remove</button></a></button></td>");
-                    out.println("<td><a href='/update_user?id=" + user.getId() + "'><button class='btn'>Update</button></a></button></td>");
+                    out.println("<td><a href='" + REMOVE_USER_PATH + "?id=" + user.getId() + "'><button class='btn'>Remove</button></a></button></td>");
+                    out.println("<td><a href='" + UPDATE_USER_PATH + "?id=" + user.getId() + "'><button class='btn'>Update</button></a></button></td>");
                     out.println("</tr>");
                 }
             %>

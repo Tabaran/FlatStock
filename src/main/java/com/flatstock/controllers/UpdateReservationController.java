@@ -7,7 +7,8 @@ package com.flatstock.controllers;
 import com.flatstock.dao.*;
 import com.flatstock.model.*;
 import org.apache.log4j.Logger;
-
+import static com.flatstock.model.Names.*;
+import static com.flatstock.model.Reservation.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 
-@WebServlet("/update_reservation")
+@WebServlet(UPDATE_RESERVATION_PATH)
 public class UpdateReservationController extends HttpServlet {
     static Logger LOG = Logger.getLogger(UpdateReservationController.class.getName());
     public void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -29,13 +30,13 @@ public class UpdateReservationController extends HttpServlet {
             SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
             ReservationDao dao = new ReservationDaoImpl();
             IReservation reservation = new Reservation();
-            reservation.setId(Integer.parseInt(request.getParameter("id")));
-            reservation.setUserId(Integer.parseInt(request.getParameter("owner")));
-            reservation.setApartmentId(Integer.parseInt(request.getParameter("apartment")));
-            reservation.setStartTime(format.parse(request.getParameter("start")));
-            reservation.setEndTime(format.parse(request.getParameter("end")));
+            reservation.setId(Integer.parseInt(request.getParameter(ID)));
+            reservation.setUserId(Integer.parseInt(request.getParameter(USER_ID)));
+            reservation.setApartmentId(Integer.parseInt(request.getParameter(APARTMENT_ID)));
+            reservation.setStartTime(format.parse(request.getParameter(START_TIME)));
+            reservation.setEndTime(format.parse(request.getParameter(END_TIME)));
             dao.updateReservation(reservation);
-            response.sendRedirect("/reservations");
+            response.sendRedirect(RESERVATIONS);
         }
         catch (ParseException e){
             LOG.error(e);
@@ -46,13 +47,13 @@ public class UpdateReservationController extends HttpServlet {
             throws ServletException, IOException {
         ReservationDao reservationDao = new ReservationDaoImpl();
         IReservation reservation = reservationDao.getReservation(Integer.parseInt(request.getParameter("id")));
-        request.setAttribute("reservation", reservation);
+        request.setAttribute(RESERVATIONS, reservation);
         UserDao userDao = new UserDaoImpl();
         List<IUser> users = userDao.getAllUsers();
-        request.setAttribute("users", users);
+        request.setAttribute(USERS, users);
         ApartmentDao apartmentDao = new ApartmentDaoImpl();
         List<IApartment> apartments = apartmentDao.getAllApartments();
-        request.setAttribute("apartments", apartments);
+        request.setAttribute(APARTMENTS, apartments);
         RequestDispatcher view = request.getRequestDispatcher("updateReservation.jsp");
         view.forward(request, response);
     }

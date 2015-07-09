@@ -1,3 +1,5 @@
+<%@ page import="static com.flatstock.model.Names.*"%>
+<%@ page import="static com.flatstock.model.User.*"%>
 <html>
 <head>
     <title></title>
@@ -11,14 +13,14 @@
     <link rel="stylesheet" href="/resources/demos/style.css">
 </head>
 <body>
-<form method="POST" action="/add_user" class="navbar-form">
+<form method="POST" action="<%= ADD_USER_PATH%>" class="navbar-form">
 <div class="container form-group">
     <div class="row">
         <div class="col-md-2">
             First Name:
         </div>
         <div class="col-md-10">
-            <input class="form-control" type="text" name="first_name"/>
+            <input class="form-control" type="text" name="<%= FIRST_NAME%>"/>
         </div>
     </div>
     <div class="row">
@@ -26,7 +28,7 @@
             Last Name:
         </div>
         <div class="col-md-10">
-            <input class="form-control" type="text" name="last_name"/>
+            <input class="form-control" type="text" name="<%= LAST_NAME%>"/>
         </div>
     </div>
     <div class="row">
@@ -34,7 +36,7 @@
             Email:
         </div>
         <div class="col-md-10">
-            <input class="form-control" type="text" name="email"/>
+            <input class="form-control" type="text" name="<%= EMAIL%>"/>
         </div>
     </div>
     <div class="row">
@@ -42,7 +44,7 @@
             Login:
         </div>
         <div class="col-md-10">
-            <input class="form-control" type="text" name="login"/>
+            <input class="form-control" type="text" name="<%= LOGIN%>"/>
         </div>
     </div>
     <div class="row">
@@ -50,7 +52,7 @@
             Password:
         </div>
         <div class="col-md-10">
-            <input class="form-control" type="password" name="password"/>
+            <input class="form-control" type="password" name="<%= PASSWORD%>"/>
         </div>
     </div>
     <div class="row">
@@ -58,8 +60,8 @@
             Gender:
         </div>
         <div class="col-md-10">
-            <span class="gender">male</span> <input type="radio" name="gender" value="male"/>
-            <span class="gender">female</span> <input type="radio" name="gender" value="female"/>
+            <span class="gender">male</span> <input type="radio" name="<%= GENDER%>" value="male"/>
+            <span class="gender">female</span> <input type="radio" name="<%= GENDER%>" value="female"/>
         </div>
     </div>
     <div class="row">

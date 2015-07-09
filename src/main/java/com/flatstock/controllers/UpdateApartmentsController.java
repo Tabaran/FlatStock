@@ -9,7 +9,8 @@ import com.flatstock.dao.ApartmentDaoImpl;
 import com.flatstock.dao.UserDao;
 import com.flatstock.dao.UserDaoImpl;
 import com.flatstock.model.*;
-
+import static com.flatstock.model.Names.*;
+import static com.flatstock.model.Apartment.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,32 +21,32 @@ import java.io.IOException;
 import java.util.List;
 
 
-@WebServlet("/update_apartments")
+@WebServlet(UPDATE_APARTMENTS_PATH)
 public class UpdateApartmentsController extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ApartmentDao dao = new ApartmentDaoImpl();
         IApartment apartment = new Apartment();
-        apartment.setId(Integer.parseInt(request.getParameter("id")));
-        apartment.setOwnerId(Integer.parseInt(request.getParameter("owner")));
-        apartment.setAddress(request.getParameter("address"));
-        apartment.setRoomNumber(Integer.parseInt(request.getParameter("rooms")));
-        apartment.setPrice(Integer.parseInt(request.getParameter("price")));
-        apartment.setFloor(Integer.parseInt(request.getParameter("floor")));
-        apartment.setDescription(request.getParameter("desc"));
+        apartment.setId(Integer.parseInt(request.getParameter(ID)));
+        apartment.setOwnerId(Integer.parseInt(request.getParameter(OWNER_ID)));
+        apartment.setAddress(request.getParameter(ADDRESS));
+        apartment.setRoomNumber(Integer.parseInt(request.getParameter(ROOM_NUMBER)));
+        apartment.setPrice(Integer.parseInt(request.getParameter(PRICE)));
+        apartment.setFloor(Integer.parseInt(request.getParameter(FLOOR)));
+        apartment.setDescription(request.getParameter(DESCRIPTION));
         dao.updateApartment(apartment);
-        response.sendRedirect("/apartments");
+        response.sendRedirect(APARTMENTS_PATH);
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ApartmentDao apartmentDao = new ApartmentDaoImpl();
-        IApartment apartment = apartmentDao.getApartment(Integer.parseInt(request.getParameter("id")));
-        request.setAttribute("apartment", apartment);
+        IApartment apartment = apartmentDao.getApartment(Integer.parseInt(request.getParameter(ID)));
+        request.setAttribute(APARTMENTS, apartment);
         UserDao userDao = new UserDaoImpl();
         List<IUser> users = userDao.getAllUsers();
-        request.setAttribute("users", users);
+        request.setAttribute(USERS, users);
         RequestDispatcher view = request.getRequestDispatcher("updateApartments.jsp");
         view.forward(request, response);
     }

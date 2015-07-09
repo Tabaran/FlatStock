@@ -1,11 +1,5 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: Valentin
-  Date: 20.06.2015
-  Time: 15:03
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="static com.flatstock.model.Names.*"%>
 <html>
 <head>
     <title>Flat Stock</title>
@@ -15,9 +9,9 @@
 <div class="navbar-form">
   <div class="form-group container">
     <div class="row">
-  <a href='/users'><button type="button" class="btn btn-primary">Users</button></a>
-  <a href='/apartments'><button type="button" class="btn btn-primary">Apartments</button></a>
-  <a href='/reservations'><button type="button" class="btn btn-primary">Reservations</button></a>
+  <a href='<%= USERS_PATH%>'><button type="button" class="btn btn-primary">Users</button></a>
+  <a href='<%= APARTMENTS_PATH%>'><button type="button" class="btn btn-primary">Apartments</button></a>
+  <a href='<%= RESERVATIONS_PATH%>'><button type="button" class="btn btn-primary">Reservations</button></a>
 </div>
     </div>
   </div>

@@ -3,6 +3,7 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="com.flatstock.model.IUser" %>
 <%@ page import="com.flatstock.model.IApartment" %>
+<%@ page import="static com.flatstock.model.Names.*"%>
 
 <html>
 <head>
@@ -17,7 +18,7 @@
 <div class="navbar-form">
 <div class="form-group container">
   <div class="row">
-<a href='/add_reservation'><button  class="btn" >Add Reservation</button></a>
+<a href='<%= ADD_RESERVATION_PATH%>'><button  class="btn" >Add Reservation</button></a>
   </div>
   <div class="row">
 <table class="table" >
@@ -33,10 +34,10 @@
   </thead>
   <tbody>
   <%
-    List<IReservation> reservations = (List<IReservation>)request.getAttribute("reservations");
+    List<IReservation> reservations = (List<IReservation>)request.getAttribute(RESERVATIONS);
     SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
-    Map<Integer, IUser> usersMap = (Map<Integer, IUser>)request.getAttribute("usersMap");
-    Map<Integer, IApartment> apartmentsMap = (Map<Integer, IApartment>)request.getAttribute("apartmentsMap");
+    Map<Integer, IUser> usersMap = (Map<Integer, IUser>)request.getAttribute(USERS);
+    Map<Integer, IApartment> apartmentsMap = (Map<Integer, IApartment>)request.getAttribute(APARTMENTS);
     IUser user = null;
     IApartment apartment = null;
     for(IReservation reservation: reservations){
@@ -50,8 +51,8 @@
       else out.println("<td> no apartments </td>");
       out.println("<td>" + format.format(reservation.getStartTime()) + "</td>");
       out.println("<td>" + format.format(reservation.getEndTime()) + "</td>");
-      out.println("<td><a href='/remove_reservation?id=" + reservation.getId() + "'><button class='btn'>Remove</button></a></button></td>");
-      out.println("<td><a href='/update_reservation?id=" + reservation.getId() + "'><button class='btn'>Update</button></a></button></td>");
+      out.println("<td><a href='" + REMOVE_RESERVATION_PATH + "?id=" + reservation.getId() + "'><button class='btn'>Remove</button></a></button></td>");
+      out.println("<td><a href='" + UPDATE_RESERVATION_PATH + "?id=" + reservation.getId() + "'><button class='btn'>Update</button></a></button></td>");
       out.println("</tr>");
     }
   %>

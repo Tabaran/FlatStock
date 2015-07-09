@@ -1,6 +1,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="com.flatstock.model.IApartment"%>
 <%@ page import="com.flatstock.model.IUser" %>
+<%@ page import="static com.flatstock.model.Names.*" %>
 <html>
 <head>
   <title></title>
@@ -13,7 +14,7 @@
 <div class="navbar-form">
 <div class="form-group container">
   <div class="row">
-    <a href='/add_apartments'><button class='btn'>Add Apartments</button></a>
+    <a href='<%= ADD_APARTMENTS_PATH%>'><button class='btn'>Add Apartments</button></a>
   </div>
   <div class="row">
     <table class="table" >
@@ -30,8 +31,8 @@
       </thead>
       <tbody>
       <%
-        List<IApartment> apartments = (List<IApartment>)request.getAttribute("apartments");
-        Map<Integer, IUser> usersMap = (Map<Integer, IUser>)request.getAttribute("usersMap");
+        List<IApartment> apartments = (List<IApartment>)request.getAttribute(APARTMENTS);
+        Map<Integer, IUser> usersMap = (Map<Integer, IUser>)request.getAttribute(USERS);
         IUser owner = null;
         for(IApartment apartment: apartments){
           owner = usersMap.get(apartment.getOwnerId());
@@ -43,8 +44,8 @@
           out.println("<td>" + apartment.getFloor() + "</td>");
           if(owner != null) out.println("<td>" + owner.getFirstName() + " " + owner.getLastName() + " (" + owner.getEmail() + ") " + "</td>");
           else out.println("<td> no owner </td>");
-          out.println("<td><a href='/remove_apartments?id=" + apartment.getId() + "'><button class='btn'>Remove</button></a></button></td>");
-          out.println("<td><a href='/update_apartments?id=" + apartment.getId() + "'><button class='btn'>Update</button></a></button></td>");
+          out.println("<td><a href='" + REMOVE_APARTMENTS_PATH + "?id=" + apartment.getId() + "'><button class='btn'>Remove</button></a></button></td>");
+          out.println("<td><a href='" + UPDATE_APARTMENTS_PATH + "?id=" + apartment.getId() + "'><button class='btn'>Update</button></a></button></td>");
           out.println("</tr>");
         }
       %>

@@ -2,8 +2,10 @@
 <%@ page import="com.flatstock.model.IApartment"%>
 <%@ page import="com.flatstock.model.IUser" %>
 <%@ page import="java.util.List" %>
+<%@ page import="static com.flatstock.model.Names.*"%>
+<%@ page import="static com.flatstock.model.Apartment.*"%>
 <html>
-<%IApartment apartments = (IApartment)request.getAttribute("apartment");%>
+<%IApartment apartments = (IApartment)request.getAttribute(APARTMENTS);%>
 <html>
 <head>
   <title></title>
@@ -13,35 +15,35 @@
   <script type="text/javascript" src="webjars/jquery/2.1.1/jquery.min.js"></script>
 </head>
 <body>
-<form method="POST" action="/update_apartments" class="navbar-form">
+<form method="POST" action="<%= UPDATE_APARTMENTS_PATH%>" class="navbar-form">
     <div class="form-group container">
-      <input type="hidden" name="id" value="<%= apartments.getId()%>" />
+      <input type="hidden" name="<%= ID%>" value="<%= apartments.getId()%>" />
       <div class="row">
       <div class="col-md-2"> Address:</div>
-     <div class="col-md-10"> <input class="form-control" type="text" name="address" value="<%= apartments.getAddress()%>"/> </div>
+     <div class="col-md-10"> <input class="form-control" type="text" name="<%= ADDRESS%>" value="<%= apartments.getAddress()%>"/> </div>
       </div>
       <div class="row">
       <div class="col-md-2"> Price: </div>
-      <div class="col-md-10"><input class="form-control" type="text" name="price" value="<%= apartments.getPrice()%>"/> </div>
+      <div class="col-md-10"><input class="form-control" type="text" name="<%= PRICE%>" value="<%= apartments.getPrice()%>"/> </div>
       </div>
       <div class="row">
       <div class="col-md-2"> Description: </div>
-      <div class="col-md-10"> <input class="form-control" type="text" name="desc" value="<%= apartments.getDescription()%>"/> </div>
+      <div class="col-md-10"> <input class="form-control" type="text" name="<%= DESCRIPTION%>" value="<%= apartments.getDescription()%>"/> </div>
       </div>
       <div class="row">
       <div class="col-md-2"> Floor: </div>
-      <div class="col-md-10"><input class="form-control" type="text" name="floor" value="<%= apartments.getFloor()%>"/> </div>
+      <div class="col-md-10"><input class="form-control" type="text" name="<%= FLOOR%>" value="<%= apartments.getFloor()%>"/> </div>
       </div>
       <div class="row">
       <div class="col-md-2"> Room number: </div>
-      <div class="col-md-10"> <input class="form-control" type="text" name="rooms" value="<%= apartments.getRoomNumber()%>"/></div>
+      <div class="col-md-10"> <input class="form-control" type="text" name="<%= ROOM_NUMBER%>" value="<%= apartments.getRoomNumber()%>"/></div>
     </div>
       <div class="row">
       <div class="col-md-2"> Owner:</div>
       <div class="col-md-10">
-        <select class="form-control" name="owner">
+        <select class="form-control" name="<%= OWNER_ID%>">
               <%
-                List<IUser> users = (List<IUser>)request.getAttribute("users");
+                List<IUser> users = (List<IUser>)request.getAttribute(USERS);
                 for(IUser user: users){
                   out.print("<option value=" + user.getId());
                   if (apartments.getOwnerId()==user.getId()) out.print(" selected");

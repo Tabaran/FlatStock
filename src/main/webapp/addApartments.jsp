@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.flatstock.model.IUser"%>
+<%@ page import="static com.flatstock.model.Apartment.*"%>
+<%@ page import="static com.flatstock.model.Names.*"%>
 <%@ page import="java.util.List" %>
 <html>
 <head>
@@ -14,30 +16,30 @@
   <div class="form-group container">
     <div class="row">
       <div class="col-md-2"> Address:</div>
-      <div class="col-md-10"> <input class="form-control" type="text" name="address"/></div>
+      <div class="col-md-10"> <input class="form-control" type="text" name="<%= ADDRESS%>"/></div>
     </div>
     <div class="row">
       <div class="col-md-2"> Price:</div>
-      <div class="col-md-10"> <input class="form-control" type="text" name="price"/></div>
+      <div class="col-md-10"> <input class="form-control" type="text" name="<%= PRICE%>"/></div>
     </div>
     <div class="row">
       <div class="col-md-2"> Description:</div>
-      <div class="col-md-10"><input class="form-control" type="text" name="desc"/></div>
+      <div class="col-md-10"><input class="form-control" type="text" name="<%= DESCRIPTION%>"/></div>
     </div>
     <div class="row">
       <div class="col-md-2"> Floor:</div>
-      <div class="col-md-10"> <input class="form-control" type="text" name="floor"/></div>
+      <div class="col-md-10"> <input class="form-control" type="text" name="<%= FLOOR%>"/></div>
     </div>
     <div class="row">
       <div class="col-md-2"> Room number:</div>
-      <div class="col-md-10"> <input class="form-control" type="text" name="rooms"/></div>
+      <div class="col-md-10"> <input class="form-control" type="text" name="<%= ROOM_NUMBER%>"/></div>
     </div>
     <div class="row">
       <div class="col-md-2"> Owner:</div>
       <div class="col-md-10">
-        <select class="form-control" name="owner">
+        <select class="form-control" name="<%= OWNER_ID%>">
           <%
-            List<IUser> users = (List<IUser>)request.getAttribute("users");
+            List<IUser> users = (List<IUser>)request.getAttribute(USERS);
             for(IUser user: users){
               out.print("<option value=" + user.getId() + ">" +
                       user.getFirstName() + " " + user.getLastName() + " (" +

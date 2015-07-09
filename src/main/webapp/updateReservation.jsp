@@ -4,8 +4,10 @@
 <%@ page import="com.flatstock.model.IReservation"%>
 <%@ page import="com.flatstock.model.IApartment" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="static com.flatstock.model.Names.*"%>
+<%@ page import="static com.flatstock.model.Reservation.*"%>
 <html>
- <%IReservation reservation = (IReservation)request.getAttribute("reservation");%>
+ <%IReservation reservation = (IReservation)request.getAttribute(RESERVATIONS);%>
 <html>
 <head>
   <title></title>
@@ -39,15 +41,15 @@
   </script>
 </head>
 <body>
-<form method="POST" action="/update_reservation" class="navbar-form">
+<form method="POST" action="<%= UPDATE_RESERVATION_PATH%>" class="navbar-form">
   <div class="form-group container">
-  <input type="hidden" name="id" value="<%= reservation.getId()%>" />
+  <input type="hidden" name="<%= ID%>" value="<%= reservation.getId()%>" />
     <div class="row">
       <div class="col-md-2">User: </div>
       <div class="col-md-10">
-        <select class="form-control" name="owner">
+        <select class="form-control" name="<%= USER_ID%>">
           <%
-            List<IUser> users = (List<IUser>)request.getAttribute("users");
+            List<IUser> users = (List<IUser>)request.getAttribute(USERS);
             for(IUser user: users){
               out.print("<option value=" + user.getId());
               if(reservation.getUserId() == user.getId()) out.print(" selected");
@@ -62,9 +64,9 @@
     <div class="row">
       <div class="col-md-2">Apartments: </div>
       <div class="col-md-10">
-        <select class="form-control" name="apartment">
+        <select class="form-control" name="<%= APARTMENT_ID%>">
           <%
-            List<IApartment> apartments = (List<IApartment>)request.getAttribute("apartments");
+            List<IApartment> apartments = (List<IApartment>)request.getAttribute(APARTMENTS);
             for(IApartment apartment: apartments){
               out.print("<option value=" + apartment.getId());
               if(reservation.getApartmentId() == apartment.getId()) out.print(" selected");
@@ -80,7 +82,7 @@
         Start date:
       </div>
       <div class="col-md-10">
-        <input class="form-control" type="text" id="from" name="start" placeholder="MM.dd.yyyy" value="<%= (new SimpleDateFormat("MM/dd/yyyy")).format(reservation.getStartTime())%>">
+        <input class="form-control" type="text" id="from" name="<%= START_TIME%>" placeholder="MM.dd.yyyy" value="<%= (new SimpleDateFormat("MM/dd/yyyy")).format(reservation.getStartTime())%>">
       </div>
       </div>
       <div class="row">
@@ -88,7 +90,7 @@
         End date:
       </div>
       <div class="col-md-10">
-        <input class="form-control" type="text" id="to" name="end" placeholder="MM.dd.yyyy" value="<%= (new SimpleDateFormat("MM/dd/yyyy")).format(reservation.getEndTime())%>">
+        <input class="form-control" type="text" id="to" name="<%= END_TIME%>" placeholder="MM.dd.yyyy" value="<%= (new SimpleDateFormat("MM/dd/yyyy")).format(reservation.getEndTime())%>">
       </div>
     </div>
     <div class="row">
