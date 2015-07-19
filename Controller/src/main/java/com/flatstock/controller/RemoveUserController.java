@@ -1,8 +1,9 @@
 package com.flatstock.controller;
 
 import com.flatstock.service.UserService;
-import com.flatstock.service.UserServiceImpl;
-import static com.flatstock.model.Names.*;
+import com.flatstock.service.impl.UserServiceImpl;
+import static com.flatstock.controller.RemoveUserController.*;
+import static com.flatstock.controller.ShowUsersController.*;
 import static com.flatstock.model.Id.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,6 +19,8 @@ import java.io.IOException;
  */
 @WebServlet(REMOVE_USER_PATH)
 public class RemoveUserController extends HttpServlet{
+
+    public static final String REMOVE_USER_PATH = "/remove_user";
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

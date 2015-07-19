@@ -4,7 +4,13 @@ import com.flatstock.service.*;
 import com.flatstock.model.IApartment;
 import com.flatstock.model.IReservation;
 import com.flatstock.model.IUser;
-import static com.flatstock.model.Names.*;
+import com.flatstock.service.impl.ApartmentServiceImpl;
+import com.flatstock.service.impl.ReservationServiceImpl;
+import com.flatstock.service.impl.UserServiceImpl;
+import static com.flatstock.controller.ShowReservationsController.*;
+import static com.flatstock.model.impl.Reservation.*;
+import static com.flatstock.model.impl.User.*;
+import static com.flatstock.model.impl.Apartment.*;
 import java.io.*;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +21,8 @@ import javax.servlet.http.*;
 
 @WebServlet(RESERVATIONS_PATH)
 public class ShowReservationsController extends HttpServlet {
+
+    public static final String RESERVATIONS_PATH = "/reservations";
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

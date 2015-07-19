@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.flatstock.model.IUser"%>
-<%@ page import="static com.flatstock.model.Apartment.*"%>
-<%@ page import="static com.flatstock.model.Names.*"%>
+<%@ page import="static com.flatstock.model.impl.Apartment.*"%>
+<%@ page import="static com.flatstock.model.impl.User.*"%>
 <%@ page import="java.util.List" %>
 <html>
 <head>

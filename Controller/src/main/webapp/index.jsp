@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="static com.flatstock.model.Names.*"%>
+<%@ page import="static com.flatstock.controller.ShowReservationsController.*"%>
+<%@ page import="static com.flatstock.controller.ShowApartmentsController.*"%>
+<%@ page import="static com.flatstock.controller.ShowUsersController.*"%>
 <html>
 <head>
     <title>Flat Stock</title>

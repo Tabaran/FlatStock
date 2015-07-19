@@ -1,6 +1,8 @@
 <%@ page import="java.util.*" %>
 <%@ page import="com.flatstock.model.IUser"%>
-<%@ page import="static com.flatstock.model.Names.*"%>
+<%@ page import="static com.flatstock.controller.UpdateUserController.*"%>
+<%@ page import="static com.flatstock.controller.RemoveUserController.*"%>
+<%@ page import="static com.flatstock.model.impl.User.*"%>
 
 <html>
 <head>

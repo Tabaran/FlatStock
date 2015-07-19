@@ -1,8 +1,10 @@
-package com.flatstock.service;
+package com.flatstock.service.impl;
 
 import com.flatstock.dao.ReservationDao;
-import com.flatstock.dao.ReservationDaoImpl;
+import com.flatstock.dao.impl.ReservationDaoImpl;
 import com.flatstock.model.IReservation;
+import com.flatstock.service.ReservationService;
+
 import java.util.List;
 
 

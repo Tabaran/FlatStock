@@ -1,8 +1,10 @@
-package com.flatstock.service;
+package com.flatstock.service.impl;
 
 import com.flatstock.dao.ApartmentDao;
-import com.flatstock.dao.ApartmentDaoImpl;
+import com.flatstock.dao.impl.ApartmentDaoImpl;
 import com.flatstock.model.IApartment;
+import com.flatstock.service.ApartmentService;
+
 import java.util.List;
 
 

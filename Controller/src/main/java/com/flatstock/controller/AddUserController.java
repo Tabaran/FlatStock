@@ -1,12 +1,13 @@
 package com.flatstock.controller;
 
 import com.flatstock.service.UserService;
-import com.flatstock.service.UserServiceImpl;
+import com.flatstock.service.impl.UserServiceImpl;
 import com.flatstock.model.Gender;
 import com.flatstock.model.IUser;
-import com.flatstock.model.User;
-import static com.flatstock.model.User.*;
-import static com.flatstock.model.Names.*;
+import com.flatstock.model.impl.User;
+import static com.flatstock.model.impl.User.*;
+import static com.flatstock.controller.ShowUsersController.*;
+import static com.flatstock.controller.AddUserController.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,6 +23,9 @@ import java.util.logging.Logger;
 
 @WebServlet(ADD_USER_PATH)
 public class AddUserController extends HttpServlet {
+
+    public static final String ADD_USER_PATH = "/add_user";
+
     static Logger LOG = Logger.getLogger(AddUserController.class.getName());
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

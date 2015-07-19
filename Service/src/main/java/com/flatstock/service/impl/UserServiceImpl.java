@@ -1,8 +1,10 @@
-package com.flatstock.service;
+package com.flatstock.service.impl;
 
 import com.flatstock.dao.UserDao;
-import com.flatstock.dao.UserDaoImpl;
+import com.flatstock.dao.impl.UserDaoImpl;
 import com.flatstock.model.IUser;
+import com.flatstock.service.UserService;
+
 import java.util.List;
 
 

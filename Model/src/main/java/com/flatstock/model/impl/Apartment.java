@@ -1,9 +1,14 @@
-package com.flatstock.model;
+package com.flatstock.model.impl;
+
+import com.flatstock.model.ApartmentsType;
+import com.flatstock.model.IApartment;
 
 /**
  * Created by Valentin on 25.05.2015.
  */
 public class Apartment implements IApartment {
+
+    public static final String APARTMENTS = "apartments";
 
     public static final String PRICE = "price";
     public static final String ADDRESS = "address";

@@ -4,8 +4,10 @@
 <%@ page import="com.flatstock.model.IReservation"%>
 <%@ page import="com.flatstock.model.IApartment" %>
 <%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="static com.flatstock.model.Names.*"%>
-<%@ page import="static com.flatstock.model.Reservation.*"%>
+<%@ page import="static com.flatstock.model.impl.User.*"%>
+<%@ page import="static com.flatstock.model.impl.Apartment.*"%>
+<%@ page import="static com.flatstock.model.impl.Reservation.*"%>
+<%@ page import="static com.flatstock.controller.UpdateReservationController.*"%>
 <html>
  <%IReservation reservation = (IReservation)request.getAttribute(RESERVATIONS);%>
 <html>

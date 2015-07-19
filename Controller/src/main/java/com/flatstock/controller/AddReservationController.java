@@ -1,7 +1,11 @@
 package com.flatstock.controller;
 
+import com.flatstock.model.impl.Reservation;
 import com.flatstock.service.*;
 import com.flatstock.model.*;
+import com.flatstock.service.impl.ApartmentServiceImpl;
+import com.flatstock.service.impl.ReservationServiceImpl;
+import com.flatstock.service.impl.UserServiceImpl;
 import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -14,8 +18,10 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import static com.flatstock.model.Names.*;
-import static com.flatstock.model.Reservation.*;
+import static com.flatstock.model.impl.Reservation.*;
+import static com.flatstock.model.impl.Apartment.*;
+import static com.flatstock.model.impl.User.*;
+import static com.flatstock.controller.AddReservationController.*;
 
 
 /**
@@ -24,6 +30,9 @@ import static com.flatstock.model.Reservation.*;
 
 @WebServlet(ADD_RESERVATION_PATH)
 public class AddReservationController extends HttpServlet {
+
+    public static final String ADD_RESERVATION_PATH = "/add_reservation";
+
     static Logger LOG = Logger.getLogger(AddReservationController.class.getName());
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)

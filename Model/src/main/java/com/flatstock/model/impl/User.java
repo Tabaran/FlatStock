@@ -1,10 +1,15 @@
-package com.flatstock.model;
+package com.flatstock.model.impl;
+
+import com.flatstock.model.Gender;
+import com.flatstock.model.IUser;
 
 /**
  * Created by Valentin on 25.05.2015.
  */
 public class User implements IUser {
 
+    public static final String USERS = "users";
+    public static final String USER = "user";
     public static final String FIRST_NAME = "first_name";
     public static final String LAST_NAME = "last_name";
     public static final String EMAIL = "email";

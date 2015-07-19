@@ -1,6 +1,7 @@
 package com.flatstock.controller;
 
 import com.flatstock.service.*;
+import com.flatstock.service.impl.ReservationServiceImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,7 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import static com.flatstock.model.Names.*;
+import static com.flatstock.controller.RemoveReservationController.*;
+import static com.flatstock.controller.ShowReservationsController.*;
 import static com.flatstock.model.Id.*;
 
 
@@ -18,6 +20,8 @@ import static com.flatstock.model.Id.*;
  */
 @WebServlet(REMOVE_RESERVATION_PATH)
 public class RemoveReservationController extends HttpServlet{
+
+    public static final String REMOVE_RESERVATION_PATH = "/remove_reservation";
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

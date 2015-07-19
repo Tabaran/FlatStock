@@ -2,8 +2,9 @@
 <%@ page import="com.flatstock.model.IApartment"%>
 <%@ page import="com.flatstock.model.IUser" %>
 <%@ page import="java.util.List" %>
-<%@ page import="static com.flatstock.model.Names.*"%>
-<%@ page import="static com.flatstock.model.Apartment.*"%>
+<%@ page import="static com.flatstock.model.impl.User.*"%>
+<%@ page import="static com.flatstock.model.impl.Apartment.*"%>
+<%@ page import="static com.flatstock.controller.UpdateApartmentsController.*"%>
 <html>
 <%IApartment apartments = (IApartment)request.getAttribute(APARTMENTS);%>
 <html>

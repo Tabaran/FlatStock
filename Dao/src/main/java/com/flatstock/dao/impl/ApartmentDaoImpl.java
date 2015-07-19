@@ -1,7 +1,8 @@
-package com.flatstock.dao;
+package com.flatstock.dao.impl;
 
 
-import com.flatstock.model.Apartment;
+import com.flatstock.dao.ApartmentDao;
+import com.flatstock.model.impl.Apartment;
 import com.flatstock.model.ApartmentsType;
 import com.flatstock.model.IApartment;
 
@@ -9,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Valentin on 31.05.2015.
@@ -130,7 +130,7 @@ public class ApartmentDaoImpl implements ApartmentDao {
                 apartment.getRating(),
                 apartment.getPhotoUrl(),
                 apartment.getOwnerId(),
-                apartment.getType().toString(),
+                ApartmentsType.FLAT, //TBD
                 apartment.getDescription()));
     }
 
@@ -149,7 +149,7 @@ public class ApartmentDaoImpl implements ApartmentDao {
                 apartment.getRating(),
                 apartment.getPhotoUrl(),
                 apartment.getOwnerId(),
-                apartment.getType().toString(),
+                ApartmentsType.FLAT, //TBD
                 apartment.getDescription(),
                 apartment.getId()));
     }

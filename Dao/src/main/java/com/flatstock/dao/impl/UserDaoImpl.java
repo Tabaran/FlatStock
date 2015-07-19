@@ -1,9 +1,10 @@
-package com.flatstock.dao;
+package com.flatstock.dao.impl;
 
 
+import com.flatstock.dao.UserDao;
 import com.flatstock.model.Gender;
 import com.flatstock.model.IUser;
-import com.flatstock.model.User;
+import com.flatstock.model.impl.User;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

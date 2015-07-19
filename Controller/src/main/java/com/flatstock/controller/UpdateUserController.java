@@ -5,12 +5,13 @@ package com.flatstock.controller;
  */
 
 import com.flatstock.service.UserService;
-import com.flatstock.service.UserServiceImpl;
+import com.flatstock.service.impl.UserServiceImpl;
 import com.flatstock.model.Gender;
 import com.flatstock.model.IUser;
-import com.flatstock.model.User;
-import static com.flatstock.model.Names.*;
-import static com.flatstock.model.User.*;
+import com.flatstock.model.impl.User;
+import static com.flatstock.model.impl.User.*;
+import static com.flatstock.controller.UpdateUserController.*;
+import static com.flatstock.controller.ShowUsersController.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,6 +23,8 @@ import java.io.IOException;
 
 @WebServlet(UPDATE_USER_PATH)
 public class UpdateUserController extends HttpServlet {
+
+    public static final String UPDATE_USER_PATH = "/update_user";
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

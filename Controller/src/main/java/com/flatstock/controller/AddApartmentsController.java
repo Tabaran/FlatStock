@@ -2,10 +2,11 @@ package com.flatstock.controller;
 
 
 import com.flatstock.model.*;
+import com.flatstock.model.impl.Apartment;
 import com.flatstock.service.ApartmentService;
-import com.flatstock.service.ApartmentServiceImpl;
+import com.flatstock.service.impl.ApartmentServiceImpl;
 import com.flatstock.service.UserService;
-import com.flatstock.service.UserServiceImpl;
+import com.flatstock.service.impl.UserServiceImpl;
 import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -16,8 +17,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-import static com.flatstock.model.Apartment.*;
-import static com.flatstock.model.Names.*;
+import static com.flatstock.model.impl.Apartment.*;
+import static com.flatstock.controller.AddApartmentsController.*;
+import static com.flatstock.controller.ShowApartmentsController.*;
 
 
 /**
@@ -26,6 +28,9 @@ import static com.flatstock.model.Names.*;
 
 @WebServlet(ADD_APARTMENTS_PATH)
 public class AddApartmentsController extends HttpServlet {
+
+    public static final String ADD_APARTMENTS_PATH = "/add_apartments";
+
     static Logger LOG = Logger.getLogger(AddApartmentsController.class.getName());
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)

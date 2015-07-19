@@ -1,9 +1,9 @@
 package com.flatstock.controller;
 
 import com.flatstock.service.ApartmentService;
-import com.flatstock.service.ApartmentServiceImpl;
+import com.flatstock.service.impl.ApartmentServiceImpl;
 import com.flatstock.service.UserService;
-import com.flatstock.service.UserServiceImpl;
+import com.flatstock.service.impl.UserServiceImpl;
 import com.flatstock.model.IApartment;
 import com.flatstock.model.IUser;
 import java.io.*;
@@ -13,11 +13,15 @@ import java.util.Map;
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-import static com.flatstock.model.Names.*;
+import static com.flatstock.controller.ShowApartmentsController.*;
+import static com.flatstock.model.impl.Apartment.*;
+import static com.flatstock.model.impl.User.*;
 
 
 @WebServlet(APARTMENTS_PATH)
 public class ShowApartmentsController extends HttpServlet {
+
+    public static final String APARTMENTS_PATH = "/apartments";
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

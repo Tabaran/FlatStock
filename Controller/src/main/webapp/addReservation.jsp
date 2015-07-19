@@ -1,8 +1,10 @@
 <%@ page import="com.flatstock.model.IUser" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.flatstock.model.IApartment" %>
-<%@ page import="static com.flatstock.model.Names.*"%>
-<%@ page import="static com.flatstock.model.Reservation.*"%>
+<%@ page import="static com.flatstock.model.impl.User.*"%>
+<%@ page import="static com.flatstock.model.impl.Apartment.*"%>
+<%@ page import="static com.flatstock.controller.AddReservationController.*"%>
+<%@ page import="static com.flatstock.model.impl.Reservation.*"%>
 <html>
 <head>
   <title></title>

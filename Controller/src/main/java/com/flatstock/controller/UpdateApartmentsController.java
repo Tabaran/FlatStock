@@ -4,13 +4,16 @@ package com.flatstock.controller;
  * Created by Valentin on 17.06.2015.
  */
 
+import com.flatstock.model.impl.Apartment;
 import com.flatstock.service.ApartmentService;
-import com.flatstock.service.ApartmentServiceImpl;
+import com.flatstock.service.impl.ApartmentServiceImpl;
 import com.flatstock.service.UserService;
-import com.flatstock.service.UserServiceImpl;
+import com.flatstock.service.impl.UserServiceImpl;
 import com.flatstock.model.*;
-import static com.flatstock.model.Names.*;
-import static com.flatstock.model.Apartment.*;
+import static com.flatstock.model.impl.Apartment.*;
+import static com.flatstock.model.impl.User.*;
+import static com.flatstock.controller.UpdateApartmentsController.*;
+import static com.flatstock.controller.ShowApartmentsController.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,6 +26,8 @@ import java.util.List;
 
 @WebServlet(UPDATE_APARTMENTS_PATH)
 public class UpdateApartmentsController extends HttpServlet {
+
+    public static final String UPDATE_APARTMENTS_PATH = "/update_apartments";
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -50,6 +55,5 @@ public class UpdateApartmentsController extends HttpServlet {
         RequestDispatcher view = request.getRequestDispatcher("updateApartments.jsp");
         view.forward(request, response);
     }
-
 
 }

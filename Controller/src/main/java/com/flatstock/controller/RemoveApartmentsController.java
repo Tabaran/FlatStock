@@ -1,8 +1,9 @@
 package com.flatstock.controller;
 
 import com.flatstock.service.ApartmentService;
-import com.flatstock.service.ApartmentServiceImpl;
-import static com.flatstock.model.Names.*;
+import com.flatstock.service.impl.ApartmentServiceImpl;
+import static com.flatstock.controller.RemoveApartmentsController.*;
+import static com.flatstock.controller.ShowApartmentsController.*;
 import static com.flatstock.model.Id.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,6 +19,8 @@ import java.io.IOException;
  */
 @WebServlet(REMOVE_APARTMENTS_PATH)
 public class RemoveApartmentsController extends HttpServlet{
+
+    public static final String REMOVE_APARTMENTS_PATH = "/remove_apartments";
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

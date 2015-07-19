@@ -1,4 +1,6 @@
-package com.flatstock.model;
+package com.flatstock.model.impl;
+
+import com.flatstock.model.IReservation;
 
 import java.util.Date;
 
@@ -6,6 +8,8 @@ import java.util.Date;
  * Created by Valentin on 31.05.2015.
  */
 public class Reservation implements IReservation {
+
+    public static final String RESERVATIONS = "reservations";
 
     public static final String USER_ID = "user_id";
     public static final String APARTMENT_ID = "apartment_id";

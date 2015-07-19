@@ -1,7 +1,7 @@
 <%@ page import="com.flatstock.model.IUser"%>
 <%@ page import="com.flatstock.model.Gender"%>
-<%@ page import="static com.flatstock.model.Names.*"%>
-<%@ page import="static com.flatstock.model.User.*"%>
+<%@ page import="static com.flatstock.controller.UpdateUserController.*"%>
+<%@ page import="static com.flatstock.model.impl.User.*"%>
 <html>
 <head>
     <title></title>

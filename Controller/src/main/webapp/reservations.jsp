@@ -3,7 +3,12 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="com.flatstock.model.IUser" %>
 <%@ page import="com.flatstock.model.IApartment" %>
-<%@ page import="static com.flatstock.model.Names.*"%>
+<%@ page import="static com.flatstock.model.impl.User.*"%>
+<%@ page import="static com.flatstock.model.impl.Reservation.*"%>
+<%@ page import="static com.flatstock.model.impl.Apartment.*"%>
+<%@ page import="static com.flatstock.controller.RemoveReservationController.*"%>
+<%@ page import="static com.flatstock.controller.UpdateReservationController.*"%>
+<%@ page import="static com.flatstock.controller.AddReservationController.*"%>
 
 <html>
 <head>

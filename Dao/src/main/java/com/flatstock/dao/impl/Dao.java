@@ -1,4 +1,4 @@
-package com.flatstock.dao;
+package com.flatstock.dao.impl;
 
 import com.flatstock.db.ConnectionProvider;
 

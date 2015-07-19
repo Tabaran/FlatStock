@@ -1,6 +1,7 @@
-package com.flatstock.dao;
+package com.flatstock.dao.impl;
+import com.flatstock.dao.ReservationDao;
 import com.flatstock.model.IReservation;
-import com.flatstock.model.Reservation;
+import com.flatstock.model.impl.Reservation;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,7 +13,7 @@ import java.util.List;
 /**
  * Created by Valentin on 31.05.2015.
  */
-public class ReservationDaoImpl implements ReservationDao{
+public class ReservationDaoImpl implements ReservationDao {
 
 
     private static final String TABLE_NAME = "Reservation";
