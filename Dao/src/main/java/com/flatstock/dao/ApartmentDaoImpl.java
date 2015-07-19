@@ -1,13 +1,20 @@
 package com.flatstock.dao;
 
 
+import com.flatstock.model.Apartment;
+import com.flatstock.model.ApartmentsType;
+import com.flatstock.model.IApartment;
+
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by Valentin on 31.05.2015.
  */
-public class ApartmentDaoImpl extends Dao implements ApartmentDao {
+public class ApartmentDaoImpl implements ApartmentDao {
 
     public static final String TABLE_NAME = "apartment";
     public static final String ID = "id";
@@ -34,47 +41,126 @@ public class ApartmentDaoImpl extends Dao implements ApartmentDao {
     private static final String DELETE_APARTMENT = "DELETE FROM "+TABLE_NAME+" WHERE " + ID +"=%s";
     private static final String SELECT_BY_OWNER_ID = "SELECT * FROM "+TABLE_NAME+" WHERE "+OWNER_ID+ "=%s";
 
-    public ResultSet getAllApartments() {
-        return executeQuery(SELECT_ALL_QUERY);
+    public List<IApartment> getAllApartments() {
+        Dao<List<IApartment>> dao = new Dao<List<IApartment>>() {
+            @Override
+            public List<IApartment> execute(ResultSet result) throws SQLException {
+                List<IApartment> apartments = new ArrayList<IApartment>();
+                while (result.next()) {
+                    IApartment apartment = new Apartment();
+                    apartment.setId(result.getInt(ID));
+                    apartment.setAddress(result.getString(ADDRESS));
+                    apartment.setRoomNumber(result.getInt(ROOM_NUMBER));
+                    apartment.setFloor(result.getInt(FLOOR));
+                    apartment.setPrice(result.getInt(PRICE));
+                    apartment.setRating(result.getInt(RATING));
+                    apartment.setOwnerId(result.getInt(OWNER_ID));
+                    apartment.setType(ApartmentsType.fromString(result.getString(TYPE)));
+                    apartment.setDescription(result.getString(DESCRIPTION));
+                    apartment.setPhotoUrl(result.getString(PHOTO_URL));
+                    apartments.add(apartment);
+                }
+                return apartments;
+            }
+        };
+        return dao.executeQuery(SELECT_ALL_QUERY);
     }
 
-    public ResultSet getApartmentsByOwnerId(Integer ownerId) {
-       return executeQuery(String.format(SELECT_BY_OWNER_ID, ownerId));
+    public List<IApartment> getApartmentsByOwnerId(Integer ownerId) {
+        Dao<List<IApartment>> dao = new Dao<List<IApartment>>() {
+            @Override
+            public List<IApartment> execute(ResultSet result) throws SQLException {
+                List<IApartment> apartments = new ArrayList<IApartment>();
+                    while (result.next()){
+                        IApartment apartment = new Apartment();
+                        apartment.setId(result.getInt(ID));
+                        apartment.setAddress(result.getString(ADDRESS));
+                        apartment.setRoomNumber(result.getInt(ROOM_NUMBER));
+                        apartment.setFloor(result.getInt(FLOOR));
+                        apartment.setPrice(result.getInt(PRICE));
+                        apartment.setRating(result.getInt(RATING));
+                        apartment.setOwnerId(result.getInt(OWNER_ID));
+                        apartment.setType(ApartmentsType.fromString(result.getString(TYPE)));
+                        apartment.setDescription(result.getString(DESCRIPTION));
+                        apartment.setPhotoUrl(result.getString(PHOTO_URL));
+                        apartments.add(apartment);
+                    }
+                return apartments;
+            }
+        };
+       return dao.executeQuery(String.format(SELECT_BY_OWNER_ID, ownerId));
     }
 
-    public ResultSet getApartment(Integer id) {
-        return executeQuery(String.format(SELECT_BY_ID, id));
+    public IApartment getApartment(Integer id) {
+        Dao<IApartment> dao = new Dao<IApartment>() {
+            @Override
+            public IApartment execute(ResultSet result) throws SQLException {
+                IApartment apartment = new Apartment();
+
+                    if(!result.next())return apartment;
+                    apartment.setId(result.getInt(ID));
+                    apartment.setAddress(result.getString(ADDRESS));
+                    apartment.setRoomNumber(result.getInt(ROOM_NUMBER));
+                    apartment.setFloor(result.getInt(FLOOR));
+                    apartment.setPrice(result.getInt(PRICE));
+                    apartment.setRating(result.getInt(RATING));
+                    apartment.setOwnerId(result.getInt(OWNER_ID));
+                    apartment.setType(ApartmentsType.fromString(result.getString(TYPE)));
+                    apartment.setDescription(result.getString(DESCRIPTION));
+                    apartment.setPhotoUrl(result.getString(PHOTO_URL));
+
+                return apartment;
+            }
+        };
+        return dao.executeQuery(String.format(SELECT_BY_ID, id));
     }
 
-    public void addApartment(Map<String, String> params) {
-        executeQuery(String.format(ADD_APARTMENT,
-                params.get(ADDRESS),
-                params.get(ROOM_NUMBER),
-                params.get(FLOOR),
-                params.get(PRICE),
-                params.get(RATING),
-                params.get(PHOTO_URL),
-                params.get(OWNER_ID),
-                params.get(TYPE),
-                params.get(DESCRIPTION)));
-
+    public void addApartment(IApartment apartment) {
+        Dao dao = new Dao() {
+            @Override
+            public Object execute(ResultSet result) throws SQLException {
+                return null;
+            }
+        };
+        dao.executeQuery(String.format(ADD_APARTMENT,
+                apartment.getAddress(),
+                apartment.getRoomNumber(),
+                apartment.getFloor(),
+                apartment.getPrice(),
+                apartment.getRating(),
+                apartment.getPhotoUrl(),
+                apartment.getOwnerId(),
+                apartment.getType().toString(),
+                apartment.getDescription()));
     }
 
-    public void updateApartment(Map<String, String> params) {
-        executeQuery(String.format(ADD_APARTMENT,
-                params.get(ADDRESS),
-                params.get(ROOM_NUMBER),
-                params.get(FLOOR),
-                params.get(PRICE),
-                params.get(RATING),
-                params.get(PHOTO_URL),
-                params.get(OWNER_ID),
-                params.get(TYPE),
-                params.get(DESCRIPTION),
-                params.get(ID)));
+    public void updateApartment(IApartment apartment) {
+        Dao dao = new Dao() {
+            @Override
+            public Object execute(ResultSet result) throws SQLException {
+                return null;
+            }
+        };
+        dao.executeQuery(String.format(UPDATE_APARTMENT,
+                apartment.getAddress(),
+                apartment.getRoomNumber(),
+                apartment.getFloor(),
+                apartment.getPrice(),
+                apartment.getRating(),
+                apartment.getPhotoUrl(),
+                apartment.getOwnerId(),
+                apartment.getType().toString(),
+                apartment.getDescription(),
+                apartment.getId()));
     }
 
     public void deleteApartment(Integer id) {
-        executeQuery(String.format(DELETE_APARTMENT, id));
+        Dao dao = new Dao() {
+            @Override
+            public Object execute(ResultSet result) throws SQLException {
+                return null;
+            }
+        };
+        dao.executeQuery(String.format(DELETE_APARTMENT, id));
     }
 }

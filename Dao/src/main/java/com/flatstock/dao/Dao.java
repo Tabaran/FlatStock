@@ -11,12 +11,12 @@ import org.apache.log4j.Logger;
 /**
  * Created by Valentin on 11.07.2015.
  */
-public class Dao {
+public abstract class Dao<T> {
     private ConnectionProvider provider = new ConnectionProvider();
 
     protected Logger LOG = Logger.getLogger(Dao.class.getName());;
 
-    protected ResultSet executeQuery(String query){
+    protected T executeQuery(String query){
         Statement statement = null;
         Connection connection = null;
         try {
@@ -24,7 +24,7 @@ public class Dao {
             statement = connection.createStatement();
             LOG.info("Execute query: " + query);
             statement.execute(query);
-            return statement.getResultSet();
+            return execute(statement.getResultSet());
         } catch (SQLException e) {
             LOG.error(e);
         }
@@ -38,4 +38,6 @@ public class Dao {
         }
         return null;
     }
+
+    public abstract T execute(ResultSet result) throws SQLException;
 }

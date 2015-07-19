@@ -8,9 +8,9 @@ import java.util.List;
  * Created by Valentin on 11.07.2015.
  */
 public interface UserService {
-    public List<IUser> getAllUsers();
-    public IUser getUser(Integer id);
-    public void addUser(IUser user);
-    public void updateUser(IUser user);
-    public void deleteUser(Integer id);
+    List<IUser> getAllUsers();
+    IUser getUser(Integer id);
+    void addUser(IUser user);
+    void updateUser(IUser user);
+    void deleteUser(Integer id);
 }
