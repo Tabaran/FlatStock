@@ -1,11 +1,10 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.flatstock.model.IUser" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.flatstock.model.IReservation"%>
-<%@ page import="com.flatstock.model.IApartment" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="static com.flatstock.model.impl.User.*"%>
-<%@ page import="static com.flatstock.model.impl.Apartment.*"%>
 <%@ page import="static com.flatstock.model.impl.Reservation.*"%>
 <%@ page import="static com.flatstock.controller.UpdateReservationController.*"%>
 <html>
@@ -50,16 +49,9 @@
       <div class="col-md-2">User: </div>
       <div class="col-md-10">
         <select class="form-control" name="<%= USER_ID%>">
-          <%
-            List<IUser> users = (List<IUser>)request.getAttribute(USERS);
-            for(IUser user: users){
-              out.print("<option value=" + user.getId());
-              if(reservation.getUserId() == user.getId()) out.print(" selected");
-              out.print(">" + user.getFirstName() + " " + user.getLastName() +
-                              " (" + user.getEmail() + ")</option>"
-              );
-            }
-          %>
+          <c:forEach items="${users}" var="user">
+            <option value="${user.getId()}" <c:if test="${reservations.getUserId() eq user.getId()}">selected</c:if>>${user.getFirstName()} ${user.getLastName()} (${user.getEmail()})</option>
+          </c:forEach>
         </select>
       </div>
     </div>
@@ -67,15 +59,9 @@
       <div class="col-md-2">Apartments: </div>
       <div class="col-md-10">
         <select class="form-control" name="<%= APARTMENT_ID%>">
-          <%
-            List<IApartment> apartments = (List<IApartment>)request.getAttribute(APARTMENTS);
-            for(IApartment apartment: apartments){
-              out.print("<option value=" + apartment.getId());
-              if(reservation.getApartmentId() == apartment.getId()) out.print(" selected");
-              out.print(">" + apartment.getAddress() + ")</option>"
-              );
-            }
-          %>
+          <c:forEach items="${apartments}" var="apartment">
+            <option value="${apartment.getId()}" <c:if test="${reservations.getApartmentId() eq apartment.getId()}">selected</c:if>>${apartment.getAddress()}</option>
+          </c:forEach>
         </select>
       </div>
     </div>

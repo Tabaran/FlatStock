@@ -5,7 +5,7 @@
 <%@ page import="static com.flatstock.model.impl.User.*"%>
 <%@ page import="static com.flatstock.model.impl.Apartment.*"%>
 <%@ page import="static com.flatstock.controller.UpdateApartmentsController.*"%>
-<html>
+
 <%IApartment apartments = (IApartment)request.getAttribute(APARTMENTS);%>
 <html>
 <head>

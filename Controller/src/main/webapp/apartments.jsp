@@ -1,8 +1,4 @@
-<%@ page import="java.util.*" %>
-<%@ page import="com.flatstock.model.IApartment"%>
-<%@ page import="com.flatstock.model.IUser" %>
-<%@ page import="static com.flatstock.model.impl.Apartment.*" %>
-<%@ page import="static com.flatstock.model.impl.User.*" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="static com.flatstock.controller.AddApartmentsController.*" %>
 <%@ page import="static com.flatstock.controller.RemoveApartmentsController.*" %>
 <%@ page import="static com.flatstock.controller.UpdateApartmentsController.*" %>
@@ -34,25 +30,18 @@
       </tr>
       </thead>
       <tbody>
-      <%
-        List<IApartment> apartments = (List<IApartment>)request.getAttribute(APARTMENTS);
-        Map<Integer, IUser> usersMap = (Map<Integer, IUser>)request.getAttribute(USERS);
-        IUser owner = null;
-        for(IApartment apartment: apartments){
-          owner = usersMap.get(apartment.getOwnerId());
-          out.println("<tr>");
-          out.println("<td>" + apartment.getId() + "</td>");
-          out.println("<td>" + apartment.getAddress() + "</td>");
-          out.println("<td>" + apartment.getPrice() + "</td>");
-          out.println("<td>" + apartment.getDescription() + "</td>");
-          out.println("<td>" + apartment.getFloor() + "</td>");
-          if(owner != null) out.println("<td>" + owner.getFirstName() + " " + owner.getLastName() + " (" + owner.getEmail() + ") " + "</td>");
-          else out.println("<td> no owner </td>");
-          out.println("<td><a href='" + REMOVE_APARTMENTS_PATH + "?id=" + apartment.getId() + "'><button class='btn'>Remove</button></a></button></td>");
-          out.println("<td><a href='" + UPDATE_APARTMENTS_PATH + "?id=" + apartment.getId() + "'><button class='btn'>Update</button></a></button></td>");
-          out.println("</tr>");
-        }
-      %>
+      <c:forEach items="${apartments}" var="apartment">
+        <tr>
+          <td>${apartment.getId()}</td>
+          <td>${apartment.getAddress()}</td>
+          <td>${apartment.getPrice()}</td>
+          <td>${apartment.getDescription()}</td>
+          <td>${apartment.getFloor()}</td>
+          <td>${users.get(apartment.getOwnerId()).getFirstName()} ${users.get(apartment.getOwnerId()).getLastName()}</td>
+          <td><a href="<%= REMOVE_APARTMENTS_PATH%>?id=${apartment.getId()}"><button class='btn'>Remove</button></a></td>
+          <td><a href="<%= UPDATE_APARTMENTS_PATH%>?id=${apartment.getId()}"><button class='btn'>Update</button></a></td>
+        </tr>
+      </c:forEach>
       </tbody>
     </table>
   </div>

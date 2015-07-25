@@ -2,10 +2,8 @@ package com.flatstock.dao.impl;
 
 import com.flatstock.db.ConnectionProvider;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+
 import org.apache.log4j.Logger;
 
 /**
@@ -17,13 +15,13 @@ public abstract class Dao<T> {
     protected Logger LOG = Logger.getLogger(Dao.class.getName());;
 
     protected T executeQuery(String query){
-        Statement statement = null;
+        PreparedStatement statement = null;
         Connection connection = null;
         try {
             connection = provider.getConnection();
-            statement = connection.createStatement();
+            statement = connection.prepareStatement(query);
             LOG.info("Execute query: " + query);
-            statement.execute(query);
+            statement.execute();
             return execute(statement.getResultSet());
         } catch (SQLException e) {
             LOG.error(e);

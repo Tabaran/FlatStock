@@ -42,7 +42,7 @@
                 Email:
             </div>
             <div class="col-md-10">
-                <input class="form-control" type="text" name="<%= EMAIL%>" value="<%= user.getEmail()%>"/>
+                <input class="form-control" type="email" name="<%= EMAIL%>" value="<%= user.getEmail()%>"/>
             </div>
         </div>
         <div class="row">

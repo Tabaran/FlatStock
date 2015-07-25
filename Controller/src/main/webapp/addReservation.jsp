@@ -1,10 +1,9 @@
-<%@ page import="com.flatstock.model.IUser" %>
-<%@ page import="java.util.List" %>
-<%@ page import="com.flatstock.model.IApartment" %>
-<%@ page import="static com.flatstock.model.impl.User.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="static com.flatstock.model.impl.Apartment.*"%>
 <%@ page import="static com.flatstock.controller.AddReservationController.*"%>
 <%@ page import="static com.flatstock.model.impl.Reservation.*"%>
+
+
 <html>
 <head>
   <title></title>
@@ -44,14 +43,9 @@
       <div class="col-md-2">User: </div>
       <div class="col-md-10">
         <select class="form-control" name="<%= USER_ID%>">
-          <%
-            List<IUser> users = (List<IUser>)request.getAttribute(USERS);
-            for(IUser user: users){
-              out.print("<option value=" + user.getId() + ">" + user.getFirstName() + " " + user.getLastName() +
-                              " (" + user.getEmail() + ")</option>"
-              );
-            }
-          %>
+          <c:forEach items="${users}" var="user">
+            <option value="${user.getId()}">${user.getFirstName()} ${user.getLastName()} (${user.getEmail()})</option>
+          </c:forEach>
         </select>
       </div>
     </div>
@@ -59,13 +53,9 @@
       <div class="col-md-2">Apartments: </div>
       <div class="col-md-10">
         <select class="form-control" name="<%= APARTMENTS%>">
-          <%
-            List<IApartment> apartments = (List<IApartment>)request.getAttribute(APARTMENTS);
-            for(IApartment apartment: apartments){
-              out.print("<option value=" + apartment.getId() + ">" + apartment.getAddress() + ")</option>"
-              );
-            }
-          %>
+          <c:forEach items="${apartments}" var="apartment">
+            <option value="${apartment.getId()}">${apartment.getAddress()}</option>
+          </c:forEach>
         </select>
       </div>
     </div>
@@ -76,7 +66,6 @@
       <div class="col-md-10">
         <input class="form-control" type="text" id="from" name="<%= START_TIME%>" placeholder="mm/dd/yyyy" readonly>
       </div>
-
     </div>
     <div class="row">
       <div class='col-md-2'>
@@ -85,14 +74,11 @@
       <div class="col-md-10">
         <input class="form-control" type="text" id="to" name="<%= END_TIME%>" placeholder="mm/dd/yyyy" readonly>
       </div>
-
     </div>
     <div class="row">
       <input  class="btn" type="submit" value="Submit"/>
     </div>
   </div>
 </form>
-
-
 </body>
 </html>

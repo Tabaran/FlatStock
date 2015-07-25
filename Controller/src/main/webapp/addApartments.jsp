@@ -1,8 +1,6 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="com.flatstock.model.IUser"%>
 <%@ page import="static com.flatstock.model.impl.Apartment.*"%>
-<%@ page import="static com.flatstock.model.impl.User.*"%>
-<%@ page import="java.util.List" %>
 <html>
 <head>
     <title></title>
@@ -38,15 +36,9 @@
       <div class="col-md-2"> Owner:</div>
       <div class="col-md-10">
         <select class="form-control" name="<%= OWNER_ID%>">
-          <%
-            List<IUser> users = (List<IUser>)request.getAttribute(USERS);
-            for(IUser user: users){
-              out.print("<option value=" + user.getId() + ">" +
-                      user.getFirstName() + " " + user.getLastName() + " (" +
-                      user.getEmail() + ")</option>"
-              );
-            }
-          %>
+          <c:forEach items="${users}" var="user">
+            <option value="${user.getId()}">${user.getFirstName()} ${user.getLastName()}</option>
+          </c:forEach>
         </select>
       </div>
     </div>
