@@ -1,7 +1,7 @@
-<%@ page import="com.flatstock.model.IUser"%>
-<%@ page import="com.flatstock.model.Gender"%>
-<%@ page import="static com.flatstock.controller.UpdateUserController.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="static com.flatstock.model.impl.User.*"%>
+<%@ page import="static com.flatstock.controller.UpdateUserController.*"%>
+
 <html>
 <head>
     <title></title>
@@ -14,11 +14,10 @@
     <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <link rel="stylesheet" href="/resources/demos/style.css">
 </head>
-<%IUser user = (IUser)request.getAttribute(USER);%>
 
 <body>
 <form method="POST" action="<%= UPDATE_USER_PATH%>" class="navbar-form">
-    <input type="hidden" name="id" value="<%= user.getId()%>" />
+    <input type="hidden" name="id" value="${user.getId()}" />
 
     <div class="container form-group">
         <div class="row">
@@ -26,7 +25,7 @@
                 First Name:
             </div>
             <div class="col-md-10">
-                <input class="form-control" type="text" name="<%= FIRST_NAME%>" value="<%= user.getFirstName()%>"/>
+                <input class="form-control" type="text" name="<%= FIRST_NAME%>" value="${user.getFirstName()}"/>
             </div>
         </div>
         <div class="row">
@@ -34,7 +33,7 @@
                 Last Name:
             </div>
             <div class="col-md-10">
-                <input class="form-control" type="text" name="<%= LAST_NAME%>" value="<%= user.getLastName()%>"/>
+                <input class="form-control" type="text" name="<%= LAST_NAME%>" value="${user.getLastName()}"/>
             </div>
         </div>
         <div class="row">
@@ -42,7 +41,7 @@
                 Email:
             </div>
             <div class="col-md-10">
-                <input class="form-control" type="email" name="<%= EMAIL%>" value="<%= user.getEmail()%>"/>
+                <input class="form-control" type="email" name="<%= EMAIL%>" value="${user.getEmail()}"/>
             </div>
         </div>
         <div class="row">
@@ -50,7 +49,7 @@
                 Login:
             </div>
             <div class="col-md-10">
-                <input class="form-control" type="text" name="<%= LOGIN%>" value="<%= user.getLogin()%>"/>
+                <input class="form-control" type="text" name="<%= LOGIN%>" value="${user.getLogin()}"/>
             </div>
         </div>
         <div class="row">
@@ -58,7 +57,7 @@
                 Password:
             </div>
             <div class="col-md-10">
-                <input class="form-control" type="password" name="<%= PASSWORD%>" value="<%= user.getPassword()%>"/>
+                <input class="form-control" type="password" name="<%= PASSWORD%>" value="${user.getPassword()}"/>
             </div>
         </div>
         <div class="row">
@@ -66,8 +65,10 @@
                 Gender:
             </div>
             <div class="col-md-10">
-                male <input type="radio" name="<%= GENDER%>" value="<%= Gender.MALE.toString()%>" <%if(user.getGender().equals(Gender.MALE)) out.print("checked"); %>/>
-                female <input type="radio" name="<%= GENDER%>" value="<%= Gender.FEMALE.toString()%>" <%if(user.getGender().equals(Gender.FEMALE)) out.print("checked"); %>/>
+                male <input type="radio" name="<%= GENDER%>" value="${Gender.MALE.toString()}"
+                            <c:if test="${user.getGender().toString() eq 'MALE'}">checked</c:if> />
+                female <input type="radio" name="<%= GENDER%>" value="${Gender.FEMALE.toString()}"
+                              <c:if test="${user.getGender().toString() eq 'FEMALE'}">checked</c:if> />
             </div>
         </div>
         <div class="row">

@@ -3,10 +3,12 @@ import com.flatstock.dao.ReservationDao;
 import com.flatstock.model.IReservation;
 import com.flatstock.model.impl.Reservation;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -24,17 +26,22 @@ public class ReservationDaoImpl implements ReservationDao {
     public static final String END_TIME = "end_time";
 
     private static final String SELECT_ALL_QUERY = "SELECT * FROM " + TABLE_NAME;
-    private static final String SELECT_BY_ID = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID + "=%s";
+    private static final String SELECT_BY_ID = "SELECT * FROM " + TABLE_NAME + " WHERE " + ID + "=?";
     private static final String ADD_RESERVATION = "INSERT INTO " + TABLE_NAME +
             " (" + USER_ID + ", " + APARTMENT_ID + ", " +
-            START_TIME + ", " + END_TIME + ") VALUES ('%s', '%s', '%s', '%s')";
+            START_TIME + ", " + END_TIME + ") VALUES (?, ?, ?, ?)";
     private static final String UPDATE_RESERVATION = "UPDATE " + TABLE_NAME +
-            " SET " + USER_ID + "='%s'," + APARTMENT_ID + "='%s'," +
-            START_TIME + "='%s'," + END_TIME + "='%s' WHERE id=%s";
-    private static final String DELETE_RESERVATION = "DELETE FROM " + TABLE_NAME + " WHERE " + ID + "=%s";
+            " SET " + USER_ID + "=?," + APARTMENT_ID + "=?," +
+            START_TIME + "=?," + END_TIME + "=? WHERE id=?";
+    private static final String DELETE_RESERVATION = "DELETE FROM " + TABLE_NAME + " WHERE " + ID + "=?";
 
     public List<IReservation> getAllReservation() {
         Dao<List<IReservation>> dao = new Dao<List<IReservation>>() {
+            @Override
+            public void prepare(PreparedStatement statement) throws SQLException {
+
+            }
+
             @Override
             public List<IReservation> execute(ResultSet result) throws SQLException {
                 List<IReservation> reservations = new ArrayList<IReservation>();
@@ -56,8 +63,13 @@ public class ReservationDaoImpl implements ReservationDao {
     }
 
 
-    public IReservation getReservation(Integer id) {
+    public IReservation getReservation(final Integer id) {
         Dao<IReservation> dao = new Dao<IReservation>() {
+            @Override
+            public void prepare(PreparedStatement statement) throws SQLException {
+                statement.setInt(1, id);
+            }
+
             @Override
             public IReservation execute(ResultSet result) throws SQLException {
                 IReservation reservation = new Reservation();
@@ -70,47 +82,58 @@ public class ReservationDaoImpl implements ReservationDao {
                 return reservation;
             }
         };
-        return dao.executeQuery(String.format(SELECT_BY_ID, id));
+        return dao.executeQuery(SELECT_BY_ID);
     }
 
-    public void addReservation(IReservation reservation) {
+    public void addReservation(final IReservation reservation) {
         Dao dao = new Dao() {
+            @Override
+            public void prepare(PreparedStatement statement) throws SQLException {
+                statement.setInt(1, reservation.getUserId());
+                statement.setInt(2, reservation.getApartmentId());
+                statement.setDate(3, new java.sql.Date(reservation.getStartTime().getTime()));
+                statement.setDate(4, new java.sql.Date(reservation.getEndTime().getTime()));
+            }
+
             @Override
             public Object execute(ResultSet result) throws SQLException {
                 return null;
             }
         };
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        dao.executeQuery(String.format(ADD_RESERVATION,
-                reservation.getUserId(),
-                reservation.getApartmentId(),
-                format.format(reservation.getStartTime()),
-                format.format(reservation.getEndTime())));
+        dao.executeQuery(ADD_RESERVATION);
     }
 
-    public void updateReservation(IReservation reservation) {
+    public void updateReservation(final IReservation reservation) {
         Dao dao = new Dao() {
+            @Override
+            public void prepare(PreparedStatement statement) throws SQLException {
+                statement.setInt(1, reservation.getUserId());
+                statement.setInt(2, reservation.getApartmentId());
+                statement.setDate(3, new java.sql.Date(reservation.getStartTime().getTime()));
+                statement.setDate(4, new java.sql.Date(reservation.getEndTime().getTime()));
+                statement.setInt(5, reservation.getId());
+            }
+
             @Override
             public Object execute(ResultSet result) throws SQLException {
                 return null;
             }
         };
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        dao.executeQuery(String.format(UPDATE_RESERVATION,
-                reservation.getUserId(),
-                reservation.getApartmentId(),
-                format.format(reservation.getStartTime()),
-                format.format(reservation.getEndTime()),
-                reservation.getId()));
+        dao.executeQuery(UPDATE_RESERVATION);
     }
 
-    public void deleteReservation(Integer id) {
-        Dao dao = new Dao() {
+    public void deleteReservation(final Integer id) {
+        final Dao dao = new Dao() {
+            @Override
+            public void prepare(PreparedStatement statement) throws SQLException {
+                statement.setInt(1, id);
+            }
+
             @Override
             public Object execute(ResultSet result) throws SQLException {
                 return null;
             }
         };
-        dao.executeQuery(String.format(DELETE_RESERVATION, id));
+        dao.executeQuery(DELETE_RESERVATION);
     }
 }

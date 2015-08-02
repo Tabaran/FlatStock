@@ -1,7 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="com.flatstock.model.IUser" %>
-<%@ page import="java.util.List" %>
+
 <%@ page import="com.flatstock.model.IReservation"%>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="static com.flatstock.model.impl.User.*"%>
@@ -44,7 +43,7 @@
 <body>
 <form method="POST" action="<%= UPDATE_RESERVATION_PATH%>" class="navbar-form">
   <div class="form-group container">
-  <input type="hidden" name="<%= ID%>" value="<%= reservation.getId()%>" />
+  <input type="hidden" name="<%= ID%>" value="${reservation.getId()}" />
     <div class="row">
       <div class="col-md-2">User: </div>
       <div class="col-md-10">

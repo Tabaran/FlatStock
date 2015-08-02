@@ -1,10 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="java.util.*" %>
-<%@ page import="com.flatstock.model.IUser"%>
 <%@ page import="static com.flatstock.controller.UpdateUserController.*"%>
 <%@ page import="static com.flatstock.controller.RemoveUserController.*"%>
-<%@ page import="static com.flatstock.model.impl.User.*"%>
-
+<%@ taglib tagdir="/WEB-INF/tags" prefix="h" %>
 <html>
 <head>
     <title></title>
@@ -17,38 +14,13 @@
 <div class="navbar-form">
 <div class="form-group container">
     <div class="row">
-        <a href='/addUser.jsp'><button class="btn">Add User</button></a>
+        <h:navigation/>
     </div>
     <div class="row">
-        <table class="table" >
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>FirstName</th>
-                <th>LastName</th>
-                <th>Email</th>
-                <th>Login</th>
-                <th>Password</th>
-                <th>Gender</th>
-                <th colspan="2"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <c:forEach items="${users}" var="user">
-                <tr>
-                    <td>${user.getId()}</td>
-                    <td>${user.getFirstName()}</td>
-                    <td>${user.getLastName()}</td>
-                    <td>${user.getEmail()}</td>
-                    <td>${user.getLogin()}</td>
-                    <td>${user.getPassword()}</td>
-                    <td>${user.getGender()}</td>
-                    <td><a href="<%= REMOVE_USER_PATH%>?id=${user.getId()}"><button class='btn'>Remove</button></a></td>
-                    <td><a href="<%= UPDATE_USER_PATH%>?id=${user.getId()}"><button class='btn'>Update</button></a></td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
+        <h:users_list users='${users}' remove='<%= REMOVE_USER_PATH%>' update='<%= UPDATE_USER_PATH%>'/>
+    </div>
+    <div class="row">
+        <a href='/addUser.jsp'><button class="btn">Add User</button></a>
     </div>
 </div>
 </div>

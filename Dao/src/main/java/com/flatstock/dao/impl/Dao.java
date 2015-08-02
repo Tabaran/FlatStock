@@ -3,6 +3,7 @@ package com.flatstock.dao.impl;
 import com.flatstock.db.ConnectionProvider;
 
 import java.sql.*;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 
@@ -21,6 +22,7 @@ public abstract class Dao<T> {
             connection = provider.getConnection();
             statement = connection.prepareStatement(query);
             LOG.info("Execute query: " + query);
+            prepare(statement);
             statement.execute();
             return execute(statement.getResultSet());
         } catch (SQLException e) {
@@ -36,6 +38,8 @@ public abstract class Dao<T> {
         }
         return null;
     }
+
+    public  abstract void prepare(PreparedStatement statement) throws SQLException;
 
     public abstract T execute(ResultSet result) throws SQLException;
 }

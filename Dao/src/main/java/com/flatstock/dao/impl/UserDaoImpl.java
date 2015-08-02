@@ -6,9 +6,11 @@ import com.flatstock.model.Gender;
 import com.flatstock.model.IUser;
 import com.flatstock.model.impl.User;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -27,14 +29,25 @@ public class UserDaoImpl implements UserDao {
     public static final String PHOTO_URL = "photo_url";
 
     private static final String SELECT_ALL_QUERY = "SELECT * FROM "+TABLE_NAME;
-    private static final String SELECT_BY_ID = "SELECT * FROM "+TABLE_NAME+" WHERE " +ID+ "=%s";
-    private static final String ADD_USER = "INSERT INTO "+TABLE_NAME+" (" + FIRST_NAME + ", " + LAST_NAME + ", " + GENDER+", "+ EMAIL+", "+ LOGIN +", "+ PASSWORD+", "+ PHOTO_URL+") VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s')";
-    private static final String UPDATE_USER = "UPDATE "+TABLE_NAME+" SET " + FIRST_NAME+"='%s', "+ LAST_NAME+"='%s', "+ GENDER +"='%s', "+ EMAIL+"='%s', "+ LOGIN +"='%s', " + PASSWORD + "='%s', " + PHOTO_URL + "='%s'" + " WHERE id=" + "'%s'";
-    private static final String DELETE_USER = "DELETE FROM "+TABLE_NAME+" WHERE " +ID +"=%s";
+    private static final String SELECT_BY_ID = "SELECT * FROM "+TABLE_NAME+" WHERE " +ID+ "=?";
+    private static final String ADD_USER = "INSERT INTO "+TABLE_NAME+
+            " (" + FIRST_NAME + ", " + LAST_NAME + ", " + GENDER+", "+ EMAIL+", "
+            + LOGIN +", "+ PASSWORD+", "+ PHOTO_URL+")" +
+            " VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private static final String UPDATE_USER = "UPDATE "+TABLE_NAME+
+            " SET " + FIRST_NAME+"=?, "+ LAST_NAME+"=?, "+ GENDER +"=?, "+ 
+            EMAIL+"=?, "+ LOGIN +"=?, " + PASSWORD + "=?, " + 
+            PHOTO_URL + "=?" + " WHERE id=" + "?";
+    private static final String DELETE_USER = "DELETE FROM "+TABLE_NAME+" WHERE " +ID +"=?";
 
 
     public List<IUser> getAllUsers() {
         Dao<List<IUser>> dao = new Dao<List<IUser>>() {
+            @Override
+            public void prepare(PreparedStatement statement) throws SQLException {
+
+            }
+
             @Override
             public List<IUser> execute(ResultSet result) throws SQLException {
                 List<IUser> users = new ArrayList<IUser>();
@@ -56,8 +69,13 @@ public class UserDaoImpl implements UserDao {
         return dao.executeQuery(SELECT_ALL_QUERY);
     }
 
-    public IUser getUser(Integer id) {
+    public IUser getUser(final Integer id) {
         Dao<IUser> dao = new Dao<IUser>() {
+            @Override
+            public void prepare(PreparedStatement statement) throws SQLException {
+                statement.setInt(1, id);
+            }
+
             @Override
             public IUser execute(ResultSet result) throws SQLException {
                 IUser user = new User();
@@ -73,51 +91,64 @@ public class UserDaoImpl implements UserDao {
                 return user;
             }
         };
-        return dao.executeQuery(String.format(SELECT_BY_ID, id));
+        return dao.executeQuery(SELECT_BY_ID);
     }
 
-    public void addUser(IUser user) {
+    public void addUser(final IUser user) {
         Dao dao = new Dao() {
+            @Override
+            public void prepare(PreparedStatement statement) throws SQLException {
+                statement.setString(1, user.getFirstName());
+                statement.setString(2, user.getLastName());
+                statement.setBoolean(3, Gender.toBoolean(user.getGender()));
+                statement.setString(4, user.getEmail());
+                statement.setString(5, user.getLogin());
+                statement.setString(6, user.getPassword());
+                statement.setString(7, user.getPhotoUrl());
+            }
+
             @Override
             public Object execute(ResultSet result) throws SQLException {
                 return null;
             }
         };
-        dao.executeQuery(String.format(ADD_USER,
-                user.getFirstName(),
-                user.getLastName(),
-                Gender.toBoolean(user.getGender()),
-                user.getEmail(),
-                user.getLogin(),
-                user.getPassword(),
-                user.getPhotoUrl()));
+        dao.executeQuery(ADD_USER);
     }
 
-    public void updateUser(IUser user) {
+    public void updateUser(final IUser user) {
         Dao dao = new Dao() {
+            @Override
+            public void prepare(PreparedStatement statement) throws SQLException {
+                statement.setString(1, user.getFirstName());
+                statement.setString(2, user.getLastName());
+                statement.setBoolean(3, Gender.toBoolean(user.getGender()));
+                statement.setString(4, user.getEmail());
+                statement.setString(5, user.getLogin());
+                statement.setString(6, user.getPassword());
+                statement.setString(7, user.getPhotoUrl());
+                statement.setInt(8, user.getId());
+            }
+
             @Override
             public Object execute(ResultSet result) throws SQLException {
                 return null;
             }
         };
-        dao.executeQuery(String.format(UPDATE_USER,
-                user.getFirstName(),
-                user.getLastName(),
-                Gender.toBoolean(user.getGender()),
-                user.getEmail(),
-                user.getLogin(),
-                user.getPassword(),
-                user.getPhotoUrl(),
-                user.getId()));
+        dao.executeQuery(UPDATE_USER);
     }
 
-    public void deleteUser(Integer id) {
+    public void deleteUser(final Integer id) {
         Dao dao = new Dao() {
+            @Override
+            public void prepare(PreparedStatement statement) throws SQLException {
+                statement.setInt(1, id);
+            }
+
             @Override
             public Object execute(ResultSet result) throws SQLException {
                 return null;
             }
         };
-        dao.executeQuery(String.format(DELETE_USER, id));
+        dao.executeQuery(DELETE_USER);
     }
 }
