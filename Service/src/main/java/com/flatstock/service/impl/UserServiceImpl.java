@@ -4,6 +4,7 @@ import com.flatstock.dao.UserDao;
 import com.flatstock.dao.impl.UserDaoImpl;
 import com.flatstock.model.IUser;
 import com.flatstock.service.UserService;
+import com.flatstock.service.exceptions.IncorrectLoginExceptions;
 
 import java.util.List;
 
@@ -33,5 +34,13 @@ public class UserServiceImpl implements UserService {
 
     public void deleteUser(Integer id) {
         userDao.deleteUser(id);
+    }
+
+    public IUser validateUser(String login, String password) throws IncorrectLoginExceptions {
+        for(IUser user: getAllUsers()){
+            if(login.equals(user.getLogin()) && password.equals(user.getPassword()))
+                return user;
+        }
+        throw new IncorrectLoginExceptions();
     }
 }

@@ -42,7 +42,7 @@ CREATE TABLE Users (
     last_name varchar(100)  NOT NULL,
     gender boolean  NOT NULL,
     email varchar(254)  NOT NULL,
-    login varchar(100)  NOT NULL,
+    login varchar(100)  NOT NULL UNIQUE,
     password varchar(100)  NOT NULL,
     photo_url varchar(400)  NOT NULL,
     CONSTRAINT Users_pk PRIMARY KEY (id)

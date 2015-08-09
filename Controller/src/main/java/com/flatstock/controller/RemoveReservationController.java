@@ -27,7 +27,6 @@ public class RemoveReservationController extends HttpServlet{
             throws ServletException, IOException {
         ReservationService service = new ReservationServiceImpl();
         service.deleteReservation(Integer.parseInt(request.getParameter(ID)));
-        RequestDispatcher view = request.getRequestDispatcher(RESERVATIONS_PATH);
-        view.forward(request, response);
+        response.sendRedirect(RESERVATIONS_PATH);
     }
 }

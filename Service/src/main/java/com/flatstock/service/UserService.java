@@ -1,6 +1,7 @@
 package com.flatstock.service;
 
 import com.flatstock.model.IUser;
+import com.flatstock.service.exceptions.IncorrectLoginExceptions;
 
 import java.util.List;
 
@@ -13,4 +14,5 @@ public interface UserService {
     void addUser(IUser user);
     void updateUser(IUser user);
     void deleteUser(Integer id);
+    IUser validateUser(String login, String password) throws IncorrectLoginExceptions;
 }

@@ -26,7 +26,6 @@ public class RemoveUserController extends HttpServlet{
             throws ServletException, IOException {
         UserService service = new UserServiceImpl();
         service.deleteUser(Integer.parseInt(request.getParameter(ID)));
-        RequestDispatcher view = request.getRequestDispatcher(USERS_PATH);
-        view.forward(request, response);
+        response.sendRedirect(USERS_PATH);
     }
 }

@@ -43,7 +43,7 @@
 <body>
 <form method="POST" action="<%= UPDATE_RESERVATION_PATH%>" class="navbar-form">
   <div class="form-group container">
-  <input type="hidden" name="<%= ID%>" value="${reservation.getId()}" />
+  <input type="hidden" name="<%= ID%>" value="${reservations.getId()}" />
     <div class="row">
       <div class="col-md-2">User: </div>
       <div class="col-md-10">

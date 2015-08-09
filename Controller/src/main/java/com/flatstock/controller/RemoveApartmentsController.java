@@ -26,7 +26,6 @@ public class RemoveApartmentsController extends HttpServlet{
             throws ServletException, IOException {
         ApartmentService service = new ApartmentServiceImpl();
         service.deleteApartment(Integer.parseInt(request.getParameter(ID)));
-        RequestDispatcher view = request.getRequestDispatcher(APARTMENTS_PATH);
-        view.forward(request, response);
+        response.sendRedirect(APARTMENTS_PATH);
     }
 }

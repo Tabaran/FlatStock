@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 public abstract class Dao<T> {
     private ConnectionProvider provider = new ConnectionProvider();
 
-    protected Logger LOG = Logger.getLogger(Dao.class.getName());;
+    private Logger LOG = Logger.getLogger(Dao.class.getName());
 
     protected T executeQuery(String query){
         PreparedStatement statement = null;

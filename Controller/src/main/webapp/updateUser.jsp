@@ -65,9 +65,9 @@
                 Gender:
             </div>
             <div class="col-md-10">
-                male <input type="radio" name="<%= GENDER%>" value="${Gender.MALE.toString()}"
+                male <input type="radio" name="<%= GENDER%>" value="MALE"
                             <c:if test="${user.getGender().toString() eq 'MALE'}">checked</c:if> />
-                female <input type="radio" name="<%= GENDER%>" value="${Gender.FEMALE.toString()}"
+                female <input type="radio" name="<%= GENDER%>" value="FEMALE"
                               <c:if test="${user.getGender().toString() eq 'FEMALE'}">checked</c:if> />
             </div>
         </div>
