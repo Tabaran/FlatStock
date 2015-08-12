@@ -2,6 +2,7 @@ package com.flatstock.model.impl;
 
 import com.flatstock.model.Gender;
 import com.flatstock.model.IUser;
+import com.flatstock.model.Role;
 
 /**
  * Created by Valentin on 25.05.2015.
@@ -14,9 +15,12 @@ public class User implements IUser {
     public static final String LAST_NAME = "last_name";
     public static final String EMAIL = "email";
     public static final String PHOTO_URL = "photo_url";
-    public static final String GENDER = "photo_url";
+    public static final String GENDER = "gender";
     public static final String LOGIN = "login";
     public static final String PASSWORD = "password";
+    public static final String ROLE = "role";
+
+
 
     private Integer id;
     private String firstName;
@@ -26,6 +30,7 @@ public class User implements IUser {
     private Gender gender;
     private String login;
     private String password;
+    private Role role = Role.CUSTOMER;
 
 
     public Integer getId() {
@@ -84,12 +89,20 @@ public class User implements IUser {
         return password;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
     public void setLogin(String login) {
         this.login = login;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
     }
 
 }

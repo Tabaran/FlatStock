@@ -1,5 +1,7 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="static com.flatstock.controller.AddUserController.*"%>
 <%@ page import="static com.flatstock.model.impl.User.*"%>
+<%@ page import="com.flatstock.model.Role" %>
 <html>
 <head>
     <title></title>
@@ -53,6 +55,18 @@
         </div>
         <div class="col-md-10">
             <input class="form-control" type="password" name="<%= PASSWORD%>"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2"> Role:</div>
+        <div class="col-md-10">
+            <select class="form-control" name="<%= ROLE%>">
+                <c:forEach items="<%= Role.values()%>" var="role">
+                    <option value="${role.toString()}">
+                            ${role.toString()}
+                    </option>
+                </c:forEach>
+            </select>
         </div>
     </div>
     <div class="row">

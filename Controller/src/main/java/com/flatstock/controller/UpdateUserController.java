@@ -4,6 +4,7 @@ package com.flatstock.controller;
  * Created by Valentin on 17.06.2015.
  */
 
+import com.flatstock.model.Role;
 import com.flatstock.service.UserService;
 import com.flatstock.service.impl.UserServiceImpl;
 import com.flatstock.model.Gender;
@@ -36,6 +37,7 @@ public class UpdateUserController extends HttpServlet {
         user.setLogin(request.getParameter(LOGIN));
         user.setEmail(request.getParameter(EMAIL));
         user.setPassword(request.getParameter(PASSWORD));
+        user.setRole(Role.fromString(request.getParameter(ROLE)));
         user.setGender(Gender.fromString(request.getParameter(GENDER)));
         service.updateUser(user);
         response.sendRedirect(USERS_PATH);

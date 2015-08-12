@@ -1,7 +1,8 @@
 -- Created by Vertabelo (http://vertabelo.com)
 -- Last modification date: 2015-05-31 14:46:06.172
 
-
+CREATE TYPE gender AS ENUM ('male', 'female');
+CREATE TYPE role AS ENUM ('customer', 'administrator');
 
 
 -- tables
@@ -13,11 +14,11 @@ CREATE TABLE Apartment (
     room_number int  NOT NULL,
     floor int  NOT NULL,
     price int  NOT NULL,
-    rating int  NOT NULL,
-    photo_url varchar(400)  NOT NULL,
-    type varchar(100)  NOT NULL,
+    rating int,
+    photo_url varchar(400),
+    type varchar(100),
     description text  NOT NULL,
-    square int  NOT NULL,
+    square int,
     CONSTRAINT Apartment_pk PRIMARY KEY (id)
 );
 
@@ -28,8 +29,8 @@ CREATE TABLE Reservation (
     id serial  NOT NULL,
     user_id int  NOT NULL,
     apartment_id int  NOT NULL,
-    start_time time  NOT NULL,
-    end_time time  NOT NULL,
+    start_time timestamp  NOT NULL,
+    end_time timestamp  NOT NULL,
     CONSTRAINT Reservation_pk PRIMARY KEY (id)
 );
 
@@ -40,19 +41,14 @@ CREATE TABLE Users (
     id serial  NOT NULL,
     first_name varchar(100)  NOT NULL,
     last_name varchar(100)  NOT NULL,
-    gender boolean  NOT NULL,
+    gender gender,
     email varchar(254)  NOT NULL,
     login varchar(100)  NOT NULL UNIQUE,
     password varchar(100)  NOT NULL,
-    photo_url varchar(400)  NOT NULL,
+    role role NOT NULL DEFAULT 'customer',
+    photo_url varchar(400),
     CONSTRAINT Users_pk PRIMARY KEY (id)
 );
-
-
-
-
-
-
 
 -- foreign keys
 -- Reference:  Flats_Users (table: Apartment)
@@ -86,7 +82,8 @@ ALTER TABLE Reservation ADD CONSTRAINT Reservation_Users
 ;
 
 
-
+INSERT INTO Users (first_name, last_name, gender, email, login, password, role)
+            VALUES ('admin', 'admin', 'male', 'admin@flatstock.com', 'admin', 'admin', 'administrator');
 
 
 

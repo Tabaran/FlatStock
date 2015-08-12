@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="static com.flatstock.model.impl.User.*"%>
 <%@ page import="static com.flatstock.controller.UpdateUserController.*"%>
+<%@ page import="com.flatstock.model.Role" %>
 
 <html>
 <head>
@@ -61,14 +62,27 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-md-2"> Role:</div>
+            <div class="col-md-10">
+                <select class="form-control" name="<%= ROLE%>">
+                    <c:forEach items="<%= Role.values()%>" var="role">
+                        <option value="${role.toString()}"
+                                <c:if test="${user.getRole() eq role}">selected</c:if>>
+                                ${role.toString()}
+                        </option>
+                    </c:forEach>
+                </select>
+            </div>
+        </div>
+        <div class="row">
             <div class="col-md-2">
                 Gender:
             </div>
             <div class="col-md-10">
                 male <input type="radio" name="<%= GENDER%>" value="MALE"
-                            <c:if test="${user.getGender().toString() eq 'MALE'}">checked</c:if> />
+                            <c:if test="${user.getGender().toString() eq 'male'}">checked</c:if> />
                 female <input type="radio" name="<%= GENDER%>" value="FEMALE"
-                              <c:if test="${user.getGender().toString() eq 'FEMALE'}">checked</c:if> />
+                              <c:if test="${user.getGender().toString() eq 'female'}">checked</c:if> />
             </div>
         </div>
         <div class="row">

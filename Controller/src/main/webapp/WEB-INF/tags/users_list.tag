@@ -13,6 +13,7 @@
         <th>Login</th>
         <th>Password</th>
         <th>Gender</th>
+        <th>Role</th>
         <th colspan="2"></th>
     </tr>
     </thead>
@@ -26,6 +27,7 @@
             <td>${user.getLogin()}</td>
             <td>${user.getPassword()}</td>
             <td>${user.getGender()}</td>
+            <td>${user.getRole().toString()}</td>
             <td><a href="${remove}?id=${user.getId()}"><button class='btn'>Remove</button></a></td>
             <td><a href="${update}?id=${user.getId()}"><button class='btn'>Update</button></a></td>
         </tr>

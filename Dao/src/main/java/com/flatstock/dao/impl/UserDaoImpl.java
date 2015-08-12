@@ -4,6 +4,7 @@ package com.flatstock.dao.impl;
 import com.flatstock.dao.UserDao;
 import com.flatstock.model.Gender;
 import com.flatstock.model.IUser;
+import com.flatstock.model.Role;
 import com.flatstock.model.impl.User;
 
 import java.sql.PreparedStatement;
@@ -26,17 +27,18 @@ public class UserDaoImpl implements UserDao {
     public static final String EMAIL = "email";
     public static final String LOGIN = "login";
     public static final String PASSWORD = "password";
+    public static final String ROLE = "role";
     public static final String PHOTO_URL = "photo_url";
 
     private static final String SELECT_ALL_QUERY = "SELECT * FROM "+TABLE_NAME;
     private static final String SELECT_BY_ID = "SELECT * FROM "+TABLE_NAME+" WHERE " +ID+ "=?";
     private static final String ADD_USER = "INSERT INTO "+TABLE_NAME+
             " (" + FIRST_NAME + ", " + LAST_NAME + ", " + GENDER+", "+ EMAIL+", "
-            + LOGIN +", "+ PASSWORD+", "+ PHOTO_URL+")" +
-            " VALUES (?, ?, ?, ?, ?, ?, ?)";
+            + LOGIN +", "+ PASSWORD+ ", " + ROLE +", "+ PHOTO_URL+")" +
+            " VALUES (?, ?, ?::gender, ?, ?, ?, ?::role, ?)";
     private static final String UPDATE_USER = "UPDATE "+TABLE_NAME+
-            " SET " + FIRST_NAME+"=?, "+ LAST_NAME+"=?, "+ GENDER +"=?, "+ 
-            EMAIL+"=?, "+ LOGIN +"=?, " + PASSWORD + "=?, " + 
+            " SET " + FIRST_NAME+"=?, "+ LAST_NAME+"=?, "+ GENDER +"=?::gender, "+
+            EMAIL+"=?, "+ LOGIN +"=?, " + PASSWORD + "=?, " + ROLE + "=?::role, " +
             PHOTO_URL + "=?" + " WHERE id=" + "?";
     private static final String DELETE_USER = "DELETE FROM "+TABLE_NAME+" WHERE " +ID +"=?";
 
@@ -56,10 +58,11 @@ public class UserDaoImpl implements UserDao {
                     user.setId(result.getInt(ID));
                     user.setFirstName(result.getString(FIRST_NAME));
                     user.setLastName(result.getString(LAST_NAME));
-                    user.setGender(Gender.fromBoolean(result.getBoolean(GENDER)));
+                    user.setGender(Gender.fromString(result.getString(GENDER)));
                     user.setEmail(result.getString(EMAIL));
                     user.setLogin(result.getString(LOGIN));
                     user.setPassword(result.getString(PASSWORD));
+                    user.setRole(Role.fromString(result.getString(ROLE)));
                     user.setPhotoUrl(result.getString(PHOTO_URL));
                     users.add(user);
                 }
@@ -83,10 +86,11 @@ public class UserDaoImpl implements UserDao {
                 user.setId(result.getInt(ID));
                 user.setFirstName(result.getString(FIRST_NAME));
                 user.setLastName(result.getString(LAST_NAME));
-                user.setGender(Gender.fromBoolean(result.getBoolean(GENDER)));
+                user.setGender(Gender.fromString(result.getString(GENDER)));
                 user.setEmail(result.getString(EMAIL));
                 user.setLogin(result.getString(LOGIN));
                 user.setPassword(result.getString(PASSWORD));
+                user.setRole(Role.fromString(result.getString(ROLE)));
                 user.setPhotoUrl(result.getString(PHOTO_URL));
                 return user;
             }
@@ -100,11 +104,14 @@ public class UserDaoImpl implements UserDao {
             public void prepare(PreparedStatement statement) throws SQLException {
                 statement.setString(1, user.getFirstName());
                 statement.setString(2, user.getLastName());
-                statement.setBoolean(3, Gender.toBoolean(user.getGender()));
+                statement.setString(3, user.getGender().toString());
                 statement.setString(4, user.getEmail());
                 statement.setString(5, user.getLogin());
                 statement.setString(6, user.getPassword());
-                statement.setString(7, user.getPhotoUrl());
+                statement.setString(7, user.getRole().toString());
+                statement.setString(8, user.getPhotoUrl());
+
+
             }
 
             @Override
@@ -121,12 +128,13 @@ public class UserDaoImpl implements UserDao {
             public void prepare(PreparedStatement statement) throws SQLException {
                 statement.setString(1, user.getFirstName());
                 statement.setString(2, user.getLastName());
-                statement.setBoolean(3, Gender.toBoolean(user.getGender()));
+                statement.setString(3, user.getGender().toString());
                 statement.setString(4, user.getEmail());
                 statement.setString(5, user.getLogin());
                 statement.setString(6, user.getPassword());
-                statement.setString(7, user.getPhotoUrl());
-                statement.setInt(8, user.getId());
+                statement.setString(7, user.getRole().toString());
+                statement.setString(8, user.getPhotoUrl());
+                statement.setInt(9, user.getId());
             }
 
             @Override
