@@ -4,6 +4,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="static com.flatstock.controller.AccessController.*" %>
 <%@ page import="static com.flatstock.controller.AddUrlController.*" %>
+<%@ page import="static com.flatstock.controller.RemoveUrlController.*" %>
 <html>
 <head>
     <title></title>
@@ -29,6 +30,7 @@
         <c:forEach items="<%= Role.values()%>" var="role">
           <th>${role.toString()}</th>
         </c:forEach>
+        <th></th>
       </tr>
       </thead>
       <tbody>
@@ -39,6 +41,7 @@
             <td><input type="checkbox" name="${url}" value="${role.toString()}" form="edit"
                     <c:if test="${accessMap.get(url).contains(role)}">checked</c:if>/></td>
           </c:forEach>
+          <td><a href="<%= REMOVE_URL_PATH%>?<%= URL%>=${url}"><button class="btn">Remove</button></a></td>
         </tr>
       </c:forEach>
       </tbody>
