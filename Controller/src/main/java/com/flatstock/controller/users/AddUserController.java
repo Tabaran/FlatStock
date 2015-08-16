@@ -1,4 +1,4 @@
-package com.flatstock.controller;
+package com.flatstock.controller.users;
 
 import com.flatstock.model.Role;
 import com.flatstock.service.UserService;
@@ -7,8 +7,8 @@ import com.flatstock.model.Gender;
 import com.flatstock.model.IUser;
 import com.flatstock.model.impl.User;
 import static com.flatstock.model.impl.User.*;
-import static com.flatstock.controller.ShowUsersController.*;
-import static com.flatstock.controller.AddUserController.*;
+import static com.flatstock.controller.users.ShowUsersController.*;
+import static com.flatstock.controller.users.AddUserController.*;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

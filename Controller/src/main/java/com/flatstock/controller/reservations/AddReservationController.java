@@ -1,4 +1,4 @@
-package com.flatstock.controller;
+package com.flatstock.controller.reservations;
 
 import com.flatstock.model.impl.Reservation;
 import com.flatstock.service.*;
@@ -21,7 +21,7 @@ import java.util.List;
 import static com.flatstock.model.impl.Reservation.*;
 import static com.flatstock.model.impl.Apartment.*;
 import static com.flatstock.model.impl.User.*;
-import static com.flatstock.controller.AddReservationController.*;
+import static com.flatstock.controller.reservations.AddReservationController.*;
 
 
 /**

@@ -1,4 +1,4 @@
-package com.flatstock.controller;
+package com.flatstock.controller.apartments;
 
 
 import com.flatstock.model.*;
@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import static com.flatstock.model.impl.Apartment.*;
-import static com.flatstock.controller.AddApartmentsController.*;
-import static com.flatstock.controller.ShowApartmentsController.*;
+import static com.flatstock.controller.apartments.AddApartmentsController.*;
+import static com.flatstock.controller.apartments.ShowApartmentsController.*;
 
 
 /**

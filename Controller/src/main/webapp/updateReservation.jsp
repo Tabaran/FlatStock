@@ -5,7 +5,7 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="static com.flatstock.model.impl.User.*"%>
 <%@ page import="static com.flatstock.model.impl.Reservation.*"%>
-<%@ page import="static com.flatstock.controller.UpdateReservationController.*"%>
+<%@ page import="static com.flatstock.controller.reservations.UpdateReservationController.*"%>
 <html>
  <%IReservation reservation = (IReservation)request.getAttribute(RESERVATIONS);%>
 <html>

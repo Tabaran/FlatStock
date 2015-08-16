@@ -1,4 +1,4 @@
-package com.flatstock.controller;
+package com.flatstock.controller.reservations;
 
 /**
  * Created by Valentin on 17.06.2015.
@@ -11,7 +11,7 @@ import com.flatstock.service.impl.ApartmentServiceImpl;
 import com.flatstock.service.impl.ReservationServiceImpl;
 import com.flatstock.service.impl.UserServiceImpl;
 import org.apache.log4j.Logger;
-import static com.flatstock.controller.UpdateReservationController.*;
+import static com.flatstock.controller.reservations.UpdateReservationController.*;
 import static com.flatstock.model.impl.Reservation.*;
 import static com.flatstock.model.impl.User.*;
 import static com.flatstock.model.impl.Apartment.*;

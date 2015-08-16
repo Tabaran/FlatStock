@@ -50,6 +50,23 @@ CREATE TABLE Users (
     CONSTRAINT Users_pk PRIMARY KEY (id)
 );
 
+-- Table: Url
+CREATE TABLE Url
+(
+    id SERIAL PRIMARY KEY NOT NULL,
+    url VARCHAR(400) NOT NULL
+);
+ALTER TABLE Url
+ADD CONSTRAINT unique_url UNIQUE (url);
+
+-- Table: AccessMap
+CREATE TABLE AccessMap
+(
+    url_id int  NOT NULL,
+    role role
+);
+
+
 -- foreign keys
 -- Reference:  Flats_Users (table: Apartment)
 
@@ -61,14 +78,22 @@ ALTER TABLE Apartment ADD CONSTRAINT Flats_Users
     INITIALLY IMMEDIATE 
 ;
 
+-- Reference:  Access_Url (table: AccessMap)
+
+ALTER TABLE AccessMap ADD CONSTRAINT Access_Url
+    FOREIGN KEY (url_id)
+    REFERENCES Url (id)
+    NOT DEFERRABLE
+    INITIALLY IMMEDIATE
+;
+
 -- Reference:  Reservation_Flats (table: Reservation)
 
-
-ALTER TABLE Reservation ADD CONSTRAINT Reservation_Flats 
-    FOREIGN KEY (apartment_id)
-    REFERENCES Apartment (id)
-    NOT DEFERRABLE 
-    INITIALLY IMMEDIATE 
+ALTER TABLE Reservation ADD CONSTRAINT Reservation_Flats
+FOREIGN KEY (apartment_id)
+REFERENCES Apartment (id)
+NOT DEFERRABLE
+INITIALLY IMMEDIATE
 ;
 
 -- Reference:  Reservation_Users (table: Reservation)
@@ -89,3 +114,4 @@ INSERT INTO Users (first_name, last_name, gender, email, login, password, role)
 
 -- End of file.
 
+SELECT * FROM users;

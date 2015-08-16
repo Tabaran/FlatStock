@@ -1,8 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="h" %>
-<%@ page import="static com.flatstock.controller.RemoveReservationController.*"%>
-<%@ page import="static com.flatstock.controller.UpdateReservationController.*"%>
-<%@ page import="static com.flatstock.controller.AddReservationController.*"%>
+<%@ page import="static com.flatstock.controller.reservations.RemoveReservationController.*"%>
+<%@ page import="static com.flatstock.controller.reservations.UpdateReservationController.*"%>
+<%@ page import="static com.flatstock.controller.reservations.AddReservationController.*"%>
 
 <html>
 <head>

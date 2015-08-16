@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="static com.flatstock.controller.UpdateUserController.*"%>
-<%@ page import="static com.flatstock.controller.RemoveUserController.*"%>
+<%@ page import="static com.flatstock.controller.users.UpdateUserController.*"%>
+<%@ page import="static com.flatstock.controller.users.RemoveUserController.*"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="h" %>
 <html>
 <head>

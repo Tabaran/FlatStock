@@ -1,4 +1,4 @@
-package com.flatstock.controller;
+package com.flatstock.controller.users;
 
 /**
  * Created by Valentin on 17.06.2015.
@@ -11,8 +11,8 @@ import com.flatstock.model.Gender;
 import com.flatstock.model.IUser;
 import com.flatstock.model.impl.User;
 import static com.flatstock.model.impl.User.*;
-import static com.flatstock.controller.UpdateUserController.*;
-import static com.flatstock.controller.ShowUsersController.*;
+import static com.flatstock.controller.users.UpdateUserController.*;
+import static com.flatstock.controller.users.ShowUsersController.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

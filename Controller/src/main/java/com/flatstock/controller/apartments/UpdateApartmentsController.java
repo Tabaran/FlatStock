@@ -1,4 +1,4 @@
-package com.flatstock.controller;
+package com.flatstock.controller.apartments;
 
 /**
  * Created by Valentin on 17.06.2015.
@@ -12,8 +12,8 @@ import com.flatstock.service.impl.UserServiceImpl;
 import com.flatstock.model.*;
 import static com.flatstock.model.impl.Apartment.*;
 import static com.flatstock.model.impl.User.*;
-import static com.flatstock.controller.UpdateApartmentsController.*;
-import static com.flatstock.controller.ShowApartmentsController.*;
+import static com.flatstock.controller.apartments.UpdateApartmentsController.*;
+import static com.flatstock.controller.apartments.ShowApartmentsController.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -1,11 +1,11 @@
-package com.flatstock.controller;
+package com.flatstock.controller.apartments;
 
 import com.flatstock.service.ApartmentService;
 import com.flatstock.service.impl.ApartmentServiceImpl;
-import static com.flatstock.controller.RemoveApartmentsController.*;
-import static com.flatstock.controller.ShowApartmentsController.*;
+import static com.flatstock.controller.apartments.RemoveApartmentsController.*;
+import static com.flatstock.controller.apartments.ShowApartmentsController.*;
 import static com.flatstock.model.Id.*;
-import javax.servlet.RequestDispatcher;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

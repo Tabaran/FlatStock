@@ -1,4 +1,4 @@
-package com.flatstock.controller;
+package com.flatstock.controller.reservations;
 
 import com.flatstock.service.*;
 import com.flatstock.model.IApartment;
@@ -7,7 +7,7 @@ import com.flatstock.model.IUser;
 import com.flatstock.service.impl.ApartmentServiceImpl;
 import com.flatstock.service.impl.ReservationServiceImpl;
 import com.flatstock.service.impl.UserServiceImpl;
-import static com.flatstock.controller.ShowReservationsController.*;
+import static com.flatstock.controller.reservations.ShowReservationsController.*;
 import static com.flatstock.model.impl.Reservation.*;
 import static com.flatstock.model.impl.User.*;
 import static com.flatstock.model.impl.Apartment.*;

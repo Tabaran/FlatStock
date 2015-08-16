@@ -1,11 +1,11 @@
-package com.flatstock.controller;
+package com.flatstock.controller.users;
 
 import com.flatstock.service.UserService;
 import com.flatstock.service.impl.UserServiceImpl;
 import com.flatstock.model.IUser;
 import org.apache.log4j.Logger;
 import static com.flatstock.model.impl.User.*;
-import static com.flatstock.controller.ShowUsersController.*;
+import static com.flatstock.controller.users.ShowUsersController.*;
 import java.io.*;
 import java.util.List;
 import javax.servlet.*;

@@ -1,4 +1,4 @@
-package com.flatstock.controller;
+package com.flatstock.controller.apartments;
 
 import com.flatstock.service.ApartmentService;
 import com.flatstock.service.impl.ApartmentServiceImpl;
@@ -13,7 +13,7 @@ import java.util.Map;
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
-import static com.flatstock.controller.ShowApartmentsController.*;
+import static com.flatstock.controller.apartments.ShowApartmentsController.*;
 import static com.flatstock.model.impl.Apartment.*;
 import static com.flatstock.model.impl.User.*;
 
