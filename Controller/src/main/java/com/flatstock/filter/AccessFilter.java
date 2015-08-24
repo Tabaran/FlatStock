@@ -31,26 +31,28 @@ public class AccessFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
         HttpServletRequest req = (HttpServletRequest) request;
-        LOG.info(req.getRequestURI() + "  **************** Do filter ***************");
         HttpSession session = req.getSession();
         IUser user = (IUser) session.getAttribute(USER);
         if (LOGIN_PATH.equals(req.getRequestURI()) || ERROR_PAGE.equals(req.getRequestURI()) ||
                 LOGIN_JSP.equals(req.getRequestURI())) {
             chain.doFilter(request, response);
         } else {
-            if (user == null) {
-                ((HttpServletResponse) response).sendRedirect(LOGIN_JSP);
-            } else {
-                Set<Role> accessList = accessService.getAccessMap().get(req.getRequestURI());
-                if (accessList != null && accessList.contains(user.getRole())) {
-                    chain.doFilter(request, response);
-                } else {
-                    RequestDispatcher rd = req.getRequestDispatcher("/accessError.jsp");
-                    rd.forward(request, response);
-                }
-            }
+            doAccessChecking(user, req, response, chain);
         }
 
+    }
+
+    private void doAccessChecking(IUser user, HttpServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+        if (user == null) {
+            ((HttpServletResponse) response).sendRedirect(LOGIN_JSP);
+        } else {
+            if (accessService.checkAccess(request.getRequestURI(), user.getRole())) {
+                chain.doFilter(request, response);
+            } else {
+                RequestDispatcher rd = request.getRequestDispatcher("/accessError.jsp");
+                rd.forward(request, response);
+            }
+        }
     }
 
     public void destroy() {

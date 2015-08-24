@@ -7,7 +7,7 @@ CREATE TYPE role AS ENUM ('customer', 'administrator');
 
 -- tables
 -- Table: Apartment
-CREATE TABLE Apartment (
+CREATE TABLE APARTMENTS (
     id serial  NOT NULL,
     user_id int  NOT NULL,
     address varchar(400)  NOT NULL,
@@ -19,25 +19,21 @@ CREATE TABLE Apartment (
     type varchar(100),
     description text  NOT NULL,
     square int,
-    CONSTRAINT Apartment_pk PRIMARY KEY (id)
+    CONSTRAINT APARTMENTS_PK PRIMARY KEY (id)
 );
 
-
-
 -- Table: Reservation
-CREATE TABLE Reservation (
+CREATE TABLE RESERVATIONS (
     id serial  NOT NULL,
     user_id int  NOT NULL,
     apartment_id int  NOT NULL,
     start_time timestamp  NOT NULL,
     end_time timestamp  NOT NULL,
-    CONSTRAINT Reservation_pk PRIMARY KEY (id)
+    CONSTRAINT RESERVATIONS_PK PRIMARY KEY (id)
 );
 
-
-
 -- Table: Users
-CREATE TABLE Users (
+CREATE TABLE USERS (
     id serial  NOT NULL,
     first_name varchar(100)  NOT NULL,
     last_name varchar(100)  NOT NULL,
@@ -47,31 +43,41 @@ CREATE TABLE Users (
     password varchar(100)  NOT NULL,
     role role NOT NULL DEFAULT 'customer',
     photo_url varchar(400),
-    CONSTRAINT Users_pk PRIMARY KEY (id)
+    CONSTRAINT USERS_PK PRIMARY KEY (id)
 );
 
 -- Table: Url
-CREATE TABLE Url
+CREATE TABLE URLS
 (
     id SERIAL PRIMARY KEY NOT NULL,
-    url VARCHAR(400) NOT NULL
+    url VARCHAR(400) NOT NULL,
+    group_id int NOT NULL
 );
-ALTER TABLE Url
+ALTER TABLE URLS
 ADD CONSTRAINT unique_url UNIQUE (url);
 
 -- Table: AccessMap
-CREATE TABLE AccessMap
+CREATE TABLE ACCESS_TABLE
 (
-    url_id int  NOT NULL,
+    group_id int  NOT NULL,
     role role
 );
+
+CREATE TABLE FUNCTIONAL_GROUPS
+(
+    id SERIAL PRIMARY KEY NOT NULL,
+    group_name VARCHAR(400) NOT NULL,
+    description TEXT
+);
+ALTER TABLE FUNCTIONAL_GROUPS
+ ADD CONSTRAINT unique_group_name UNIQUE (group_name);
 
 
 -- foreign keys
 -- Reference:  Flats_Users (table: Apartment)
 
 
-ALTER TABLE Apartment ADD CONSTRAINT Flats_Users 
+ALTER TABLE APARTMENTS ADD CONSTRAINT Flats_Users
     FOREIGN KEY (user_id)
     REFERENCES Users (id)
     NOT DEFERRABLE 
@@ -80,16 +86,16 @@ ALTER TABLE Apartment ADD CONSTRAINT Flats_Users
 
 -- Reference:  Access_Url (table: AccessMap)
 
-ALTER TABLE AccessMap ADD CONSTRAINT Access_Url
-    FOREIGN KEY (url_id)
-    REFERENCES Url (id)
+ALTER TABLE ACCESS_TABLE ADD CONSTRAINT Access_Url
+    FOREIGN KEY (group_id)
+    REFERENCES functional_groups (id)
     NOT DEFERRABLE
     INITIALLY IMMEDIATE
 ;
 
 -- Reference:  Reservation_Flats (table: Reservation)
 
-ALTER TABLE Reservation ADD CONSTRAINT Reservation_Flats
+ALTER TABLE RESERVATIONS ADD CONSTRAINT Reservations_Flats
 FOREIGN KEY (apartment_id)
 REFERENCES Apartment (id)
 NOT DEFERRABLE
@@ -99,19 +105,27 @@ INITIALLY IMMEDIATE
 -- Reference:  Reservation_Users (table: Reservation)
 
 
-ALTER TABLE Reservation ADD CONSTRAINT Reservation_Users 
+ALTER TABLE RESERVATIONS ADD CONSTRAINT Reservation_Users
     FOREIGN KEY (user_id)
     REFERENCES Users (id)
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE 
 ;
 
+ALTER TABLE URLS ADD CONSTRAINT URLS_GROUPS
+    FOREIGN KEY (group_id)
+    REFERENCES FUNCTIONAL_GROUPS (id)
+    NOT DEFERRABLE
+    INITIALLY IMMEDIATE
+;
 
-INSERT INTO Users (first_name, last_name, gender, email, login, password, role)
-            VALUES ('admin', 'admin', 'male', 'admin@flatstock.com', 'admin', 'admin', 'administrator');
 
+ALTER TABLE ACCESS_TABLE ADD CONSTRAINT access_groups
+FOREIGN KEY (group_id)
+REFERENCES FUNCTIONAL_GROUPS (id)
+NOT DEFERRABLE
+INITIALLY IMMEDIATE
+;
 
 
 -- End of file.
-
-SELECT * FROM users;

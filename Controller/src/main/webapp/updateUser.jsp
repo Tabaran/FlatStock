@@ -18,8 +18,7 @@
 
 <body>
 <form method="POST" action="<%= UPDATE_USER_PATH%>" class="navbar-form">
-    <input type="hidden" name="id" value="${user.getId()}" />
-
+    <input type="hidden" name="id" value="${user.getId()}"/>
     <div class="container form-group">
         <div class="row">
             <div class="col-md-2">

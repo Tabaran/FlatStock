@@ -26,6 +26,7 @@
             <td>${user.getEmail()}</td>
             <td>${user.getLogin()}</td>
             <td>${user.getPassword()}</td>
+            <td>${user.getPhotoUrl()}</td>
             <td>${user.getGender()}</td>
             <td>${user.getRole().toString()}</td>
             <td><a href="${remove}?id=${user.getId()}"><button class='btn'>Remove</button></a></td>

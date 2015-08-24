@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class UserDaoImpl implements UserDao {
 
-    private static final String TABLE_NAME = "Users";
+    private static final String TABLE_NAME = "USERS";
     public static final String ID = "id";
     public static final String FIRST_NAME = "first_name";
     public static final String LAST_NAME = "last_name";

@@ -2,13 +2,11 @@ package com.flatstock.dao.impl;
 import com.flatstock.dao.ReservationDao;
 import com.flatstock.model.IReservation;
 import com.flatstock.model.impl.Reservation;
-
+import static com.flatstock.model.Id.*;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 
@@ -18,8 +16,7 @@ import java.util.List;
 public class ReservationDaoImpl implements ReservationDao {
 
 
-    private static final String TABLE_NAME = "Reservation";
-    public static final String ID = "id";
+    private static final String TABLE_NAME = "RESERVATIONS";
     public static final String USER_ID = "user_id";
     public static final String APARTMENT_ID = "apartment_id";
     public static final String START_TIME = "start_time";

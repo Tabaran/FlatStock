@@ -13,7 +13,7 @@ public enum Gender {
         this.name = name;
     }
     public static Gender fromString(String name) {
-        if (name.equalsIgnoreCase("male")) return MALE;
+        if (name != null && name.equalsIgnoreCase("male")) return MALE;
         else return FEMALE;
     }
 

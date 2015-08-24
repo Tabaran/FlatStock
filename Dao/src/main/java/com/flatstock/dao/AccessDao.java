@@ -8,9 +8,8 @@ import java.util.Set;
 /**
  * Created by Valentin on 15.08.2015.
  */
-public interface AccessMapDao {
-    Set<Role> getRolesForUrl(int urlId);
+public interface AccessDao {
+    Set<Role> getRolesForGroup(int groupId);
     void addAccess(int urlId, Role role);
-    void removeAccess(int urlId, Role role);
-    void removeAccess(int urlId);
+    void removeAccess(int groupId, Role role);
 }

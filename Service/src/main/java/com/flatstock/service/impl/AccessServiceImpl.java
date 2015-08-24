@@ -1,9 +1,12 @@
 package com.flatstock.service.impl;
 
-import com.flatstock.dao.AccessMapDao;
+import com.flatstock.dao.AccessDao;
+import com.flatstock.dao.GroupsDao;
 import com.flatstock.dao.UrlDao;
-import com.flatstock.dao.impl.AccessMapDaoImpl;
+import com.flatstock.dao.impl.AccessDaoImpl;
+import com.flatstock.dao.impl.GroupsDaoImpl;
 import com.flatstock.dao.impl.UrlDaoImpl;
+import com.flatstock.model.IFunctionalGroup;
 import com.flatstock.model.Role;
 import com.flatstock.service.AccessService;
 
@@ -14,70 +17,62 @@ import java.util.*;
  */
 public class AccessServiceImpl implements AccessService {
 
-    private static Map<String, Set<Role>> accessMap = null;
+    private static Map<Integer, Set<Role>> accessMap = null;
+    private static Map<Integer, IFunctionalGroup> groups;
 
-    AccessMapDao accessMapDao;
+    AccessDao accessDao;
     UrlDao urlDao;
+    GroupsDao groupsDao;
 
     public AccessServiceImpl(){
-        accessMapDao = new AccessMapDaoImpl();
+        accessDao = new AccessDaoImpl();
         urlDao = new UrlDaoImpl();
+        groupsDao = new GroupsDaoImpl();
+        groups = new HashMap<>();
+        for (IFunctionalGroup group: groupsDao.getAllGroups()){
+            groups.put(group.getId(), group);
+        }
     }
 
-    public Map<String, Set<Role>> getAccessMap() {
-        if(accessMap == null) {
-            accessMap = new HashMap<String, Set<Role>>();
-            Map<Integer,String> urls = urlDao.getAllUrls();
-            if(urls != null){
-                for(int urlId: urls.keySet()){
-                    accessMap.put(urls.get(urlId), accessMapDao.getRolesForUrl(urlId));
-                }
+
+    @Override
+    public Map<Integer, Set<Role>> getAccessMap() {
+        if(accessMap == null){
+            accessMap = new HashMap<>();
+            for (IFunctionalGroup group: groups.values()){
+                Set<Role> roles = accessDao.getRolesForGroup(group.getId());
+                accessMap.put(group.getId(), roles);
             }
         }
         return accessMap;
     }
 
-    public void addUrl(String url) {
-        urlDao.addUrl(url);
-        accessMap = null;
+    @Override
+    public Map<Integer, IFunctionalGroup> getGroups() {
+        return groups;
     }
 
-    public void updateAccess(String url, Set<Role> newRoles) {
-        int urlId = urlDao.getUrlId(url);
-        Set<Role> oldRoles = accessMapDao.getRolesForUrl(urlId);
+    @Override
+    public void updateAccess(Integer groupId, Set<Role> newRoles) {
+        Set<Role> oldRoles = accessDao.getRolesForGroup(groupId);
         for(Role role: Role.values()){
             if(oldRoles.contains(role) && !newRoles.contains(role)) {
-                accessMapDao.removeAccess(urlId, role);
+                accessDao.removeAccess(groupId, role);
             }
             if(!oldRoles.contains(role) && newRoles.contains(role)) {
-                accessMapDao.addAccess(urlId, role);
+                accessDao.addAccess(groupId, role);
             }
         }
-        getAccessMap().put(url, newRoles);
+        getAccessMap().put(groupId, newRoles);
     }
 
-    public void removeUrl(String url) {
-        Integer urlId = urlDao.getUrlId(url);
-        if(urlId != null) {
-            accessMapDao.removeAccess(urlId);
-            urlDao.removeUrl(url);
-            accessMap = null;
-        }
-    }
-
-    public void removeAccess(String url, Role role) {
-        Integer urlId = urlDao.getUrlId(url);
-        if(urlId != null) {
-            accessMapDao.removeAccess(urlId, role);
-            accessMap = null;
-        }
-    }
-
-    public void addAccess(String url, Role role) {
-        Integer urlId = urlDao.getUrlId(url);
-        if(urlId != null) {
-            accessMapDao.addAccess(urlId, role);
-            accessMap = null;
-        }
+    @Override
+    public boolean checkAccess(String url, Role role) {
+        Map<String, Integer> urlMap = urlDao.getAllUrls();
+        IFunctionalGroup group = groups.get(urlMap.get(url));
+        if(group == null) return false;
+        Set<Role> roles = getAccessMap().get(group.getId());
+        if(roles == null) return false;
+        return roles.contains(role);
     }
 }

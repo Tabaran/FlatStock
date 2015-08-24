@@ -1,6 +1,6 @@
 package com.flatstock.dao.impl;
 
-import com.flatstock.dao.AccessMapDao;
+import com.flatstock.dao.AccessDao;
 import com.flatstock.model.Role;
 
 import java.sql.PreparedStatement;
@@ -12,30 +12,29 @@ import java.util.Set;
 /**
  * Created by Valentin on 16.08.2015.
  */
-public class AccessMapDaoImpl implements AccessMapDao {
-    private static final String ACCESS_TABLE = "AccessMap";
+public class AccessDaoImpl implements AccessDao {
+    private static final String TABLE_NAME = "access_table";
     private static final String ROLE = "role";
-    private static final String URL_ID = "url_id";
+    private static final String GROUP_ID = "group_id";
 
-    private static final String SELECT_ROLES_QUERY = "SELECT " + ROLE + " FROM " + ACCESS_TABLE +
-            " WHERE " + URL_ID + "=?;";
-    private static final String ADD_ACCESS_QUERY = "INSERT INTO " + ACCESS_TABLE +
-            "(" + URL_ID + ", " + ROLE + ") VALUES (?, ?::role);";
-    private static final String REMOVE_ACCESS_QUERY = "DELETE FROM " + ACCESS_TABLE +
-            " WHERE " + URL_ID + "=? AND " + ROLE + "=?::role;";
-    private static final String REMOVE_URL_QUERY = "DELETE FROM " + ACCESS_TABLE +
-            " WHERE " + URL_ID + "=?;";
+    private static final String SELECT_ROLES_QUERY = "SELECT " + ROLE + " FROM " + TABLE_NAME +
+            " WHERE " + GROUP_ID + "=?;";
+    private static final String ADD_ACCESS_QUERY = "INSERT INTO " + TABLE_NAME +
+            "(" + GROUP_ID + ", " + ROLE + ") VALUES (?, ?::role);";
+    private static final String REMOVE_ACCESS_QUERY = "DELETE FROM " + TABLE_NAME +
+            " WHERE " + GROUP_ID + "=? AND " + ROLE + "=?::role;";
 
-    public Set<Role> getRolesForUrl(final int urlId) {
+
+    public Set<Role> getRolesForGroup(final int groupId) {
         Dao<Set<Role>> dao = new Dao<Set<Role>>() {
             @Override
             public void prepare(PreparedStatement statement) throws SQLException {
-                statement.setInt(1, urlId);
+                statement.setInt(1, groupId);
             }
 
             @Override
             public Set<Role> execute(ResultSet result) throws SQLException {
-                Set<Role> roles = new HashSet<Role>();
+                Set<Role> roles = new HashSet<>();
                 while (result.next()){
                     roles.add(Role.fromString(result.getString(ROLE)));
                 }
@@ -45,11 +44,11 @@ public class AccessMapDaoImpl implements AccessMapDao {
         return dao.executeQuery(SELECT_ROLES_QUERY);
     }
 
-    public void addAccess(final int urlId, final Role role) {
+    public void addAccess(final int groupId, final Role role) {
         Dao dao = new Dao() {
             @Override
             public void prepare(PreparedStatement statement) throws SQLException {
-                statement.setInt(1, urlId);
+                statement.setInt(1, groupId);
                 statement.setString(2, role.toString());
             }
 
@@ -61,11 +60,11 @@ public class AccessMapDaoImpl implements AccessMapDao {
         dao.executeQuery(ADD_ACCESS_QUERY);
     }
 
-    public void removeAccess(final int urlId, final Role role) {
+    public void removeAccess(final int groupId, final Role role) {
         Dao dao = new Dao() {
             @Override
             public void prepare(PreparedStatement statement) throws SQLException {
-                statement.setInt(1, urlId);
+                statement.setInt(1, groupId);
                 statement.setString(2, role.toString());
             }
 
@@ -77,18 +76,5 @@ public class AccessMapDaoImpl implements AccessMapDao {
         dao.executeQuery(REMOVE_ACCESS_QUERY);
     }
 
-    public void removeAccess(final int urlId) {
-        Dao dao = new Dao() {
-            @Override
-            public void prepare(PreparedStatement statement) throws SQLException {
-                statement.setInt(1, urlId);
-            }
 
-            @Override
-            public Object execute(ResultSet result) throws SQLException {
-                return null;
-            }
-        };
-        dao.executeQuery(REMOVE_URL_QUERY);
-    }
 }

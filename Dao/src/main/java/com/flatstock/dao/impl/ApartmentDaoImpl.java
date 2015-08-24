@@ -19,7 +19,7 @@ import java.util.Map;
  */
 public class ApartmentDaoImpl implements ApartmentDao {
 
-    public static final String TABLE_NAME = "apartment";
+    public static final String TABLE_NAME = "APARTMENTS";
     public static final String ID = "id";
     public static final String ADDRESS = "address";
     public static final String ROOM_NUMBER = "room_number";

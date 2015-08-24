@@ -2,9 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="h" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="static com.flatstock.controller.AccessController.*" %>
-<%@ page import="static com.flatstock.controller.AddUrlController.*" %>
-<%@ page import="static com.flatstock.controller.RemoveUrlController.*" %>
+<%@ page import="static com.flatstock.controller.AccessEditorController.*" %>
 <html>
 <head>
     <title></title>
@@ -17,42 +15,38 @@
   <div class="row">
     <h:navigation/>
   </div>
-  <div class="row">
-    <input  class="btn" type="submit" form="edit" value="Save"/>
+  $('#save').delay(5000).fadeOut('slow');
+  <div id="save">
+    Saved
   </div>
+  <form method="post" action="<%= ACCESS_PATH%>">
   <div class="row">
-    <form method="post" id="edit" action="<%= ACCESS_PATH%>"></form>
-    <form method="post" id="add" action="<%= ADD_URL_PATH%>"></form>
     <table class="table" >
       <thead>
       <tr>
-        <th>Access URL</th>
+        <th>Features</th>
         <c:forEach items="<%= Role.values()%>" var="role">
           <th>${role.toString()}</th>
         </c:forEach>
-        <th></th>
       </tr>
       </thead>
       <tbody>
-      <c:forEach items="${accessMap.keySet()}" var="url">
+      <c:forEach items="${accessMap.keySet()}" var="groupId">
         <tr>
-          <td>${url}</td>
+          <td>${groups.get(groupId).getName()}</td>
           <c:forEach items="<%= Role.values()%>" var="role">
-            <td><input type="checkbox" name="${url}" value="${role.toString()}" form="edit"
-                    <c:if test="${accessMap.get(url).contains(role)}">checked</c:if>/></td>
+            <td><input type="checkbox" name="${groupId.toString()}" value="${role.toString()}"
+                    <c:if test="${accessMap.get(groupId).contains(role)}">checked</c:if>/></td>
           </c:forEach>
-          <td><a href="<%= REMOVE_URL_PATH%>?<%= URL%>=${url}"><button class="btn">Remove</button></a></td>
         </tr>
       </c:forEach>
       </tbody>
       </table>
   </div>
-    <div class="row">
-        Add URL:
-        <input type="text" name="<%= URL%>" form="add"/>
-        <input  class="btn" type="submit" form="add" value="Add"/>
-    </div>
-
+  <div class="row">
+      <input  class="btn" type="submit" value="Save"/>
+  </div>
+  </form>
 </div>
 </div>
 </body>
