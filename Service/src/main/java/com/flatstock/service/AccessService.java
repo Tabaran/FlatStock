@@ -12,6 +12,6 @@ import java.util.Set;
 public interface AccessService {
     Map<Integer, Set<Role>> getAccessMap();
     Map<Integer, IFunctionalGroup> getGroups();
-    void updateAccess(Integer groupId, Set<Role> roles);
+    boolean updateAccess(Integer groupId, Set<Role> roles);
     boolean checkAccess(String url, Role role);
 }

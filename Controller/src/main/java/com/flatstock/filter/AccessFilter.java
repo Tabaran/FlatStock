@@ -29,7 +29,6 @@ public class AccessFilter implements Filter {
     }
 
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-
         HttpServletRequest req = (HttpServletRequest) request;
         HttpSession session = req.getSession();
         IUser user = (IUser) session.getAttribute(USER);
@@ -39,7 +38,6 @@ public class AccessFilter implements Filter {
         } else {
             doAccessChecking(user, req, response, chain);
         }
-
     }
 
     private void doAccessChecking(IUser user, HttpServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {

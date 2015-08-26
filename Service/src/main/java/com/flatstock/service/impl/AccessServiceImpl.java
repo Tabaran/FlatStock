@@ -53,8 +53,9 @@ public class AccessServiceImpl implements AccessService {
     }
 
     @Override
-    public void updateAccess(Integer groupId, Set<Role> newRoles) {
+    public boolean updateAccess(Integer groupId, Set<Role> newRoles) {
         Set<Role> oldRoles = accessDao.getRolesForGroup(groupId);
+        if(newRoles==null || newRoles.equals(oldRoles)) return false;
         for(Role role: Role.values()){
             if(oldRoles.contains(role) && !newRoles.contains(role)) {
                 accessDao.removeAccess(groupId, role);
@@ -64,11 +65,13 @@ public class AccessServiceImpl implements AccessService {
             }
         }
         getAccessMap().put(groupId, newRoles);
+        return true;
     }
 
     @Override
     public boolean checkAccess(String url, Role role) {
         Map<String, Integer> urlMap = urlDao.getAllUrls();
+        if(!urlMap.keySet().contains(url)) return true;
         IFunctionalGroup group = groups.get(urlMap.get(url));
         if(group == null) return false;
         Set<Role> roles = getAccessMap().get(group.getId());

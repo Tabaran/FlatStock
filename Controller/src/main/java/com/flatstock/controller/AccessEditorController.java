@@ -49,8 +49,9 @@ public class AccessEditorController extends HttpServlet {
                     roles.add(Role.fromString(r));
                 }
             }
-            service.updateAccess(groupId, roles);
+            request.setAttribute("isSaved", service.updateAccess(groupId, roles));
         }
-        response.sendRedirect(ACCESS_PATH);
+        RequestDispatcher view = request.getRequestDispatcher("accessEditor.jsp");
+        view.forward(request, response);
     }
 }

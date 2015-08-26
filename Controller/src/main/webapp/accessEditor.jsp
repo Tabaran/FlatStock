@@ -7,7 +7,8 @@
 <head>
     <title></title>
   <link rel='stylesheet' href='webjars/bootstrap/3.2.0/css/bootstrap.min.css'>
-  <link rel='stylesheet' href='main.css'>
+  <link rel='stylesheet' href='style.css'>
+  <script type="text/javascript" src="webjars/jquery/2.1.1/jquery.min.js"></script>
 </head>
 <body>
 <div class="navbar-form">
@@ -15,9 +16,8 @@
   <div class="row">
     <h:navigation/>
   </div>
-  $('#save').delay(5000).fadeOut('slow');
-  <div id="save">
-    Saved
+  <div id="save" class="saved">
+    Saved ${isSaved}
   </div>
   <form method="post" action="<%= ACCESS_PATH%>">
   <div class="row">
@@ -49,5 +49,10 @@
   </form>
 </div>
 </div>
+<script>
+  $(function (){
+    $('#save').delay(2500).fadeOut('slow');
+  })
+</script>
 </body>
 </html>
