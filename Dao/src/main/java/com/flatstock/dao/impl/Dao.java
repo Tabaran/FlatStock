@@ -3,8 +3,6 @@ package com.flatstock.dao.impl;
 import com.flatstock.db.ConnectionProvider;
 
 import java.sql.*;
-import java.util.Map;
-
 import org.apache.log4j.Logger;
 
 /**

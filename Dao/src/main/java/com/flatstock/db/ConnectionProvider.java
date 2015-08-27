@@ -6,11 +6,13 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.SQLException;
+import org.apache.log4j.Logger;
 
 /**
  * Created by Valentin on 02.06.2015.
  */
 public class ConnectionProvider {
+    private Logger LOG = Logger.getLogger(ConnectionProvider.class.getName());
     public Connection getConnection(){
         InitialContext initContext;
         try {
@@ -21,10 +23,10 @@ public class ConnectionProvider {
             return conn;
         }
         catch (NamingException e) {
-            e.printStackTrace();
+            LOG.error(e);
         }
         catch (SQLException e) {
-            e.printStackTrace();
+            LOG.error(e);
         }
 
         return null;

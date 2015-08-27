@@ -57,12 +57,19 @@ public class AddUserController extends HttpServlet {
                 if(item.isFormField()){
                     switch (item.getFieldName()){
                         case FIRST_NAME: user.setFirstName(item.getString());
+                            break;
                         case LAST_NAME: user.setLastName(item.getString());
+                            break;
                         case LOGIN: user.setLogin(item.getString());
+                            break;
                         case EMAIL: user.setEmail(item.getString());
+                            break;
                         case PASSWORD: user.setPassword(item.getString());
+                            break;
                         case ROLE: user.setRole(Role.fromString(item.getString()));
+                            break;
                         case GENDER: user.setGender(Gender.fromString(item.getString()));
+                            break;
                     }
                 }
                 else {
