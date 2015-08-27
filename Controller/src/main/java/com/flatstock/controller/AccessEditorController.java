@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -27,20 +28,21 @@ public class AccessEditorController extends HttpServlet {
     public static final String ACCESS_PATH = "/access";
     public static final String GROUPS = "groups";
     public static final String ACCESS_MAP = "accessMap";
+    private AccessService service = new AccessServiceImpl();
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        AccessService service = new AccessServiceImpl();
         request.setAttribute(ACCESS_MAP, service.getAccessMap());
         request.setAttribute(GROUPS, service.getGroups());
+        request.setAttribute("isSaved", service.isSaved());
         RequestDispatcher view = request.getRequestDispatcher("accessEditor.jsp");
         view.forward(request, response);
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        AccessService service = new AccessServiceImpl();
-        Map<Integer, Set<Role>> accessMap =  service.getAccessMap();
+        Map<Integer, Set<Role>> accessMap = service.getAccessMap();
+        Map<Integer, Set<Role>> newMap = new HashMap<>();
         for(Integer groupId: accessMap.keySet()) {
             String[] checkedRoles = request.getParameterValues(groupId.toString());
             Set<Role> roles = new HashSet<>();
@@ -49,9 +51,9 @@ public class AccessEditorController extends HttpServlet {
                     roles.add(Role.fromString(r));
                 }
             }
-            request.setAttribute("isSaved", service.updateAccess(groupId, roles));
+            newMap.put(groupId, roles);
         }
-        RequestDispatcher view = request.getRequestDispatcher("accessEditor.jsp");
-        view.forward(request, response);
+        service.updateAccess(newMap);
+        response.sendRedirect(ACCESS_PATH);
     }
 }

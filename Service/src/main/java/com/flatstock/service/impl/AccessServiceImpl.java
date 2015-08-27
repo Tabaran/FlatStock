@@ -19,6 +19,7 @@ public class AccessServiceImpl implements AccessService {
 
     private static Map<Integer, Set<Role>> accessMap = null;
     private static Map<Integer, IFunctionalGroup> groups;
+    private boolean isSaved = false;
 
     AccessDao accessDao;
     UrlDao urlDao;
@@ -53,19 +54,24 @@ public class AccessServiceImpl implements AccessService {
     }
 
     @Override
-    public boolean updateAccess(Integer groupId, Set<Role> newRoles) {
-        Set<Role> oldRoles = accessDao.getRolesForGroup(groupId);
-        if(newRoles==null || newRoles.equals(oldRoles)) return false;
-        for(Role role: Role.values()){
-            if(oldRoles.contains(role) && !newRoles.contains(role)) {
-                accessDao.removeAccess(groupId, role);
+    public void updateAccess(Map<Integer, Set<Role>> newMap) {
+        if(newMap==null || newMap.equals(accessMap)) isSaved=false;
+        else {
+            for(Integer groupId : accessMap.keySet()) {
+                Set<Role> oldRoles = accessMap.get(groupId);
+                Set<Role> newRoles = newMap.get(groupId);
+                for (Role role : Role.values()) {
+                    if (oldRoles.contains(role) && !newRoles.contains(role)) {
+                        accessDao.removeAccess(groupId, role);
+                    }
+                    if (!oldRoles.contains(role) && newRoles.contains(role)) {
+                        accessDao.addAccess(groupId, role);
+                    }
+                }
+                getAccessMap().put(groupId, newRoles);
             }
-            if(!oldRoles.contains(role) && newRoles.contains(role)) {
-                accessDao.addAccess(groupId, role);
-            }
+            isSaved = true;
         }
-        getAccessMap().put(groupId, newRoles);
-        return true;
     }
 
     @Override
@@ -77,5 +83,15 @@ public class AccessServiceImpl implements AccessService {
         Set<Role> roles = getAccessMap().get(group.getId());
         if(roles == null) return false;
         return roles.contains(role);
+    }
+
+    @Override
+    public boolean isSaved(){
+        if(isSaved){
+            isSaved = false;
+            return true;
+        } else {
+            return false;
+        }
     }
 }

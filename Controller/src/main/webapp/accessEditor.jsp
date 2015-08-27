@@ -16,9 +16,11 @@
   <div class="row">
     <h:navigation/>
   </div>
-  <div id="save" class="saved">
-    Saved ${isSaved}
-  </div>
+  <c:if test="${isSaved}">
+    <div id="save" class="saved">
+      Saved
+    </div>
+  </c:if>
   <form method="post" action="<%= ACCESS_PATH%>">
   <div class="row">
     <table class="table" >
