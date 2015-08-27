@@ -9,8 +9,6 @@ import com.flatstock.model.impl.User;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-
-import static com.flatstock.controller.users.ShowUsersController.LOG;
 import static com.flatstock.model.impl.User.*;
 import static com.flatstock.controller.users.ShowUsersController.*;
 import static com.flatstock.controller.users.AddUserController.*;
@@ -23,7 +21,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 
 /**
@@ -37,8 +35,11 @@ public class AddUserController extends HttpServlet {
     public static final String FILE_UPLOAD_PATH = "file-upload";
     private String filePath;
 
-    public void init( ) {
+    public void init() {
         filePath = getServletContext().getInitParameter(FILE_UPLOAD_PATH);
+        File dir = new File(filePath);
+        if(!dir.exists()) dir.mkdir();
+        LOG.info(dir.getAbsolutePath());
     }
 
     static Logger LOG = Logger.getLogger(AddUserController.class.getName());
@@ -46,7 +47,6 @@ public class AddUserController extends HttpServlet {
             throws ServletException, IOException {
         UserService service = new UserServiceImpl();
         IUser user = new User();
-
         DiskFileItemFactory factory = new DiskFileItemFactory();
         ServletFileUpload upload = new ServletFileUpload(factory);
         try{
@@ -70,21 +70,20 @@ public class AddUserController extends HttpServlet {
                             break;
                         case ROLE: user.setRole(Role.fromString(item.getString()));
                             break;
-                        default :
-                            LOG.warning("Unknown field name");
+                        default:
+                            LOG.warn("Unknown field name");
                     }
                 }
                 else {
-                    user.setPhotoUrl(item.getName());
+                    user.setPhotoUrl((new File(filePath)).getAbsolutePath() + "\\" + item.getName());
                     item.write(new File(filePath + item.getName()));
                 }
             }
         }catch(Exception ex) {
-            LOG.warning(ex.getMessage());
+            LOG.error(ex.getMessage());
         }
         LOG.info("Adding user");
         service.addUser(user);
-
         response.sendRedirect(USERS_PATH);
     }
 }

@@ -22,7 +22,7 @@
         <description>Location to store uploaded file</description>
         <param-name>file-upload</param-name>
         <param-value>
-            C:\apache-tomcat-7.0.62\webapps\data\
+            /photos/
         </param-value>
     </context-param>
 </web-app>

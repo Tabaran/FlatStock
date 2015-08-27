@@ -85,6 +85,14 @@
             </div>
         </div>
         <div class="row">
+            <div class="col-md-2">
+                Photo:
+            </div>
+            <div class="col-md-10">
+                <img src="file://${user.getPhotoUrl()}"/>
+            </div>
+        </div>
+        <div class="row">
             <input  class="btn" type="submit" value="Submit"/>
         </div>
     </div>
