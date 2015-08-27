@@ -66,10 +66,12 @@ public class AddUserController extends HttpServlet {
                             break;
                         case PASSWORD: user.setPassword(item.getString());
                             break;
-                        case ROLE: user.setRole(Role.fromString(item.getString()));
-                            break;
                         case GENDER: user.setGender(Gender.fromString(item.getString()));
                             break;
+                        case ROLE: user.setRole(Role.fromString(item.getString()));
+                            break;
+                        default :
+                            LOG.warning("Unknown field name");
                     }
                 }
                 else {

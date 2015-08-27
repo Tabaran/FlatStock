@@ -12,6 +12,7 @@
         <th>Email</th>
         <th>Login</th>
         <th>Password</th>
+        <th>Photo URL</th>
         <th>Gender</th>
         <th>Role</th>
         <th colspan="2"></th>
