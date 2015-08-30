@@ -9,6 +9,14 @@ select.form-control{
     cursor: pointer;
 }
 
+img {
+    display: block;
+    max-width:230px;
+    max-height:150px;
+    width: auto;
+    height: auto;
+}
+
 .saved{
     background-color: lightgreen;
     color: green;

@@ -43,6 +43,7 @@ CREATE TABLE USERS (
     password varchar(100)  NOT NULL,
     role role NOT NULL DEFAULT 'customer',
     photo_url varchar(400),
+    photo bytea,
     CONSTRAINT USERS_PK PRIMARY KEY (id)
 );
 

@@ -3,6 +3,7 @@ package com.flatstock.service;
 import com.flatstock.model.IUser;
 import com.flatstock.service.exceptions.IncorrectLoginExceptions;
 
+import java.io.InputStream;
 import java.util.List;
 
 /**
@@ -11,8 +12,10 @@ import java.util.List;
 public interface UserService {
     List<IUser> getAllUsers();
     IUser getUser(Integer id);
-    void addUser(IUser user);
+    Integer addUser(IUser user);
     void updateUser(IUser user);
     void deleteUser(Integer id);
+    void uploadPhotoToDB(Integer userId, InputStream stream, int size);
+    byte[] getPhoto(Integer userId);
     IUser validateUser(String login, String password) throws IncorrectLoginExceptions;
 }

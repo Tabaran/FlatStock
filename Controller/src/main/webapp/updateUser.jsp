@@ -1,13 +1,14 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="static com.flatstock.model.impl.User.*"%>
 <%@ page import="static com.flatstock.controller.users.UpdateUserController.*"%>
+<%@ page import="static com.flatstock.controller.PhotoController.*"%>
 <%@ page import="com.flatstock.model.Role" %>
 
 <html>
 <head>
     <title></title>
     <link rel='stylesheet' href='webjars/bootstrap/3.2.0/css/bootstrap.min.css'>
-    <link rel='stylesheet' href='style.css'>
+    <link rel='stylesheet' href='main.css'>
     <script type="text/javascript" src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="webjars/jquery/2.1.1/jquery.min.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -89,7 +90,9 @@
                 Photo:
             </div>
             <div class="col-md-10">
-                <img src="file://${user.getPhotoUrl()}"/>
+
+
+                <img src="<%= GET_PHOTO_PATH%>?<%= PHOTO%>=${user.getPhotoUrl()}&id=${user.getId()}"/>
             </div>
         </div>
         <div class="row">

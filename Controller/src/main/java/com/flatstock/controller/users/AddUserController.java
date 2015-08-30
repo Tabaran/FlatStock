@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
 import org.apache.log4j.Logger;
@@ -33,6 +34,7 @@ public class AddUserController extends HttpServlet {
 
     public static final String ADD_USER_PATH = "/add_user";
     public static final String FILE_UPLOAD_PATH = "file-upload";
+    private static final long DB_PHOTO_SIZE = 100 * 1024;
     private String filePath;
 
     public void init() {
@@ -49,6 +51,8 @@ public class AddUserController extends HttpServlet {
         IUser user = new User();
         DiskFileItemFactory factory = new DiskFileItemFactory();
         ServletFileUpload upload = new ServletFileUpload(factory);
+        InputStream photoStream = null;
+        long size = 0;
         try{
             List items = upload.parseRequest(request);
             Iterator itemsIterator = items.iterator();
@@ -75,15 +79,26 @@ public class AddUserController extends HttpServlet {
                     }
                 }
                 else {
-                    user.setPhotoUrl((new File(filePath)).getAbsolutePath() + "\\" + item.getName());
-                    item.write(new File(filePath + item.getName()));
+                    if(item.getSize() > DB_PHOTO_SIZE) {
+                        user.setPhotoUrl((new File(filePath)).getAbsolutePath() + "\\" + item.getName());
+                        item.write(new File(filePath + item.getName()));
+                    }
+                    else {
+                        user.setPhotoUrl("DB");
+                        photoStream = item.getInputStream();
+                        size = item.getSize();
+                    }
                 }
             }
         }catch(Exception ex) {
             LOG.error(ex.getMessage());
         }
         LOG.info("Adding user");
-        service.addUser(user);
+        if(photoStream != null) {
+            service.uploadPhotoToDB(service.addUser(user), photoStream, Long.valueOf(size).intValue());
+        } else {
+            service.addUser(user);
+        }
         response.sendRedirect(USERS_PATH);
     }
 }
