@@ -1,21 +1,30 @@
 package com.flatstock.service.impl;
 
 import com.flatstock.dao.UserDao;
+import com.flatstock.dao.UsersPhotosDao;
 import com.flatstock.dao.impl.UserDaoImpl;
+import com.flatstock.dao.impl.UsersPhotosDaoImpl;
 import com.flatstock.model.IUser;
 import com.flatstock.service.UserService;
 import com.flatstock.service.exceptions.IncorrectLoginExceptions;
+import org.apache.log4j.Logger;
 
-import java.io.InputStream;
+import java.io.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 /**
  * Created by Valentin on 11.07.2015.
  */
 public class UserServiceImpl implements UserService {
+    Logger LOG = Logger.getLogger(UserServiceImpl.class.getName());
 
     UserDao userDao = new UserDaoImpl();
+    UsersPhotosDao photosDao = new UsersPhotosDaoImpl();
+
+    private static Map<Integer, byte[]> photos = new HashMap<>();
 
     @Override
     public List<IUser> getAllUsers() {
@@ -39,17 +48,52 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(Integer id) {
+        photosDao.deletePhoto(id);
         userDao.deleteUser(id);
     }
 
     @Override
+    public void showPhoto(Integer userId, String path, BufferedOutputStream output){
+        FileInputStream fis = null;
+        BufferedInputStream bis = null;
+        try {
+            if ("DB".equals(path)) {
+
+                byte[] data = getPhoto(userId);
+                for (int i = 0; i < data.length; i++) {
+                    output.write(data[i]);
+                }
+            } else {
+                File photo = new File(path);
+                fis = new FileInputStream(photo);
+                bis = new BufferedInputStream(fis);
+                for (int data; (data = bis.read()) > -1; ) {
+                    output.write(data);
+                }
+            }
+        } catch (IOException e) {
+            LOG.error(e);
+        } finally {
+             try {
+                 if (fis != null) fis.close();
+                if (bis != null) bis.close();
+                if (output != null) output.close();
+            } catch (IOException e) {
+                 LOG.error(e);
+            }
+
+        }
+    }
+
+    @Override
     public void uploadPhotoToDB(Integer userId, InputStream stream, int size) {
-        userDao.insertPhoto(userId, stream, size);
+        photosDao.insertPhoto(userId, stream, size);
     }
 
     @Override
     public byte[] getPhoto(Integer userId) {
-        return userDao.getPhoto(userId);
+        if(photos.get(userId) == null) photos.put(userId, photosDao.getPhoto(userId));
+        return photos.get(userId);
     }
 
     @Override

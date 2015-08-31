@@ -43,8 +43,14 @@ CREATE TABLE USERS (
     password varchar(100)  NOT NULL,
     role role NOT NULL DEFAULT 'customer',
     photo_url varchar(400),
-    photo bytea,
     CONSTRAINT USERS_PK PRIMARY KEY (id)
+);
+
+--Table: users_photos
+CREATE TABLE USERS_PHOTOS
+(
+    user_id INT NOT NULL,
+    photo BYTEA NOT NULL
 );
 
 -- Table: Url
@@ -83,6 +89,16 @@ ALTER TABLE APARTMENTS ADD CONSTRAINT Flats_Users
     REFERENCES Users (id)
     NOT DEFERRABLE 
     INITIALLY IMMEDIATE 
+;
+
+-- Reference:  Users_Photos (table: users_photos)
+
+
+ALTER TABLE USERS_PHOTOS ADD CONSTRAINT Users_Photos
+    FOREIGN KEY (user_id)
+    REFERENCES Users (id)
+    NOT DEFERRABLE
+    INITIALLY IMMEDIATE
 ;
 
 -- Reference:  Access_Url (table: AccessMap)

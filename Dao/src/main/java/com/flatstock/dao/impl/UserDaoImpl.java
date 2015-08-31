@@ -7,6 +7,7 @@ import com.flatstock.model.IUser;
 import com.flatstock.model.Role;
 import com.flatstock.model.impl.User;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.PreparedStatement;
@@ -31,7 +32,7 @@ public class UserDaoImpl implements UserDao {
     public static final String PASSWORD = "password";
     public static final String ROLE = "role";
     public static final String PHOTO_URL = "photo_url";
-    public static final String PHOTO = "photo";
+
 
     private static final String SELECT_ALL_QUERY = "SELECT * FROM "+TABLE_NAME;
     private static final String SELECT_BY_ID = "SELECT * FROM "+TABLE_NAME+" WHERE " +ID+ "=?";
@@ -44,9 +45,6 @@ public class UserDaoImpl implements UserDao {
             EMAIL+"=?, "+ LOGIN +"=?, " + PASSWORD + "=?, " + ROLE + "=?::role, " +
             PHOTO_URL + "=?" + " WHERE id=" + "?";
     private static final String DELETE_USER = "DELETE FROM " + TABLE_NAME + " WHERE " +ID + "=?";
-    private static final String INSERT_PHOTO = "INSERT INTO " + TABLE_NAME + " (" + PHOTO + ") VALUES (?) WHERE " + ID + "=?;";
-    private static final String SELECT_PHOTO = "SELECT " + PHOTO  + " FROM " + TABLE_NAME + " WHERE " + ID + "=?;";
-
 
     public List<IUser> getAllUsers() {
         Dao<List<IUser>> dao = new Dao<List<IUser>>() {
@@ -57,7 +55,7 @@ public class UserDaoImpl implements UserDao {
 
             @Override
             public List<IUser> execute(ResultSet result) throws SQLException {
-                List<IUser> users = new ArrayList<IUser>();
+                List<IUser> users = new ArrayList<>();
                 while (result.next()) {
                     IUser user = new User();
                     user.setId(result.getInt(ID));
@@ -164,48 +162,5 @@ public class UserDaoImpl implements UserDao {
             }
         };
         dao.executeQuery(DELETE_USER);
-    }
-
-    @Override
-    public void insertPhoto(final Integer userId, final InputStream inputStream, final int size) {
-        Dao dao = new Dao() {
-            @Override
-            public void prepare(PreparedStatement statement) throws SQLException {
-                statement.setBinaryStream(1, inputStream, size);
-                statement.setInt(2, userId.intValue());
-            }
-
-            @Override
-            public Object execute(ResultSet result) throws SQLException {
-                if(inputStream != null){
-                    try {
-                        inputStream.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-                return null;
-            }
-        };
-        dao.executeQuery(INSERT_PHOTO);
-    }
-
-    @Override
-    public byte[] getPhoto(final Integer userId) {
-        Dao<byte[]> dao = new Dao<byte[]>() {
-            @Override
-            public void prepare(PreparedStatement statement) throws SQLException {
-                statement.setInt(1, userId);
-            }
-
-            @Override
-            public byte[] execute(ResultSet result) throws SQLException {
-                if(result.next()){
-                    return result.getBytes(PHOTO);
-                }
-                return null;
-            }
-        };
-        return dao.executeQuery(SELECT_PHOTO);
     }
 }

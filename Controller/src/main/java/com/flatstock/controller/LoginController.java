@@ -1,5 +1,6 @@
 package com.flatstock.controller;
 
+import com.flatstock.model.IUser;
 import com.flatstock.service.UserService;
 import com.flatstock.service.exceptions.IncorrectLoginExceptions;
 import com.flatstock.service.impl.UserServiceImpl;
@@ -30,8 +31,9 @@ public class LoginController extends HttpServlet {
         LOG.info("Trying to login");
         UserService service = new UserServiceImpl();
         try {
-            request.getSession().setAttribute(USER,
-                    service.validateUser(request.getParameter(LOGIN), request.getParameter(PASSWORD)));
+            IUser user = service.validateUser(request.getParameter(LOGIN), request.getParameter(PASSWORD));
+            service.getPhoto(user.getId());
+            request.getSession().setAttribute(USER, user);
             response.sendRedirect("/index.jsp");
         } catch (IncorrectLoginExceptions incorrectLoginExceptions) {
             response.sendRedirect(ERROR_PAGE);

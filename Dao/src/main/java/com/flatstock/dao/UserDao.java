@@ -16,6 +16,4 @@ public interface UserDao {
     Integer addUser(IUser user);
     void updateUser(IUser user);
     void deleteUser(Integer id);
-    void insertPhoto(Integer userId, InputStream inputStream, int size);
-    byte[] getPhoto(Integer userId);
 }

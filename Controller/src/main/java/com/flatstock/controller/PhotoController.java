@@ -20,39 +20,17 @@ import static com.flatstock.model.Id.*;
  */
 @WebServlet(GET_PHOTO_PATH)
 public class PhotoController extends HttpServlet {
-    Logger LOG = Logger.getLogger(PhotoController.class.getName());
 
     public static final String GET_PHOTO_PATH = "/get_photo";
     public static final String PHOTO = "photo";
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        FileInputStream fis = null;
-        BufferedInputStream bis = null;
+        UserService service = new UserServiceImpl();
         BufferedOutputStream output = new BufferedOutputStream(response.getOutputStream());
         String path = request.getParameter(PHOTO);
         response.setContentType("image/gif");
-        try {
-            if ("DB".equals(path)) {
-                UserService service = new UserServiceImpl();
-                byte[] data = service.getPhoto(Integer.valueOf(request.getParameter(ID)));
-                for (int i = 0; i < data.length; i++) {
-                    output.write(data[i]);
-                }
-            } else {
-                File photo = new File(path);
-                fis = new FileInputStream(photo);
-                bis = new BufferedInputStream(fis);
-                for (int data; (data = bis.read()) > -1; ) {
-                    output.write(data);
-                }
-            }
-        } catch (IOException e) {
-            LOG.error(e);
-        } finally {
-            if (fis != null) fis.close();
-            if (bis != null) bis.close();
-            if (output != null) output.close();
-        }
+        service.showPhoto(Integer.valueOf(request.getParameter(ID)), path, output);
+
     }
 }
