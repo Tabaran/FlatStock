@@ -34,7 +34,12 @@ public class LoginController extends HttpServlet {
             IUser user = service.validateUser(request.getParameter(LOGIN), request.getParameter(PASSWORD));
             service.getPhoto(user.getId());
             request.getSession().setAttribute(USER, user);
-            response.sendRedirect("/index.jsp");
+            switch (user.getRole()){
+                case CUSTOMER: response.sendRedirect("/profile.jsp");
+                    break;
+                default: response.sendRedirect("/index.jsp");
+            }
+
         } catch (IncorrectLoginExceptions incorrectLoginExceptions) {
             response.sendRedirect(ERROR_PAGE);
         }

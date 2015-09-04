@@ -90,8 +90,6 @@
                 Photo:
             </div>
             <div class="col-md-10">
-
-
                 <img src="<%= GET_PHOTO_PATH%>?<%= PHOTO%>=${user.getPhotoUrl()}&id=${user.getId()}"/>
             </div>
         </div>

@@ -2,7 +2,7 @@
 <%@ attribute name="remove" required="true" rtexprvalue="true" %>
 <%@ attribute name="update" required="true" rtexprvalue="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<table class="table" >
+<table class="table">
     <thead>
     <tr>
         <th>Id</th>

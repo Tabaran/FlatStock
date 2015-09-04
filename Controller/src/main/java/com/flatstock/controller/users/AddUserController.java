@@ -34,6 +34,7 @@ public class AddUserController extends HttpServlet {
 
     public static final String ADD_USER_PATH = "/add_user";
     public static final String FILE_UPLOAD_PATH = "file-upload";
+    public static final String PHOTO_PREFIX = "user_photo_";
     private static final long DB_PHOTO_SIZE = 100 * 1024;
     private String filePath;
 
@@ -80,8 +81,10 @@ public class AddUserController extends HttpServlet {
                 }
                 else {
                     if(item.getSize() > DB_PHOTO_SIZE) {
-                        user.setPhotoUrl((new File(filePath)).getAbsolutePath() + "\\" + item.getName());
-                        item.write(new File(filePath + item.getName()));
+                        String extension = "";
+                        if(item.getName().contains(".")) extension = "." + item.getName().split(".")[1];
+                        user.setPhotoUrl((new File(filePath)).getAbsolutePath() + "\\" + PHOTO_PREFIX + user.getId() + extension);
+                        item.write(new File(filePath + PHOTO_PREFIX + user.getId() + extension));
                     }
                     else {
                         user.setPhotoUrl("DB");
