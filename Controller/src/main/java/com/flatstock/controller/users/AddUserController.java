@@ -53,6 +53,8 @@ public class AddUserController extends HttpServlet {
         DiskFileItemFactory factory = new DiskFileItemFactory();
         ServletFileUpload upload = new ServletFileUpload(factory);
         InputStream photoStream = null;
+        FileItem fileItem = null;
+        String extension = "";
         long size = 0;
         try{
             List items = upload.parseRequest(request);
@@ -81,10 +83,11 @@ public class AddUserController extends HttpServlet {
                 }
                 else {
                     if(item.getSize() > DB_PHOTO_SIZE) {
-                        String extension = "";
-                        if(item.getName().contains(".")) extension = "." + item.getName().split(".")[1];
-                        user.setPhotoUrl((new File(filePath)).getAbsolutePath() + "\\" + PHOTO_PREFIX + user.getId() + extension);
-                        item.write(new File(filePath + PHOTO_PREFIX + user.getId() + extension));
+                        if(item.getName().contains(".")) {
+                            extension = "." + item.getName().split("\\.")[1];
+                        }
+                        fileItem = item;
+
                     }
                     else {
                         user.setPhotoUrl("DB");
@@ -100,7 +103,17 @@ public class AddUserController extends HttpServlet {
         if(photoStream != null) {
             service.uploadPhotoToDB(service.addUser(user), photoStream, Long.valueOf(size).intValue());
         } else {
-            service.addUser(user);
+            if(fileItem != null){
+                try {
+                    Integer id = service.addUser(user);
+                    fileItem.write(new File(filePath + PHOTO_PREFIX + id + extension));
+                    user.setPhotoUrl((new File(filePath)).getAbsolutePath() + "\\" + PHOTO_PREFIX + id + extension);
+                    user.setId(id);
+                    service.updateUser(user);
+                } catch (Exception e) {
+                    LOG.error(e.getMessage());
+                }
+            }
         }
         response.sendRedirect(USERS_PATH);
     }

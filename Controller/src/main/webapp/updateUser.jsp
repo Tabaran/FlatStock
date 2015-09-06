@@ -91,6 +91,7 @@
             </div>
             <div class="col-md-10">
                 <img src="<%= GET_PHOTO_PATH%>?<%= PHOTO%>=${user.getPhotoUrl()}&id=${user.getId()}"/>
+                <input type="file" name="<%= PHOTO_URL%>" accept="image/*"/>
             </div>
         </div>
         <div class="row">
