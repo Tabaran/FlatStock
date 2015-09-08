@@ -69,6 +69,8 @@ public class UpdateUserController extends HttpServlet {
                             break;
                         case ROLE: user.setRole(Role.fromString(item.getString()));
                             break;
+                        case ID: user.setId(Integer.valueOf(item.getString()));
+                            break;
                         default:
                             LOG.warn("Unknown field name");
                     }
