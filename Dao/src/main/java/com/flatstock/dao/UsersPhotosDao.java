@@ -7,6 +7,7 @@ import java.io.InputStream;
  */
 public interface UsersPhotosDao {
     void insertPhoto(Integer userId, InputStream inputStream, int size);
+    void updatePhoto(Integer userId, InputStream inputStream, int size);
     byte[] getPhoto(Integer userId);
     void deletePhoto(Integer userId);
 }

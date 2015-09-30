@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
 
@@ -34,6 +35,8 @@ public class UpdateUserController extends HttpServlet {
 
     public static final String UPDATE_USER_PATH = "/update_user";
     public static final String FILE_UPLOAD_PATH = "file-upload";
+    public static final String PHOTO_PREFIX = "user_photo_";
+    private static final long DB_PHOTO_SIZE = 100 * 1024;
     private String filePath;
 
     public void init() {
@@ -48,6 +51,10 @@ public class UpdateUserController extends HttpServlet {
         IUser user = new User();
         DiskFileItemFactory factory = new DiskFileItemFactory();
         ServletFileUpload upload = new ServletFileUpload(factory);
+        InputStream photoStream = null;
+        FileItem fileItem = null;
+        String extension = "";
+        long size = 0;
         try{
             List items = upload.parseRequest(request);
             Iterator itemsIterator = items.iterator();
@@ -76,15 +83,38 @@ public class UpdateUserController extends HttpServlet {
                     }
                 }
                 else {
-                    user.setPhotoUrl(item.getName());
-                    item.write(new File(filePath + item.getName()));
+                    if(item.getSize() > DB_PHOTO_SIZE) {
+                        if(item.getName().contains(".")) {
+                            extension = "." + item.getName().split("\\.")[1];
+                        }
+                        fileItem = item;
+                    }
+                    else {
+                        user.setPhotoUrl("DB");
+                        photoStream = item.getInputStream();
+                        size = item.getSize();
+                    }
                 }
             }
-        }catch(Exception ex) {
+        }
+        catch(Exception ex) {
             LOG.error(ex.getMessage());
         }
-        LOG.info("Adding user");
-        service.updateUser(user);
+        LOG.info("Updating user");
+        if(photoStream != null) {
+            service.updateUser(user);
+            service.updatePhotoInDB(user.getId(), photoStream, Long.valueOf(size).intValue());
+        } else {
+            if(fileItem != null){
+                try {
+                    fileItem.write(new File(filePath + PHOTO_PREFIX + user.getId() + extension));
+                    user.setPhotoUrl((new File(filePath)).getAbsolutePath() + "\\" + PHOTO_PREFIX + user.getId() + extension);
+                    service.updateUser(user);
+                } catch (Exception e) {
+                    LOG.error(e.getMessage());
+                }
+            }
+        }
         response.sendRedirect(USERS_PATH);
     }
 

@@ -17,6 +17,7 @@ public class UsersPhotosDaoImpl implements UsersPhotosDao {
     public static final String USER_ID = "user_id";
     public static final String PHOTO = "photo";
     private static final String INSERT_PHOTO = "INSERT INTO " + TABLE_NAME + " VALUES (?, ?)";
+    private static final String UPDATE_PHOTO = "UPDATE " + TABLE_NAME + " SET " + PHOTO + "=? WHERE " + USER_ID + "=?;";
     private static final String SELECT_PHOTO = "SELECT " + PHOTO  + " FROM " + TABLE_NAME + " WHERE " + USER_ID + "=?;";
     private static final String DELETE_PHOTO = "DELETE FROM " + TABLE_NAME + " WHERE " + USER_ID + "=?";
 
@@ -42,6 +43,30 @@ public class UsersPhotosDaoImpl implements UsersPhotosDao {
             }
         };
         dao.executeQuery(INSERT_PHOTO);
+    }
+
+    @Override
+    public void updatePhoto(final Integer userId, final InputStream inputStream, final int size) {
+        Dao dao = new Dao() {
+            @Override
+            public void prepare(PreparedStatement statement) throws SQLException {
+                statement.setBinaryStream(1, inputStream, size);
+                statement.setInt(2, userId.intValue());
+            }
+
+            @Override
+            public Object execute(ResultSet result) throws SQLException {
+                if(inputStream != null){
+                    try {
+                        inputStream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                return null;
+            }
+        };
+        dao.executeQuery(UPDATE_PHOTO);
     }
 
     @Override

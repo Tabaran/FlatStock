@@ -7,6 +7,7 @@ import com.flatstock.dao.impl.UsersPhotosDaoImpl;
 import com.flatstock.model.IUser;
 import com.flatstock.service.UserService;
 import com.flatstock.service.exceptions.IncorrectLoginExceptions;
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 
 import java.io.*;
@@ -88,6 +89,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public void uploadPhotoToDB(Integer userId, InputStream stream, int size) {
         photosDao.insertPhoto(userId, stream, size);
+    }
+
+    @Override
+    public void updatePhotoInDB(Integer userId, InputStream stream, int size) {
+        try {
+            photos.put(userId, IOUtils.toByteArray(stream));
+        } catch (IOException e) {
+            LOG.error(e);
+        }
+        photosDao.updatePhoto(userId, stream, size);
     }
 
     @Override

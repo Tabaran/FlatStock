@@ -20,6 +20,7 @@ public interface UserService {
     void showPhoto(Integer userId, String path, BufferedOutputStream output);
 
     void uploadPhotoToDB(Integer userId, InputStream stream, int size);
+    void updatePhotoInDB(Integer userId, InputStream stream, int size);
     byte[] getPhoto(Integer userId);
     IUser validateUser(String login, String password) throws IncorrectLoginExceptions;
 }
