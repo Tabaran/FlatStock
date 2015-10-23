@@ -1,4 +1,4 @@
-<%@ attribute name="apartments" required="true" type="java.util.List<com.flatstock.model.impl.Apartment>" %>
+<%@ attribute name="apartments" required="true" type="java.util.List<com.flatstock.model.Apartment>" %>
 <%@ attribute name="remove" required="true" rtexprvalue="true" %>
 <%@ attribute name="update" required="true" rtexprvalue="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -22,7 +22,7 @@
             <td>${apartment.getPrice()}</td>
             <td>${apartment.getDescription()}</td>
             <td>${apartment.getFloor()}</td>
-            <td>${users.get(apartment.getOwnerId()).getFirstName()} ${users.get(apartment.getOwnerId()).getLastName()}</td>
+            <td>${apartment.getOwner().getFirstName()} ${users.get(apartment.getOwnerId()).getLastName()}</td>
             <td><a href="${remove}?id=${apartment.getId()}"><button class='btn'>Remove</button></a></td>
             <td><a href="${update}?id=${apartment.getId()}"><button class='btn'>Update</button></a></td>
         </tr>

@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="static com.flatstock.controller.apartments.UpdateApartmentsController.*"%>
-<%@ page import="static com.flatstock.model.impl.Apartment.*"%>
+<%@ page import="static com.flatstock.model.Apartment.*"%>
 
 
 <html>

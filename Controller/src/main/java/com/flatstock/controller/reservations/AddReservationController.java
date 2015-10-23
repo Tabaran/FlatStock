@@ -1,8 +1,7 @@
 package com.flatstock.controller.reservations;
 
-import com.flatstock.model.impl.Reservation;
+import com.flatstock.model.Reservation;
 import com.flatstock.service.*;
-import com.flatstock.model.*;
 import com.flatstock.service.impl.ApartmentServiceImpl;
 import com.flatstock.service.impl.ReservationServiceImpl;
 import com.flatstock.service.impl.UserServiceImpl;
@@ -18,9 +17,9 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import static com.flatstock.model.impl.Reservation.*;
-import static com.flatstock.model.impl.Apartment.*;
-import static com.flatstock.model.impl.User.*;
+import static com.flatstock.model.Reservation.*;
+import static com.flatstock.model.Apartment.*;
+import static com.flatstock.model.User.*;
 import static com.flatstock.controller.reservations.AddReservationController.*;
 
 
@@ -40,7 +39,7 @@ public class AddReservationController extends HttpServlet {
         ReservationService service = new ReservationServiceImpl();
         try {
             SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
-            IReservation reservation = new Reservation();
+            Reservation reservation = new Reservation();
             reservation.setApartmentId(Integer.parseInt(request.getParameter(APARTMENTS)));
             reservation.setUserId(Integer.parseInt(request.getParameter(USER_ID)));
             reservation.setStartTime(format.parse(request.getParameter(START_TIME)));
@@ -56,10 +55,10 @@ public class AddReservationController extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         UserService userService = new UserServiceImpl();
-        List<IUser> users = userService.getAllUsers();
+        List<User> users = userService.getAllUsers();
         request.setAttribute(USERS, users);
         ApartmentService apartmentService = new ApartmentServiceImpl();
-        List<IApartment> apartments = apartmentService.getAllApartments();
+        List<Apartment> apartments = apartmentService.getAllApartments();
         request.setAttribute(APARTMENTS, apartments);
         RequestDispatcher view = request.getRequestDispatcher("addReservation.jsp");
         view.forward(request, response);

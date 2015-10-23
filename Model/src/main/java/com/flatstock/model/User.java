@@ -1,13 +1,17 @@
-package com.flatstock.model.impl;
+package com.flatstock.model;
 
-import com.flatstock.model.Gender;
-import com.flatstock.model.IUser;
-import com.flatstock.model.Role;
+import javax.persistence.*;
+import javax.persistence.Id;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Created by Valentin on 25.05.2015.
  */
-public class User implements IUser {
+
+@Entity
+@Table(name = "users")
+public class User implements Person, com.flatstock.model.Id<Integer> {
 
     public static final String USERS = "users";
     public static final String USER = "user";
@@ -21,15 +25,39 @@ public class User implements IUser {
     public static final String ROLE = "role";
 
 
-
+    @Id
+    @GeneratedValue
+    @Column(name = ID)
     private Integer id;
+
+    @Column(name = FIRST_NAME)
     private String firstName;
+
+    @Column(name = LAST_NAME)
     private String lastName;
+
+    @Column(name = EMAIL)
     private String email;
+
+    @Column(name = PHOTO_URL)
     private String photoUrl;
+
+    @Column(name = GENDER)
     private Gender gender;
+
+    @Column(name = LOGIN)
     private String login;
+
+    @Column(name = PASSWORD)
     private String password;
+
+    @OneToMany(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "owner_id")
+    Set<Apartment> apartments = new HashSet<>();
+
+    @OneToMany(cascade = {CascadeType.ALL})
+    Set<Reservation> reservations = new HashSet<>();
+
     private Role role = Role.CUSTOMER;
 
 
@@ -93,6 +121,16 @@ public class User implements IUser {
         return role;
     }
 
+
+    public Set<Apartment> getApartments() {
+        return apartments;
+    }
+
+
+    public Set<Reservation> getReservation() {
+        return reservations;
+    }
+
     public void setLogin(String login) {
         this.login = login;
     }
@@ -103,6 +141,26 @@ public class User implements IUser {
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+
+    public void addApartment(Apartment apartment) {
+        apartments.add(apartment);
+    }
+
+
+    public void removeApartment(Apartment apartment) {
+        apartments.remove(apartment);
+    }
+
+
+    public void addReservation(Reservation reservation) {
+        reservations.add(reservation);
+    }
+
+
+    public void removeReservation(Reservation reservation) {
+        reservations.remove(reservation);
     }
 
 }

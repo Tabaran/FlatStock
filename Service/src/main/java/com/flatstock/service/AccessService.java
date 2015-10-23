@@ -1,6 +1,5 @@
 package com.flatstock.service;
 
-import com.flatstock.model.IFunctionalGroup;
 import com.flatstock.model.Role;
 
 import java.util.Map;

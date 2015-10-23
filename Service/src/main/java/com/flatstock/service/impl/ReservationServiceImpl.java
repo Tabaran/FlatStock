@@ -1,9 +1,9 @@
 package com.flatstock.service.impl;
 
 import com.flatstock.dao.ReservationDao;
-import com.flatstock.dao.impl.ReservationDaoImpl;
-import com.flatstock.model.IReservation;
+import com.flatstock.model.Reservation;
 import com.flatstock.service.ReservationService;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
@@ -13,21 +13,22 @@ import java.util.List;
  */
 public class ReservationServiceImpl implements ReservationService {
 
-    ReservationDao reservationDao = new ReservationDaoImpl();
+    @Autowired
+    ReservationDao reservationDao;
 
-    public List<IReservation> getAllReservation() {
+    public List<Reservation> getAllReservation() {
         return reservationDao.getAllReservation();
     }
 
-    public IReservation getReservation(Integer id) {
+    public Reservation getReservation(Integer id) {
         return reservationDao.getReservation(id);
     }
 
-    public void addReservation(IReservation reservation) {
+    public void addReservation(Reservation reservation) {
         reservationDao.addReservation(reservation);
     }
 
-    public void updateReservation(IReservation reservation) {
+    public void updateReservation(Reservation reservation) {
         reservationDao.updateReservation(reservation);
     }
 

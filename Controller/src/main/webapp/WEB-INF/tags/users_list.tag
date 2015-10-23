@@ -1,4 +1,4 @@
-<%@ attribute name="users" required="true" type="java.util.List<com.flatstock.model.impl.User>" %>
+<%@ attribute name="users" required="true" type="java.util.List<com.flatstock.model.User>" %>
 <%@ attribute name="remove" required="true" rtexprvalue="true" %>
 <%@ attribute name="update" required="true" rtexprvalue="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>

@@ -1,8 +1,8 @@
 package com.flatstock.controller.apartments;
 
 
-import com.flatstock.model.*;
-import com.flatstock.model.impl.Apartment;
+import com.flatstock.model.Apartment;
+import com.flatstock.model.User;
 import com.flatstock.service.ApartmentService;
 import com.flatstock.service.impl.ApartmentServiceImpl;
 import com.flatstock.service.UserService;
@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-import static com.flatstock.model.impl.Apartment.*;
+import static com.flatstock.model.Apartment.*;
 import static com.flatstock.controller.apartments.AddApartmentsController.*;
 import static com.flatstock.controller.apartments.ShowApartmentsController.*;
 
@@ -36,13 +36,14 @@ public class AddApartmentsController extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ApartmentService service = new ApartmentServiceImpl();
-        IApartment apartment = new Apartment();
+        UserService userService = new UserServiceImpl();
+        Apartment apartment = new Apartment();
         apartment.setAddress(request.getParameter(ADDRESS));
         apartment.setFloor(Integer.parseInt(request.getParameter(FLOOR)));
         apartment.setDescription(request.getParameter(DESCRIPTION));
         apartment.setPrice(Integer.parseInt(request.getParameter(PRICE)));
         apartment.setRoomNumber(Integer.parseInt(request.getParameter(ROOM_NUMBER)));
-        apartment.setOwnerId(Integer.parseInt(request.getParameter(OWNER_ID)));
+        apartment.setOwner(userService.getUser(Integer.parseInt(request.getParameter(OWNER))));
         LOG.info("Adding apartments");
         service.addApartment(apartment);
         response.sendRedirect(APARTMENTS_PATH);
@@ -51,10 +52,10 @@ public class AddApartmentsController extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         UserService userService = new UserServiceImpl();
-        List<IUser> users = userService.getAllUsers();
+        List<User> users = userService.getAllUsers();
         request.setAttribute("users", users);
         ApartmentService apartmentService = new ApartmentServiceImpl();
-        List<IApartment> apartments = apartmentService.getAllApartments();
+        List<Apartment> apartments = apartmentService.getAllApartments();
         request.setAttribute("apartments", apartments);
         RequestDispatcher view = request.getRequestDispatcher("addApartments.jsp");
         view.forward(request, response);

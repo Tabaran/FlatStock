@@ -1,13 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-<%@ page import="com.flatstock.model.IReservation"%>
+<%@ page import="com.flatstock.model.Reservation"%>
 <%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="static com.flatstock.model.impl.User.*"%>
-<%@ page import="static com.flatstock.model.impl.Reservation.*"%>
+<%@ page import="static com.flatstock.model.User.*"%>
+<%@ page import="static com.flatstock.model.Reservation.*"%>
 <%@ page import="static com.flatstock.controller.reservations.UpdateReservationController.*"%>
 <html>
- <%IReservation reservation = (IReservation)request.getAttribute(RESERVATIONS);%>
+ <%Reservation reservation = (Reservation)request.getAttribute(RESERVATIONS);%>
 <html>
 <head>
   <title></title>

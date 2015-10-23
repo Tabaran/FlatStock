@@ -1,19 +1,17 @@
 package com.flatstock.dao;
 
-import com.flatstock.model.IApartment;
+import com.flatstock.model.Apartment;
 
-import java.sql.ResultSet;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Valentin on 26.05.2015.
  */
 public interface ApartmentDao {
-    List<IApartment> getAllApartments();
-    List<IApartment> getApartmentsByOwnerId(Integer OwnerId);
-    IApartment getApartment(Integer id);
-    void addApartment(IApartment apartments);
-    void updateApartment(IApartment apartments);
+    List<Apartment> getAllApartments();
+    List<Apartment> getApartmentsByOwnerId(Integer OwnerId);
+    Apartment getApartment(Integer id);
+    void addApartment(Apartment apartments);
+    void updateApartment(Apartment apartments);
     void deleteApartment(Integer id);
 }

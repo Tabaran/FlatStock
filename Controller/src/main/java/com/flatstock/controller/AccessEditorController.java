@@ -1,9 +1,7 @@
 package com.flatstock.controller;
 
-import com.flatstock.model.IFunctionalGroup;
 import com.flatstock.model.Role;
 import com.flatstock.service.AccessService;
-import com.flatstock.service.impl.AccessServiceImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

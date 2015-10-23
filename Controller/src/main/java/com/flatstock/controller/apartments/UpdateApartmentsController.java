@@ -4,14 +4,14 @@ package com.flatstock.controller.apartments;
  * Created by Valentin on 17.06.2015.
  */
 
-import com.flatstock.model.impl.Apartment;
+import com.flatstock.model.Apartment;
 import com.flatstock.service.ApartmentService;
 import com.flatstock.service.impl.ApartmentServiceImpl;
 import com.flatstock.service.UserService;
 import com.flatstock.service.impl.UserServiceImpl;
-import com.flatstock.model.*;
-import static com.flatstock.model.impl.Apartment.*;
-import static com.flatstock.model.impl.User.*;
+
+import static com.flatstock.model.Apartment.*;
+import static com.flatstock.model.User.*;
 import static com.flatstock.controller.apartments.UpdateApartmentsController.*;
 import static com.flatstock.controller.apartments.ShowApartmentsController.*;
 import javax.servlet.RequestDispatcher;
@@ -32,7 +32,7 @@ public class UpdateApartmentsController extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ApartmentService service = new ApartmentServiceImpl();
-        IApartment apartment = new Apartment();
+        Apartment apartment = new Apartment();
         apartment.setId(Integer.parseInt(request.getParameter(ID)));
         apartment.setOwnerId(Integer.parseInt(request.getParameter(OWNER_ID)));
         apartment.setAddress(request.getParameter(ADDRESS));
@@ -47,10 +47,10 @@ public class UpdateApartmentsController extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ApartmentService apartmentService = new ApartmentServiceImpl();
-        IApartment apartment = apartmentService.getApartment(Integer.parseInt(request.getParameter(ID)));
+        Apartment apartment = apartmentService.getApartment(Integer.parseInt(request.getParameter(ID)));
         request.setAttribute(APARTMENTS, apartment);
         UserService userService = new UserServiceImpl();
-        List<IUser> users = userService.getAllUsers();
+        List<User> users = userService.getAllUsers();
         request.setAttribute(USERS, users);
         RequestDispatcher view = request.getRequestDispatcher("updateApartments.jsp");
         view.forward(request, response);

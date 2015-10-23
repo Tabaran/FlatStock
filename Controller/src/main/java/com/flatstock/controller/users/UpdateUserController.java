@@ -8,13 +8,12 @@ import com.flatstock.model.Role;
 import com.flatstock.service.UserService;
 import com.flatstock.service.impl.UserServiceImpl;
 import com.flatstock.model.Gender;
-import com.flatstock.model.IUser;
-import com.flatstock.model.impl.User;
+import com.flatstock.model.User;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import static com.flatstock.model.impl.User.*;
+import static com.flatstock.model.User.*;
 import static com.flatstock.controller.users.UpdateUserController.*;
 import static com.flatstock.controller.users.ShowUsersController.*;
 import javax.servlet.RequestDispatcher;
@@ -48,7 +47,7 @@ public class UpdateUserController extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         UserService service = new UserServiceImpl();
-        IUser user = new User();
+        User user = new User();
         DiskFileItemFactory factory = new DiskFileItemFactory();
         ServletFileUpload upload = new ServletFileUpload(factory);
         InputStream photoStream = null;
@@ -121,7 +120,7 @@ public class UpdateUserController extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         UserService service = new UserServiceImpl();
-        IUser user = service.getUser(Integer.parseInt(request.getParameter(ID)));
+        User user = service.getUser(Integer.parseInt(request.getParameter(ID)));
         request.setAttribute(USER, user);
         RequestDispatcher view = request.getRequestDispatcher("updateUser.jsp");
         view.forward(request, response);

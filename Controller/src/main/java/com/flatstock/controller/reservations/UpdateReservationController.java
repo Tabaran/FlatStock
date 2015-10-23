@@ -4,17 +4,16 @@ package com.flatstock.controller.reservations;
  * Created by Valentin on 17.06.2015.
  */
 
-import com.flatstock.model.impl.Reservation;
+import com.flatstock.model.Reservation;
 import com.flatstock.service.*;
-import com.flatstock.model.*;
 import com.flatstock.service.impl.ApartmentServiceImpl;
 import com.flatstock.service.impl.ReservationServiceImpl;
 import com.flatstock.service.impl.UserServiceImpl;
 import org.apache.log4j.Logger;
 import static com.flatstock.controller.reservations.UpdateReservationController.*;
-import static com.flatstock.model.impl.Reservation.*;
-import static com.flatstock.model.impl.User.*;
-import static com.flatstock.model.impl.Apartment.*;
+import static com.flatstock.model.Reservation.*;
+import static com.flatstock.model.User.*;
+import static com.flatstock.model.Apartment.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,7 +37,7 @@ public class UpdateReservationController extends HttpServlet {
         try {
             SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
             ReservationService service = new ReservationServiceImpl();
-            IReservation reservation = new Reservation();
+            Reservation reservation = new Reservation();
             reservation.setId(Integer.parseInt(request.getParameter(ID)));
             reservation.setUserId(Integer.parseInt(request.getParameter(USER_ID)));
             reservation.setApartmentId(Integer.parseInt(request.getParameter(APARTMENT_ID)));
@@ -55,13 +54,13 @@ public class UpdateReservationController extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ReservationService reservationService = new ReservationServiceImpl();
-        IReservation reservation = reservationService.getReservation(Integer.parseInt(request.getParameter("id")));
+        Reservation reservation = reservationService.getReservation(Integer.parseInt(request.getParameter("id")));
         request.setAttribute(RESERVATIONS, reservation);
         UserService userService = new UserServiceImpl();
-        List<IUser> users = userService.getAllUsers();
+        List<User> users = userService.getAllUsers();
         request.setAttribute(USERS, users);
         ApartmentService apartmentService = new ApartmentServiceImpl();
-        List<IApartment> apartments = apartmentService.getAllApartments();
+        List<Apartment> apartments = apartmentService.getAllApartments();
         request.setAttribute(APARTMENTS, apartments);
         RequestDispatcher view = request.getRequestDispatcher("updateReservation.jsp");
         view.forward(request, response);

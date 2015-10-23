@@ -4,7 +4,6 @@ import com.flatstock.dao.UserDao;
 import com.flatstock.dao.UsersPhotosDao;
 import com.flatstock.dao.impl.UserDaoImpl;
 import com.flatstock.dao.impl.UsersPhotosDaoImpl;
-import com.flatstock.model.IUser;
 import com.flatstock.service.UserService;
 import com.flatstock.service.exceptions.IncorrectLoginExceptions;
 import org.apache.commons.io.IOUtils;
@@ -28,22 +27,22 @@ public class UserServiceImpl implements UserService {
     private static Map<Integer, byte[]> photos = new HashMap<>();
 
     @Override
-    public List<IUser> getAllUsers() {
+    public List<User> getAllUsers() {
         return userDao.getAllUsers();
     }
 
     @Override
-    public IUser getUser(Integer id) {
+    public User getUser(Integer id) {
         return userDao.getUser(id);
     }
 
     @Override
-    public Integer addUser(IUser user) {
+    public Integer addUser(User user) {
         return userDao.addUser(user);
     }
 
     @Override
-    public void updateUser(IUser user) {
+    public void updateUser(User user) {
         userDao.updateUser(user);
     }
 
@@ -108,8 +107,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public IUser validateUser(String login, String password) throws IncorrectLoginExceptions {
-        for(IUser user: getAllUsers()){
+    public User validateUser(String login, String password) throws IncorrectLoginExceptions {
+        for(User user: getAllUsers()){
             if(login.equals(user.getLogin()) && password.equals(user.getPassword()))
                 return user;
         }

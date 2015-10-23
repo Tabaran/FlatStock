@@ -2,9 +2,8 @@ package com.flatstock.controller.users;
 
 import com.flatstock.service.UserService;
 import com.flatstock.service.impl.UserServiceImpl;
-import com.flatstock.model.IUser;
 import org.apache.log4j.Logger;
-import static com.flatstock.model.impl.User.*;
+import static com.flatstock.model.User.*;
 import static com.flatstock.controller.users.ShowUsersController.*;
 import java.io.*;
 import java.util.List;
@@ -22,7 +21,7 @@ public class ShowUsersController extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         UserService service = new UserServiceImpl();
-        List<IUser> users = service.getAllUsers();
+        List<User> users = service.getAllUsers();
         request.setAttribute(USERS, users);
         RequestDispatcher view = request.getRequestDispatcher("users.jsp");
         view.forward(request, response);

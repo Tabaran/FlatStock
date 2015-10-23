@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="static com.flatstock.controller.users.AddUserController.*"%>
-<%@ page import="static com.flatstock.model.impl.User.*"%>
+<%@ page import="static com.flatstock.model.User.*"%>
 <%@ page import="com.flatstock.model.Role" %>
 <html>
 <head>

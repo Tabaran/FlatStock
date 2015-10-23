@@ -1,16 +1,13 @@
 package com.flatstock.controller.reservations;
 
 import com.flatstock.service.*;
-import com.flatstock.model.IApartment;
-import com.flatstock.model.IReservation;
-import com.flatstock.model.IUser;
 import com.flatstock.service.impl.ApartmentServiceImpl;
 import com.flatstock.service.impl.ReservationServiceImpl;
 import com.flatstock.service.impl.UserServiceImpl;
 import static com.flatstock.controller.reservations.ShowReservationsController.*;
-import static com.flatstock.model.impl.Reservation.*;
-import static com.flatstock.model.impl.User.*;
-import static com.flatstock.model.impl.Apartment.*;
+import static com.flatstock.model.Reservation.*;
+import static com.flatstock.model.User.*;
+import static com.flatstock.model.Apartment.*;
 import java.io.*;
 import java.util.HashMap;
 import java.util.List;
@@ -27,17 +24,17 @@ public class ShowReservationsController extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ReservationService reservationService = new ReservationServiceImpl();
-        List<IReservation> reservations = reservationService.getAllReservation();
+        List<Reservation> reservations = reservationService.getAllReservation();
         request.setAttribute(RESERVATIONS, reservations);
         UserService userService = new UserServiceImpl();
-        Map usersMap = new HashMap<Integer, IUser>();
-        for(IReservation reservation : reservations){
+        Map usersMap = new HashMap<Integer, User>();
+        for(Reservation reservation : reservations){
             usersMap.put(reservation.getUserId(), userService.getUser(reservation.getUserId()));
         }
         request.setAttribute(USERS, usersMap);
         ApartmentService apartmentService = new ApartmentServiceImpl();
-        Map apartmentsMap = new HashMap<Integer, IApartment>();
-        for(IReservation reservation : reservations){
+        Map apartmentsMap = new HashMap<Integer, Apartment>();
+        for(Reservation reservation : reservations){
             apartmentsMap.put(reservation.getApartmentId(), apartmentService.getApartment(reservation.getApartmentId()));
         }
         request.setAttribute(APARTMENTS, apartmentsMap);

@@ -2,7 +2,6 @@ package com.flatstock.service.impl;
 
 import com.flatstock.dao.ApartmentDao;
 import com.flatstock.dao.impl.ApartmentDaoImpl;
-import com.flatstock.model.IApartment;
 import com.flatstock.service.ApartmentService;
 
 import java.util.List;
@@ -15,23 +14,23 @@ public class ApartmentServiceImpl implements ApartmentService {
 
     private ApartmentDao apartmentDao = new ApartmentDaoImpl();
 
-    public List<IApartment> getAllApartments() {
+    public List<Apartment> getAllApartments() {
         return apartmentDao.getAllApartments();
     }
 
-    public List<IApartment> getApartmentsByOwnerId(Integer ownerId) {
+    public List<Apartment> getApartmentsByOwnerId(Integer ownerId) {
         return apartmentDao.getApartmentsByOwnerId(ownerId);
     }
 
-    public IApartment getApartment(Integer id) {
+    public Apartment getApartment(Integer id) {
         return apartmentDao.getApartment(id);
     }
 
-    public void addApartment(IApartment apartments) {
+    public void addApartment(Apartment apartments) {
         apartmentDao.addApartment(apartments);
     }
 
-    public void updateApartment(IApartment apartments) {
+    public void updateApartment(Apartment apartments) {
 
         apartmentDao.updateApartment(apartments);
     }

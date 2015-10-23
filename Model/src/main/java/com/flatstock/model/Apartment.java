@@ -1,12 +1,16 @@
-package com.flatstock.model.impl;
+package com.flatstock.model;
 
-import com.flatstock.model.ApartmentsType;
-import com.flatstock.model.IApartment;
+import javax.persistence.*;
+import javax.persistence.Id;
+import java.util.Set;
+
 
 /**
  * Created by Valentin on 25.05.2015.
  */
-public class Apartment implements IApartment {
+@Entity
+@Table(name = "apartments")
+public class Apartment implements com.flatstock.model.Id<Integer> {
 
     public static final String APARTMENTS = "apartments";
 
@@ -18,18 +22,44 @@ public class Apartment implements IApartment {
     public static final String PHOTO_URL = "photo_url";
     public static final String TYPE = "type";
     public static final String DESCRIPTION = "description";
-    public static final String OWNER_ID = "owner_id";
+    public static final String OWNER = "owner";
 
+
+    @Id
+    @Column(name = ID)
+    @GeneratedValue
     private int id;
+
+    @Column(name = PRICE)
     private int price;
+
+    @Column(name = ADDRESS)
     private String address;
+
+    @Column(name = ROOM_NUMBER)
     private int roomNumber;
+
+    @Column(name = FLOOR)
     private int floor;
+
+    @Column(name = RATING)
     private int rating;
+
+    @Column(name = PHOTO_URL)
     private String photoUrl;
+
+    @Column(name = TYPE)
     private ApartmentsType type;
+
+    @Column(name = DESCRIPTION)
     private String description;
-    private int ownerId;
+
+    @OneToMany
+    Set<Reservation> reservations;
+
+    @OneToOne
+    User owner;
+
 
     public Integer getId() {
         return id;
@@ -95,18 +125,36 @@ public class Apartment implements IApartment {
         this.description = description;
     }
 
-    public int getOwnerId() {
-        return ownerId;
-    }
-
-    public void setOwnerId(int ownerId) {
-        this.ownerId = ownerId;
-    }
     public ApartmentsType getType() {
         return type;
     }
 
     public void setType(ApartmentsType type) {
         this.type = type;
+    }
+
+
+    public User getOwner() {
+        return owner;
+    }
+
+
+    public void setOwner(User owner) {
+        this.owner = owner;
+    }
+
+
+    public Set<Reservation> getReservations() {
+        return reservations;
+    }
+
+
+    public void addReservation(Reservation reservation) {
+        this.reservations.add(reservation);
+    }
+
+
+    public void removeReservation(Reservation reservation) {
+        this.reservations.remove(reservation);
     }
 }

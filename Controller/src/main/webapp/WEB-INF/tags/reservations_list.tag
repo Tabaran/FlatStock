@@ -1,4 +1,4 @@
-<%@ attribute name="reservations" required="true" type="java.util.List<com.flatstock.model.impl.Reservation>" %>
+<%@ attribute name="reservations" required="true" type="java.util.List<com.flatstock.model.Reservation>" %>
 <%@ attribute name="remove" required="true" rtexprvalue="true"%>
 <%@ attribute name="update" required="true" rtexprvalue="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>

@@ -1,6 +1,6 @@
 package com.flatstock.service;
 
-import com.flatstock.model.IApartment;
+import com.flatstock.model.Apartment;
 
 import java.util.List;
 
@@ -8,10 +8,10 @@ import java.util.List;
  * Created by Valentin on 11.07.2015.
  */
 public interface ApartmentService {
-    List<IApartment> getAllApartments();
-    List<IApartment> getApartmentsByOwnerId(Integer OwnerId);
-    IApartment getApartment(Integer id);
-    void addApartment(IApartment apartments);
-    void updateApartment(IApartment apartments);
+    List<Apartment> getAllApartments();
+    List<Apartment> getApartmentsByOwnerId(Integer OwnerId);
+    Apartment getApartment(Integer id);
+    void addApartment(Apartment apartments);
+    void updateApartment(Apartment apartments);
     void deleteApartment(Integer id);
 }
