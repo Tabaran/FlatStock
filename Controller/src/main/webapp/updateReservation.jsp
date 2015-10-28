@@ -47,7 +47,7 @@
     <div class="row">
       <div class="col-md-2">User: </div>
       <div class="col-md-10">
-        <select class="form-control" name="<%= USER_ID%>">
+        <select class="form-control" name="">
           <c:forEach items="${users}" var="user">
             <option value="${user.getId()}" <c:if test="${reservations.getUserId() eq user.getId()}">selected</c:if>>${user.getFirstName()} ${user.getLastName()} (${user.getEmail()})</option>
           </c:forEach>
@@ -57,7 +57,7 @@
     <div class="row">
       <div class="col-md-2">Apartments: </div>
       <div class="col-md-10">
-        <select class="form-control" name="<%= APARTMENT_ID%>">
+        <select class="form-control" name="">
           <c:forEach items="${apartments}" var="apartment">
             <option value="${apartment.getId()}" <c:if test="${reservations.getApartmentId() eq apartment.getId()}">selected</c:if>>${apartment.getAddress()}</option>
           </c:forEach>

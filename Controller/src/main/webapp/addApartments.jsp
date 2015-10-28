@@ -35,7 +35,7 @@
     <div class="row">
       <div class="col-md-2"> Owner:</div>
       <div class="col-md-10">
-        <select class="form-control" name="<%= OWNER_ID%>">
+        <select class="form-control" name="<%= OWNER%>">
           <c:forEach items="${users}" var="user">
             <option value="${user.getId()}">${user.getFirstName()} ${user.getLastName()}</option>
           </c:forEach>

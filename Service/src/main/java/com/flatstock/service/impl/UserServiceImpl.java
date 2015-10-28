@@ -2,8 +2,8 @@ package com.flatstock.service.impl;
 
 import com.flatstock.dao.UserDao;
 import com.flatstock.dao.UsersPhotosDao;
-import com.flatstock.dao.impl.UserDaoImpl;
-import com.flatstock.dao.impl.UsersPhotosDaoImpl;
+import com.flatstock.model.User;
+import com.flatstock.repository.UserRepository;
 import com.flatstock.service.UserService;
 import com.flatstock.service.exceptions.IncorrectLoginExceptions;
 import org.apache.commons.io.IOUtils;
@@ -21,8 +21,8 @@ import java.util.Map;
 public class UserServiceImpl implements UserService {
     Logger LOG = Logger.getLogger(UserServiceImpl.class.getName());
 
-    UserDao userDao = new UserDaoImpl();
-    UsersPhotosDao photosDao = new UsersPhotosDaoImpl();
+    UserDao userDao = new UserRepository();
+    UsersPhotosDao photosDao;
 
     private static Map<Integer, byte[]> photos = new HashMap<>();
 

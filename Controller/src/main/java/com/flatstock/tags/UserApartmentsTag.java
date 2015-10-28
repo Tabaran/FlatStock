@@ -1,8 +1,11 @@
 package com.flatstock.tags;
 
+import com.flatstock.model.Apartment;
 import com.flatstock.service.ApartmentService;
 import com.flatstock.service.impl.ApartmentServiceImpl;
 
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.*;
 import java.io.*;
 import java.util.List;

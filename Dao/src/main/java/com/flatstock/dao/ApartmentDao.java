@@ -11,7 +11,7 @@ public interface ApartmentDao {
     List<Apartment> getAllApartments();
     List<Apartment> getApartmentsByOwnerId(Integer OwnerId);
     Apartment getApartment(Integer id);
-    void addApartment(Apartment apartments);
+    Integer addApartment(Apartment apartments);
     void updateApartment(Apartment apartments);
     void deleteApartment(Integer id);
 }

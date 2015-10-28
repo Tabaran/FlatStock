@@ -1,5 +1,6 @@
 package com.flatstock.controller;
 
+import com.flatstock.model.User;
 import com.flatstock.service.UserService;
 import com.flatstock.service.exceptions.IncorrectLoginExceptions;
 import com.flatstock.service.impl.UserServiceImpl;

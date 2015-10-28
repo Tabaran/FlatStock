@@ -12,7 +12,5 @@
 <a href='<%= RESERVATIONS_PATH%>'>
     <button type="button" class="btn btn-primary">Reservations</button>
 </a>
-<a href='<%= ACCESS_PATH%>'>
-    <button type="button" class="btn btn-primary">Access</button>
-</a>
+
 Hello ${sessionScope.user.getFirstName()}!

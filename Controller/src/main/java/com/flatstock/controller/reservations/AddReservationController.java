@@ -1,6 +1,8 @@
 package com.flatstock.controller.reservations;
 
+import com.flatstock.model.Apartment;
 import com.flatstock.model.Reservation;
+import com.flatstock.model.User;
 import com.flatstock.service.*;
 import com.flatstock.service.impl.ApartmentServiceImpl;
 import com.flatstock.service.impl.ReservationServiceImpl;
@@ -40,8 +42,8 @@ public class AddReservationController extends HttpServlet {
         try {
             SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
             Reservation reservation = new Reservation();
-            reservation.setApartmentId(Integer.parseInt(request.getParameter(APARTMENTS)));
-            reservation.setUserId(Integer.parseInt(request.getParameter(USER_ID)));
+            //reservation.setApartmentId(Integer.parseInt(request.getParameter(APARTMENTS)));
+            //reservation.setUserId(Integer.parseInt(request.getParameter(USER_ID)));
             reservation.setStartTime(format.parse(request.getParameter(START_TIME)));
             reservation.setEndTime(format.parse(request.getParameter(END_TIME)));
             service.addReservation(reservation);

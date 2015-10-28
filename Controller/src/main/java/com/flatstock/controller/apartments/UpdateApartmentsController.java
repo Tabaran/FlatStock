@@ -5,6 +5,7 @@ package com.flatstock.controller.apartments;
  */
 
 import com.flatstock.model.Apartment;
+import com.flatstock.model.User;
 import com.flatstock.service.ApartmentService;
 import com.flatstock.service.impl.ApartmentServiceImpl;
 import com.flatstock.service.UserService;
@@ -34,7 +35,7 @@ public class UpdateApartmentsController extends HttpServlet {
         ApartmentService service = new ApartmentServiceImpl();
         Apartment apartment = new Apartment();
         apartment.setId(Integer.parseInt(request.getParameter(ID)));
-        apartment.setOwnerId(Integer.parseInt(request.getParameter(OWNER_ID)));
+        //apartment.setOwnerId(Integer.parseInt(request.getParameter(OWNER_ID)));
         apartment.setAddress(request.getParameter(ADDRESS));
         apartment.setRoomNumber(Integer.parseInt(request.getParameter(ROOM_NUMBER)));
         apartment.setPrice(Integer.parseInt(request.getParameter(PRICE)));

@@ -42,7 +42,7 @@
     <div class="row">
       <div class="col-md-2">User: </div>
       <div class="col-md-10">
-        <select class="form-control" name="<%= USER_ID%>">
+        <select class="form-control" name="">
           <c:forEach items="${users}" var="user">
             <option value="${user.getId()}">${user.getFirstName()} ${user.getLastName()} (${user.getEmail()})</option>
           </c:forEach>

@@ -1,5 +1,8 @@
 package com.flatstock.controller.reservations;
 
+import com.flatstock.model.Apartment;
+import com.flatstock.model.Reservation;
+import com.flatstock.model.User;
 import com.flatstock.service.*;
 import com.flatstock.service.impl.ApartmentServiceImpl;
 import com.flatstock.service.impl.ReservationServiceImpl;
@@ -29,13 +32,13 @@ public class ShowReservationsController extends HttpServlet {
         UserService userService = new UserServiceImpl();
         Map usersMap = new HashMap<Integer, User>();
         for(Reservation reservation : reservations){
-            usersMap.put(reservation.getUserId(), userService.getUser(reservation.getUserId()));
+            usersMap.put(reservation.getUser().getId(), userService.getUser(reservation.getUser().getId()));
         }
         request.setAttribute(USERS, usersMap);
         ApartmentService apartmentService = new ApartmentServiceImpl();
         Map apartmentsMap = new HashMap<Integer, Apartment>();
         for(Reservation reservation : reservations){
-            apartmentsMap.put(reservation.getApartmentId(), apartmentService.getApartment(reservation.getApartmentId()));
+            apartmentsMap.put(reservation.getApartment().getId(), apartmentService.getApartment(reservation.getApartment().getId()));
         }
         request.setAttribute(APARTMENTS, apartmentsMap);
         RequestDispatcher view = request.getRequestDispatcher("reservations.jsp");

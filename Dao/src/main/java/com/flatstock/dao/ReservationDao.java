@@ -10,7 +10,7 @@ import java.util.List;
 public interface ReservationDao {
     List<Reservation> getAllReservation();
     Reservation getReservation(Integer id);
-    void addReservation(Reservation reservation);
+    Integer addReservation(Reservation reservation);
     void updateReservation(Reservation reservation);
     void deleteReservation(Integer id);
 }

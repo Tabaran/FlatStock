@@ -54,10 +54,11 @@ public class Apartment implements com.flatstock.model.Id<Integer> {
     @Column(name = DESCRIPTION)
     private String description;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
+    @JoinColumn(name="apartment_id")
     Set<Reservation> reservations;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     User owner;
 
 

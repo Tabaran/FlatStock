@@ -3,12 +3,14 @@ package com.flatstock.repository;
 import com.flatstock.model.Apartment;
 import com.flatstock.model.User;
 import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+
 
 
 /**
@@ -21,30 +23,35 @@ import org.springframework.transaction.annotation.Transactional;
 
 public class UserRepositoryTest {
 
-    @Autowired
-    UserRepository repository;
 
     @Autowired
-    User user;
+    UserRepository userRepository;
 
     @Autowired
-    Apartment apartment;
+    ApartmentsRepository apartmentsRepository;
 
     @Test
-    @Rollback(false)
     public void test(){
-        user.addApartment(apartment);
-        System.out.println(repository.addUser(user));
-
+        User testUser = new User();
+        testUser.setLogin("L");
+        Apartment apartment = new Apartment();
+        apartment.setAddress("A");
+        testUser.addApartment(apartment);
+        userRepository.addUser(testUser);
+        assertEquals("Check user was added", 1, userRepository.getAllUsers().size());
+        assertEquals("Check apartments was added", 1, apartmentsRepository.getAllApartments().size());
     }
 
     @Test
-    @Rollback(false)
     public void test2(){
-
-        System.out.println(((Apartment)repository.getAllUsers().get(0).getApartments().toArray()[0]).getAddress());
+        User testUser = new User();
+        testUser.setLogin("L");
+        Integer id = userRepository.addUser(testUser);
+        assertEquals("", id, userRepository.getUser(id).getId());
 
     }
+
+
 
 
 

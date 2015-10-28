@@ -4,7 +4,9 @@ package com.flatstock.controller.reservations;
  * Created by Valentin on 17.06.2015.
  */
 
+import com.flatstock.model.Apartment;
 import com.flatstock.model.Reservation;
+import com.flatstock.model.User;
 import com.flatstock.service.*;
 import com.flatstock.service.impl.ApartmentServiceImpl;
 import com.flatstock.service.impl.ReservationServiceImpl;
@@ -39,8 +41,8 @@ public class UpdateReservationController extends HttpServlet {
             ReservationService service = new ReservationServiceImpl();
             Reservation reservation = new Reservation();
             reservation.setId(Integer.parseInt(request.getParameter(ID)));
-            reservation.setUserId(Integer.parseInt(request.getParameter(USER_ID)));
-            reservation.setApartmentId(Integer.parseInt(request.getParameter(APARTMENT_ID)));
+            //reservation.setUser(request.getParameter(OWNER));
+            //reservation.setApartment(Integer.parseInt(request.getParameter(APARTMENT_ID)));
             reservation.setStartTime(format.parse(request.getParameter(START_TIME)));
             reservation.setEndTime(format.parse(request.getParameter(END_TIME)));
             service.updateReservation(reservation);

@@ -1,7 +1,7 @@
 package com.flatstock.service.impl;
 
 import com.flatstock.dao.ApartmentDao;
-import com.flatstock.dao.impl.ApartmentDaoImpl;
+import com.flatstock.model.Apartment;
 import com.flatstock.service.ApartmentService;
 
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class ApartmentServiceImpl implements ApartmentService {
 
-    private ApartmentDao apartmentDao = new ApartmentDaoImpl();
+    private ApartmentDao apartmentDao;
 
     public List<Apartment> getAllApartments() {
         return apartmentDao.getAllApartments();

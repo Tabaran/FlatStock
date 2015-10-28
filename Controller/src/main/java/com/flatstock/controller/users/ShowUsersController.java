@@ -1,5 +1,6 @@
 package com.flatstock.controller.users;
 
+import com.flatstock.model.User;
 import com.flatstock.service.UserService;
 import com.flatstock.service.impl.UserServiceImpl;
 import org.apache.log4j.Logger;

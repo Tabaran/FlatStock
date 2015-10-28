@@ -3,7 +3,6 @@ package com.flatstock.repository;
 import com.flatstock.dao.UserDao;
 import com.flatstock.model.User;
 import org.hibernate.Criteria;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,60 +15,41 @@ import java.util.List;
 /**
  * Created by Valentin on 21.10.2015.
  */
-@Repository
-public class UserRepository implements UserDao {
 
-    private SessionFactory sessionFactory;
 
-    @Autowired
-    public void setSessionFactory(SessionFactory sessionFactory) {
+public class UserRepository extends AbstractRepository implements UserDao {
 
-        this.sessionFactory = sessionFactory;
-    }
 
-    public SessionFactory getSessionFactory() {
-        return sessionFactory;
-    }
 
     @Override
     public List<User> getAllUsers() {
-        Session session = getSessionFactory().getCurrentSession();
-        Criteria criteria = session.createCriteria(User.class);
+        Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class);
         List<User> users = (List<User>) criteria.list();
         return users;
+
     }
 
     @Override
     public User getUser(Integer id) {
-        Session session = getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-        Criteria criteria = session.createCriteria(User.class).add(Restrictions.eq(ID, id));
-        User users = (User) criteria.uniqueResult();
-        session.getTransaction().commit();
-        return users;
+        Criteria criteria =
+                sessionFactory.getCurrentSession().createCriteria(User.class).add(Restrictions.eq(ID, id));
+        return  (User) criteria.uniqueResult();
     }
 
     @Override
     public Integer addUser(User user) {
-        Session session = getSessionFactory().getCurrentSession();
-        return (Integer)session.save(user);
-
+        return (Integer)sessionFactory.getCurrentSession().save(user);
     }
 
     @Override
     public void updateUser(User user) {
-        Session session = getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-        session.save(user);
-        session.getTransaction().commit();
+        addUser(user);
     }
 
     @Override
     public void deleteUser(Integer id) {
-        Session session = getSessionFactory().getCurrentSession();
-        session.beginTransaction();
         User user = new User();
-        session.delete(user);
-        session.getTransaction().commit();
+        user.setId(id);
+        sessionFactory.getCurrentSession().delete(user);
     }
 }

@@ -56,6 +56,7 @@ public class User implements Person, com.flatstock.model.Id<Integer> {
     Set<Apartment> apartments = new HashSet<>();
 
     @OneToMany(cascade = {CascadeType.ALL})
+    @JoinColumn(name = "reservation_id")
     Set<Reservation> reservations = new HashSet<>();
 
     private Role role = Role.CUSTOMER;

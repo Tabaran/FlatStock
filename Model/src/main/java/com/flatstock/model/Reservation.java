@@ -28,10 +28,10 @@ public class Reservation implements com.flatstock.model.Id<Integer> {
     @Column(name = END_TIME)
     private Date endTime;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     private Apartment apartment;
 
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.ALL})
     private User user;
 
     public Date getStartTime() {
