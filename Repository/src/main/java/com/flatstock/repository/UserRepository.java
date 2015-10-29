@@ -17,8 +17,14 @@ import java.util.List;
  */
 
 
-public class UserRepository extends AbstractRepository implements UserDao {
+public class UserRepository implements UserDao {
 
+    SessionFactory sessionFactory;
+
+    @Autowired
+    public void setSessionFactory(SessionFactory sessionFactory){
+        this.sessionFactory = sessionFactory;
+    }
 
 
     @Override
@@ -26,7 +32,6 @@ public class UserRepository extends AbstractRepository implements UserDao {
         Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class);
         List<User> users = (List<User>) criteria.list();
         return users;
-
     }
 
     @Override

@@ -1,9 +1,13 @@
 package com.flatstock.controller.users;
 
 import com.flatstock.model.User;
+import com.flatstock.repository.ApartmentsRepository;
 import com.flatstock.service.UserService;
 import com.flatstock.service.impl.UserServiceImpl;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+
 import static com.flatstock.model.User.*;
 import static com.flatstock.controller.users.ShowUsersController.*;
 import java.io.*;
@@ -19,8 +23,12 @@ public class ShowUsersController extends HttpServlet {
 
     static Logger LOG = Logger.getLogger(ShowUsersController.class.getName());
 
+
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+
+
         UserService service = new UserServiceImpl();
         List<User> users = service.getAllUsers();
         request.setAttribute(USERS, users);
