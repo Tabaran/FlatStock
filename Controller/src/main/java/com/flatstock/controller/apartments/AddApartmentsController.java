@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
+//import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,7 +26,7 @@ import static com.flatstock.controller.apartments.ShowApartmentsController.*;
  * Created by Valentin on 09.06.2015.
  */
 
-@WebServlet(ADD_APARTMENTS_PATH)
+//@WebServlet(ADD_APARTMENTS_PATH)
 public class AddApartmentsController extends HttpServlet {
 
     public static final String ADD_APARTMENTS_PATH = "/add_apartments";

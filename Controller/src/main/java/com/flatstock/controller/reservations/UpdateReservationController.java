@@ -18,7 +18,7 @@ import static com.flatstock.model.User.*;
 import static com.flatstock.model.Apartment.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
+//import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,7 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 
-@WebServlet(UPDATE_RESERVATION_PATH)
+//@WebServlet(UPDATE_RESERVATION_PATH)
 public class UpdateReservationController extends HttpServlet {
 
     public static final String UPDATE_RESERVATION_PATH = "/update_reservation";

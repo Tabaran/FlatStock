@@ -12,7 +12,7 @@ import static com.flatstock.model.User.*;
 import static com.flatstock.controller.users.ShowUsersController.*;
 import static com.flatstock.controller.users.AddUserController.*;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
+//import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,7 +28,7 @@ import org.apache.log4j.Logger;
  * Created by Valentin on 09.06.2015.
  */
 
-@WebServlet(ADD_USER_PATH)
+//@WebServlet(ADD_USER_PATH)
 public class AddUserController extends HttpServlet {
 
     public static final String ADD_USER_PATH = "/add_user";

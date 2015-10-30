@@ -7,7 +7,7 @@ import com.flatstock.service.impl.UserServiceImpl;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
+//import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +19,7 @@ import static com.flatstock.model.User.*;
  * Created by Valentin on 08.08.2015.
  */
 
-@WebServlet(LOGIN_PATH)
+//@WebServlet(LOGIN_PATH)
 public class LoginController extends HttpServlet {
     private Logger LOG = Logger.getLogger(LoginController.class.getName());
     public static final String LOGIN_PATH = "/login";

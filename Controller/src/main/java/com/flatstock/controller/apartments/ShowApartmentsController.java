@@ -12,14 +12,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.*;
-import javax.servlet.annotation.WebServlet;
+//import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import static com.flatstock.controller.apartments.ShowApartmentsController.*;
 import static com.flatstock.model.Apartment.*;
 import static com.flatstock.model.User.*;
 
 
-@WebServlet(APARTMENTS_PATH)
+//@WebServlet(APARTMENTS_PATH)
 public class ShowApartmentsController extends HttpServlet {
 
     public static final String APARTMENTS_PATH = "/apartments";

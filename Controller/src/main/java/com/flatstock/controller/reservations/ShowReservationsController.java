@@ -16,10 +16,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.servlet.*;
-import javax.servlet.annotation.WebServlet;
+//import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
-@WebServlet(RESERVATIONS_PATH)
+//@WebServlet(RESERVATIONS_PATH)
 public class ShowReservationsController extends HttpServlet {
 
     public static final String RESERVATIONS_PATH = "/reservations";

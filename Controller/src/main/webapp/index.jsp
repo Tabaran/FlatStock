@@ -10,6 +10,7 @@
     <div class="form-group container">
         <div class="row">
             <h:navigation/>
+            <p>${message}</p>
         </div>
     </div>
 </div>

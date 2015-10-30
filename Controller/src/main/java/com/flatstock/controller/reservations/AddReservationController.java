@@ -11,7 +11,7 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
+//import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,7 +29,7 @@ import static com.flatstock.controller.reservations.AddReservationController.*;
  * Created by Valentin on 09.06.2015.
  */
 
-@WebServlet(ADD_RESERVATION_PATH)
+//@WebServlet(ADD_RESERVATION_PATH)
 public class AddReservationController extends HttpServlet {
 
     public static final String ADD_RESERVATION_PATH = "/add_reservation";

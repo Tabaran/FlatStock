@@ -12,13 +12,12 @@ import com.flatstock.model.User;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
-
 import static com.flatstock.model.User.*;
 import static com.flatstock.controller.users.UpdateUserController.*;
 import static com.flatstock.controller.users.ShowUsersController.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
+//import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,7 +28,7 @@ import java.util.Iterator;
 import java.util.List;
 
 
-@WebServlet(UPDATE_USER_PATH)
+//@WebServlet(UPDATE_USER_PATH)
 public class UpdateUserController extends HttpServlet {
 
     public static final String UPDATE_USER_PATH = "/update_user";
