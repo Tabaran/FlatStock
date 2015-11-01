@@ -2,6 +2,7 @@ package com.flatstock.model;
 
 import javax.persistence.*;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,7 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
-public class User implements Person, com.flatstock.model.Id<Integer> {
+public class User implements Person, com.flatstock.model.Id<Integer>,Serializable {
 
     public static final String USERS = "users";
     public static final String USER = "user";

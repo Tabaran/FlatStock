@@ -5,12 +5,14 @@ import com.flatstock.model.Reservation;
 import com.flatstock.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 
 /**
  * Created by Valentin on 11.07.2015.
  */
+@Transactional
 public class ReservationServiceImpl implements ReservationService {
 
     @Autowired

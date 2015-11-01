@@ -8,6 +8,8 @@ import com.flatstock.service.UserService;
 import com.flatstock.service.exceptions.IncorrectLoginExceptions;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.*;
 import java.util.HashMap;
@@ -18,10 +20,13 @@ import java.util.Map;
 /**
  * Created by Valentin on 11.07.2015.
  */
+@Transactional
 public class UserServiceImpl implements UserService {
     Logger LOG = Logger.getLogger(UserServiceImpl.class.getName());
 
-    UserDao userDao = new UserRepository();
+    @Autowired
+    UserDao userDao;
+
     UsersPhotosDao photosDao;
 
     private static Map<Integer, byte[]> photos = new HashMap<>();

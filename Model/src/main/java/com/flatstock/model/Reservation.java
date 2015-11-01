@@ -2,6 +2,7 @@ package com.flatstock.model;
 
 import javax.persistence.*;
 import javax.persistence.Id;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -10,7 +11,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "reservations")
-public class Reservation implements com.flatstock.model.Id<Integer> {
+public class Reservation implements com.flatstock.model.Id<Integer>,Serializable {
 
     public static final String RESERVATIONS = "reservations";
 

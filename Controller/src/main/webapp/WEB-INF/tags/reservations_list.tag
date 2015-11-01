@@ -16,11 +16,10 @@
     </thead>
     <tbody>
     <c:forEach items="${reservations}" var="reservation">
-        <c:set var="user" value="${users.get(reservation.getUserId())}"/>
         <tr>
             <td>${reservation.getId()}</td>
-            <td>${user.getFirstName()} ${user.getLastName()}</td>
-            <td>${apartments.get(reservation.getApartmentId()).getAddress()}</td>
+            <td>${reservation.getUser().getFirstName()} ${reservation.getUser().getLastName()}</td>
+            <td>${reservation.getApartment().getAddress()}</td>
             <td><fmt:formatDate pattern="MM/dd/yyyy" value="${reservation.getStartTime()}"/></td>
             <td><fmt:formatDate pattern="MM/dd/yyyy" value="${reservation.getEndTime()}"/></td>
             <td><a href="${remove}?id=${reservation.getId()}"><button class='btn'>Remove</button></a></td>

@@ -8,31 +8,61 @@ import com.flatstock.service.impl.ApartmentServiceImpl;
 import com.flatstock.service.UserService;
 import com.flatstock.service.impl.UserServiceImpl;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-//import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import static com.flatstock.model.Apartment.*;
-import static com.flatstock.controller.apartments.AddApartmentsController.*;
+import static com.flatstock.model.User.*;
 import static com.flatstock.controller.apartments.ShowApartmentsController.*;
 
 
 /**
  * Created by Valentin on 09.06.2015.
  */
-
-//@WebServlet(ADD_APARTMENTS_PATH)
+@Controller
+@Scope("request")
 public class AddApartmentsController extends HttpServlet {
 
     public static final String ADD_APARTMENTS_PATH = "/add_apartments";
+    public static final String ADD_APARTMENTS = "addApartments";
+
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    ApartmentService apartmentService;
 
     static Logger LOG = Logger.getLogger(AddApartmentsController.class.getName());
 
+
+    @RequestMapping(value = ADD_APARTMENTS_PATH, method = RequestMethod.GET)
+    public ModelAndView showAddApartmentsForm(){
+        ModelAndView model = new ModelAndView(ADD_APARTMENTS);
+        model.addObject(USERS, userService.getAllUsers());
+        return model;
+    }
+
+    @RequestMapping(value = ADD_APARTMENTS_PATH, method = RequestMethod.POST)
+    public String addApartment(@ModelAttribute Apartment apartment){
+
+        apartmentService.addApartment(apartment);
+        return APARTMENTS;
+    }
+
+/*
     public void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         ApartmentService service = new ApartmentServiceImpl();
@@ -49,15 +79,7 @@ public class AddApartmentsController extends HttpServlet {
         response.sendRedirect(APARTMENTS_PATH);
     }
 
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        UserService userService = new UserServiceImpl();
-        List<User> users = userService.getAllUsers();
-        request.setAttribute("users", users);
-        ApartmentService apartmentService = new ApartmentServiceImpl();
-        List<Apartment> apartments = apartmentService.getAllApartments();
-        request.setAttribute("apartments", apartments);
-        RequestDispatcher view = request.getRequestDispatcher("addApartments.jsp");
-        view.forward(request, response);
-    }
+
+
+    */
 }

@@ -17,8 +17,7 @@
     <context:component-scan base-package="com.flatstock"/>
     <mvc:resources mapping="/resources/**" location="/"/>
 
-    <bean
-            class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix">
             <value>/</value>
         </property>
@@ -26,12 +25,13 @@
             <value>.jsp</value>
         </property>
     </bean>
+
     <bean id="sessionFactory"
           class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.hbm2ddl.auto">create</prop>
+                <!--<prop key="hibernate.hbm2ddl.auto">create</prop>-->
                 <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL82Dialect</prop>
             </props>
         </property>
@@ -43,27 +43,32 @@
             </list>
         </property>
     </bean>
+
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName" value="org.postgresql.Driver"/>
         <property name="url" value="jdbc:postgresql://localhost:5555/flatStock"/>
         <property name="username" value="postgres"/>
         <property name="password" value="tvtkz11"/>
     </bean>
+
     <tx:annotation-driven transaction-manager="transactionManager"/>
     <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+
+    <bean id="userService" class="com.flatstock.service.impl.UserServiceImpl"></bean>
+    <bean id="apartmentService" class="com.flatstock.service.impl.ApartmentServiceImpl"></bean>
+    <bean id="apartmentReservation" class="com.flatstock.service.impl.ReservationServiceImpl"></bean>
+
     <bean id="userRepository" class="com.flatstock.repository.UserRepository">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+
     <bean id="apartmentsRepository" class="com.flatstock.repository.ApartmentsRepository">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <bean id="user" class="com.flatstock.model.User">
-        <property name="id" value="1"></property>
-
+    <bean id="reservationsRepository" class="com.flatstock.repository.ReservationRepository">
+        <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
-
-
 </beans>

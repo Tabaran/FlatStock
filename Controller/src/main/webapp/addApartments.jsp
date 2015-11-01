@@ -37,7 +37,7 @@
       <div class="col-md-10">
         <select class="form-control" name="<%= OWNER%>">
           <c:forEach items="${users}" var="user">
-            <option value="${user.getId()}">${user.getFirstName()} ${user.getLastName()}</option>
+            <option value="${user}">${user.getFirstName()} ${user.getLastName()}</option>
           </c:forEach>
         </select>
       </div>
