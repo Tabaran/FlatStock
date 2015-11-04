@@ -16,10 +16,10 @@ public class User implements Person, com.flatstock.model.Id<Integer>,Serializabl
 
     public static final String USERS = "users";
     public static final String USER = "user";
-    public static final String FIRST_NAME = "first_name";
-    public static final String LAST_NAME = "last_name";
+    public static final String FIRST_NAME = "firstName";
+    public static final String LAST_NAME = "lastName";
     public static final String EMAIL = "email";
-    public static final String PHOTO_URL = "photo_url";
+    public static final String PHOTO_URL = "photoUrl";
     public static final String GENDER = "gender";
     public static final String LOGIN = "login";
     public static final String PASSWORD = "password";

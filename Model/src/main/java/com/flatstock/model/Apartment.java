@@ -17,10 +17,10 @@ public class Apartment implements com.flatstock.model.Id<Integer>, Serializable 
 
     public static final String PRICE = "price";
     public static final String ADDRESS = "address";
-    public static final String ROOM_NUMBER = "room_number";
+    public static final String ROOM_NUMBER = "roomNumber";
     public static final String FLOOR = "floor";
     public static final String RATING = "rating";
-    public static final String PHOTO_URL = "photo_url";
+    public static final String PHOTO_URL = "photoUrl";
     public static final String TYPE = "type";
     public static final String DESCRIPTION = "description";
     public static final String OWNER = "owner";

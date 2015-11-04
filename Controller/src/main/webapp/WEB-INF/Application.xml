@@ -71,4 +71,28 @@
     <bean id="reservationsRepository" class="com.flatstock.repository.ReservationRepository">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+
+    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+        <property name="customEditors">
+            <map>
+                <entry key="com.flatstock.model.Gender" value="com.flatstock.converter.GenderEnumConverter" />
+            </map>
+        </property>
+    </bean>
+
+    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+        <property name="customEditors">
+            <map>
+                <entry key="com.flatstock.model.Role" value="com.flatstock.converter.RoleEnumConverter" />
+            </map>
+        </property>
+    </bean>
+
+    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+        <property name="customEditors">
+            <map>
+                <entry key="com.flatstock.model.User" value="com.flatstock.converter.UserConverter" />
+            </map>
+        </property>
+    </bean>
 </beans>

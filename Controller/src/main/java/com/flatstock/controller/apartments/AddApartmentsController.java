@@ -1,7 +1,12 @@
 package com.flatstock.controller.apartments;
 
 
+import com.flatstock.converter.GenderEnumConverter;
+import com.flatstock.converter.RoleEnumConverter;
+import com.flatstock.converter.UserConverter;
 import com.flatstock.model.Apartment;
+import com.flatstock.model.Gender;
+import com.flatstock.model.Role;
 import com.flatstock.model.User;
 import com.flatstock.service.ApartmentService;
 import com.flatstock.service.impl.ApartmentServiceImpl;
@@ -12,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,6 +46,11 @@ public class AddApartmentsController extends HttpServlet {
     public static final String ADD_APARTMENTS_PATH = "/add_apartments";
     public static final String ADD_APARTMENTS = "addApartments";
 
+    @InitBinder
+    public void initBinder(WebDataBinder dataBinder) {
+        dataBinder.registerCustomEditor(User.class, new UserConverter());
+    }
+
     @Autowired
     UserService userService;
 
@@ -57,9 +69,8 @@ public class AddApartmentsController extends HttpServlet {
 
     @RequestMapping(value = ADD_APARTMENTS_PATH, method = RequestMethod.POST)
     public String addApartment(@ModelAttribute Apartment apartment){
-
         apartmentService.addApartment(apartment);
-        return APARTMENTS;
+        return "redirect:" + APARTMENTS_PATH;
     }
 
 /*
@@ -78,8 +89,5 @@ public class AddApartmentsController extends HttpServlet {
         service.addApartment(apartment);
         response.sendRedirect(APARTMENTS_PATH);
     }
-
-
-
     */
 }

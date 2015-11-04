@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="/resources/demos/style.css">
 </head>
 <body>
-<form method="POST" action="<%= ADD_USER_PATH%>" class="navbar-form" enctype="multipart/form-data">
+<form method="POST" action="<%= ADD_USER_PATH%>" class="navbar-form"> <!--enctype="multipart/form-data"-->
 <div class="container form-group">
     <div class="row">
         <div class="col-md-2">
@@ -57,14 +57,14 @@
             <input class="form-control" type="password" name="<%= PASSWORD%>"/>
         </div>
     </div>
-    <div class="row">
+   <%-- <div class="row">
         <div class="col-md-2">
             Photo:
         </div>
         <div class="col-md-10">
             <input type="file" name="<%= PHOTO_URL%>" accept="image/*"/>
         </div>
-    </div>
+    </div>--%>
     <div class="row">
         <div class="col-md-2"> Role:</div>
         <div class="col-md-10">

@@ -1,5 +1,7 @@
 package com.flatstock.controller.users;
 
+import com.flatstock.converter.GenderEnumConverter;
+import com.flatstock.converter.RoleEnumConverter;
 import com.flatstock.model.Role;
 import com.flatstock.service.UserService;
 import com.flatstock.service.impl.UserServiceImpl;
@@ -22,13 +24,21 @@ import java.io.InputStream;
 import java.util.Iterator;
 import java.util.List;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 
 /**
  * Created by Valentin on 09.06.2015.
  */
 
-//@WebServlet(ADD_USER_PATH)
+@Controller
+@Scope("request")
 public class AddUserController extends HttpServlet {
 
     public static final String ADD_USER_PATH = "/add_user";
@@ -37,6 +47,25 @@ public class AddUserController extends HttpServlet {
     private static final long DB_PHOTO_SIZE = 100 * 1024;
     private String filePath;
 
+
+    @InitBinder
+    public void initBinder(WebDataBinder dataBinder) {
+        dataBinder.registerCustomEditor(Gender.class, new GenderEnumConverter());
+        dataBinder.registerCustomEditor(Role.class, new RoleEnumConverter());
+    }
+
+
+    @Autowired
+    UserService userService;
+
+    @RequestMapping(value = ADD_USER_PATH)
+    public String addUser(@ModelAttribute User user){
+        userService.addUser(user);
+        return "redirect:" + USERS_PATH;
+    }
+
+
+/*
     public void init() {
         filePath = getServletContext().getInitParameter(FILE_UPLOAD_PATH);
         File dir = new File(filePath);
@@ -116,4 +145,5 @@ public class AddUserController extends HttpServlet {
         }
         response.sendRedirect(USERS_PATH);
     }
+    */
 }

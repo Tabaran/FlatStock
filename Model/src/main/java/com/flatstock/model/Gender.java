@@ -12,9 +12,11 @@ public enum Gender {
     Gender(String name){
         this.name = name;
     }
-    public static Gender fromString(String name) {
-        if (name != null && name.equalsIgnoreCase("male")) return MALE;
-        else return FEMALE;
+    public static Gender fromString(String name) throws IllegalArgumentException{
+        if(name == null) throw new IllegalArgumentException();
+        if(name.equalsIgnoreCase(FEMALE.name)) return FEMALE;
+        if (name.equalsIgnoreCase(MALE.name)) return MALE;
+        throw new IllegalArgumentException();
     }
 
     public String toString(){
