@@ -1,8 +1,8 @@
 package com.flatstock.converter;
 
-import com.flatstock.model.Gender;
+
 import com.flatstock.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+
 
 import java.beans.PropertyEditorSupport;
 
@@ -11,8 +11,17 @@ import java.beans.PropertyEditorSupport;
  */
 public class UserConverter extends PropertyEditorSupport {
 
-    @Autowired
+
     UserService service;
+
+
+    public UserConverter(UserService service) {
+        this.service = service;
+    }
+
+    public UserConverter() {
+
+    }
 
     @Override
     public void setAsText(String text) throws IllegalArgumentException {

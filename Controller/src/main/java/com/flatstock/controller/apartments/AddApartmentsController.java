@@ -48,7 +48,7 @@ public class AddApartmentsController extends HttpServlet {
 
     @InitBinder
     public void initBinder(WebDataBinder dataBinder) {
-        dataBinder.registerCustomEditor(User.class, new UserConverter());
+        dataBinder.registerCustomEditor(User.class, new UserConverter(userService));
     }
 
     @Autowired

@@ -32,7 +32,7 @@
       <div class="col-md-2"> Room number:</div>
       <div class="col-md-10"> <input class="form-control" type="text" name="<%= ROOM_NUMBER%>"/></div>
     </div>
-    <%--<div class="row">
+    <div class="row">
       <div class="col-md-2"> Owner:</div>
       <div class="col-md-10">
         <select class="form-control" name="<%= OWNER%>">
@@ -41,7 +41,7 @@
           </c:forEach>
         </select>
       </div>
-    </div>--%>
+    </div>
     <div class="row">
       <input  class="btn" type="submit" value="Submit"/>
     </div>
