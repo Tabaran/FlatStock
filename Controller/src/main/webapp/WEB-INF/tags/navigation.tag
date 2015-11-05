@@ -1,5 +1,5 @@
 <%@ tag import="static com.flatstock.controller.reservations.ShowReservationsController.*" %>
-<%@ tag import="static com.flatstock.controller.apartments.ShowApartmentsController.*" %>
+<%@ tag import="static com.flatstock.controller.apartments.ApartmentsController.*" %>
 <%@ tag import="static com.flatstock.controller.users.ShowUsersController.*" %>
 
 <a href='<%= USERS_PATH%>'>

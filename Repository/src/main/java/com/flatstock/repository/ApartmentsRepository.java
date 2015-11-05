@@ -45,7 +45,7 @@ public class ApartmentsRepository extends AbstractRepository implements Apartmen
 
     @Override
     public void updateApartment(Apartment apartment) {
-        addApartment(apartment);
+        sessionFactory.getCurrentSession().update(apartment);
     }
 
     @Override

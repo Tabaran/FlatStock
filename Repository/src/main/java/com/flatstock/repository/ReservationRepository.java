@@ -36,7 +36,7 @@ public class ReservationRepository extends AbstractRepository implements Reserva
 
     @Override
     public void updateReservation(Reservation reservation) {
-        addReservation(reservation);
+        sessionFactory.getCurrentSession().update(reservation);
     }
 
     @Override

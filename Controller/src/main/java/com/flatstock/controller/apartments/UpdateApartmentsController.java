@@ -13,8 +13,7 @@ import com.flatstock.service.impl.UserServiceImpl;
 
 import static com.flatstock.model.Apartment.*;
 import static com.flatstock.model.User.*;
-import static com.flatstock.controller.apartments.UpdateApartmentsController.*;
-import static com.flatstock.controller.apartments.ShowApartmentsController.*;
+import static com.flatstock.controller.apartments.ApartmentsController.*;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 //import javax.servlet.annotation.WebServlet;

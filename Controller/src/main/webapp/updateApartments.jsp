@@ -1,8 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="static com.flatstock.controller.apartments.UpdateApartmentsController.*"%>
+<%@ page import="static com.flatstock.controller.apartments.ApartmentsController.*"%>
 <%@ page import="static com.flatstock.model.Apartment.*"%>
-
 
 <html>
 <head>
@@ -42,7 +41,7 @@
         <select class="form-control" name="<%= OWNER%>">
             <c:forEach items="${users}" var="user">
                 <option value="${user.getId()}"
-                        <c:if test="${apartments.getOwnerId() eq user.getId()}">selected</c:if>>
+                        <c:if test="${apartments.getOwner().getId() eq user.getId()}">selected</c:if>>
                     ${user.getFirstName()} ${user.getLastName()} (${user.getEmail()})
                 </option>
             </c:forEach>

@@ -48,7 +48,7 @@ public class UserRepository implements UserDao {
 
     @Override
     public void updateUser(User user) {
-        addUser(user);
+        sessionFactory.getCurrentSession().update(user);
     }
 
     @Override
