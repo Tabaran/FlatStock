@@ -4,26 +4,13 @@ import com.flatstock.converter.GenderEnumConverter;
 import com.flatstock.converter.RoleEnumConverter;
 import com.flatstock.model.Role;
 import com.flatstock.service.UserService;
-import com.flatstock.service.impl.UserServiceImpl;
 import com.flatstock.model.Gender;
 import com.flatstock.model.User;
-import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
-import static com.flatstock.model.User.*;
-import static com.flatstock.controller.users.ShowUsersController.*;
-import static com.flatstock.controller.users.AddUserController.*;
-import javax.servlet.ServletException;
+
+import static com.flatstock.controller.users.UsersController.*;
 //import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Iterator;
-import java.util.List;
-import org.apache.log4j.Logger;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -41,28 +28,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Scope("request")
 public class AddUserController extends HttpServlet {
 
-    public static final String ADD_USER_PATH = "/add_user";
+
     public static final String FILE_UPLOAD_PATH = "file-upload";
     public static final String PHOTO_PREFIX = "user_photo_";
     private static final long DB_PHOTO_SIZE = 100 * 1024;
     private String filePath;
 
 
-    @InitBinder
-    public void initBinder(WebDataBinder dataBinder) {
-        dataBinder.registerCustomEditor(Gender.class, new GenderEnumConverter());
-        dataBinder.registerCustomEditor(Role.class, new RoleEnumConverter());
-    }
 
-
-    @Autowired
-    UserService userService;
-
-    @RequestMapping(value = ADD_USER_PATH)
-    public String addUser(@ModelAttribute User user){
-        userService.addUser(user);
-        return "redirect:" + USERS_PATH;
-    }
 
 
 /*

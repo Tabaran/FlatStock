@@ -2,8 +2,8 @@ package com.flatstock.controller.users;
 
 import com.flatstock.service.UserService;
 import com.flatstock.service.impl.UserServiceImpl;
-import static com.flatstock.controller.users.RemoveUserController.*;
-import static com.flatstock.controller.users.ShowUsersController.*;
+
+import static com.flatstock.controller.users.UsersController.*;
 import static com.flatstock.model.Id.*;
 
 import javax.servlet.ServletException;

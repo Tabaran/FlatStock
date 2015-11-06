@@ -1,6 +1,6 @@
 <%@ tag import="static com.flatstock.controller.reservations.ShowReservationsController.*" %>
 <%@ tag import="static com.flatstock.controller.apartments.ApartmentsController.*" %>
-<%@ tag import="static com.flatstock.controller.users.ShowUsersController.*" %>
+<%@ tag import="static com.flatstock.controller.users.UsersController.*" %>
 
 <a href='<%= USERS_PATH%>'>
     <button type="button" class="btn btn-primary">Users</button>
