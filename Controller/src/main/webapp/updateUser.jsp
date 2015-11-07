@@ -18,7 +18,7 @@
 </head>
 
 <body>
-<form method="POST" action="<%= UPDATE_USER_PATH%>" class="navbar-form" enctype="multipart/form-data">
+<form method="POST" action="<%= UPDATE_USER_PATH%>" class="navbar-form" <%--enctype="multipart/form-data"--%>>
     <input type="hidden" name="id" value="${user.getId()}"/>
     <div class="container form-group">
         <div class="row">
@@ -85,7 +85,7 @@
                               <c:if test="${user.getGender().toString() eq 'female'}">checked</c:if> />
             </div>
         </div>
-        <div class="row">
+        <%--<div class="row">
             <div class="col-md-2">
                 Photo:
             </div>
@@ -93,7 +93,7 @@
                 <img src="<%= GET_PHOTO_PATH%>?<%= PHOTO%>=${user.getPhotoUrl()}&id=${user.getId()}"/>
                 <input type="file" name="<%= PHOTO_URL%>" accept="image/*"/>
             </div>
-        </div>
+        </div>--%>
         <div class="row">
             <input  class="btn" type="submit" value="Submit"/>
         </div>

@@ -32,7 +32,7 @@ import static com.flatstock.controller.reservations.AddReservationController.*;
 //@WebServlet(ADD_RESERVATION_PATH)
 public class AddReservationController extends HttpServlet {
 
-    public static final String ADD_RESERVATION_PATH = "/add_reservation";
+
 
     static Logger LOG = Logger.getLogger(AddReservationController.class.getName());
 

@@ -31,7 +31,7 @@ import java.util.List;
 //@WebServlet(UPDATE_RESERVATION_PATH)
 public class UpdateReservationController extends HttpServlet {
 
-    public static final String UPDATE_RESERVATION_PATH = "/update_reservation";
+
 
     static Logger LOG = Logger.getLogger(UpdateReservationController.class.getName());
     public void doPost(HttpServletRequest request, HttpServletResponse response)

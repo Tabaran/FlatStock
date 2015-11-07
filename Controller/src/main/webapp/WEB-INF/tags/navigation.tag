@@ -1,4 +1,4 @@
-<%@ tag import="static com.flatstock.controller.reservations.ShowReservationsController.*" %>
+<%@ tag import="static com.flatstock.controller.reservations.ReservationsController.*" %>
 <%@ tag import="static com.flatstock.controller.apartments.ApartmentsController.*" %>
 <%@ tag import="static com.flatstock.controller.users.UsersController.*" %>
 

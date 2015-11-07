@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import static com.flatstock.controller.reservations.RemoveReservationController.*;
-import static com.flatstock.controller.reservations.ShowReservationsController.*;
+
+import static com.flatstock.controller.reservations.ReservationsController.*;
 import static com.flatstock.model.Id.*;
 
 
@@ -20,7 +20,7 @@ import static com.flatstock.model.Id.*;
 //@WebServlet(REMOVE_RESERVATION_PATH)
 public class RemoveReservationController extends HttpServlet{
 
-    public static final String REMOVE_RESERVATION_PATH = "/remove_reservation";
+
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
