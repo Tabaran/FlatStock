@@ -2,6 +2,8 @@
 <%@ page import="static com.flatstock.model.Apartment.*"%>
 <%@ page import="static com.flatstock.controller.reservations.ReservationsController.*"%>
 <%@ page import="static com.flatstock.model.Reservation.*"%>
+<%@ page import="static com.flatstock.model.User.*"%>
+<%@ page import="static com.flatstock.model.Apartment.*"%>
 
 
 <html>
@@ -42,7 +44,7 @@
     <div class="row">
       <div class="col-md-2">User: </div>
       <div class="col-md-10">
-        <select class="form-control" name="">
+        <select class="form-control" name="<%= USER%>">
           <c:forEach items="${users}" var="user">
             <option value="${user.getId()}">${user.getFirstName()} ${user.getLastName()} (${user.getEmail()})</option>
           </c:forEach>
@@ -52,7 +54,7 @@
     <div class="row">
       <div class="col-md-2">Apartments: </div>
       <div class="col-md-10">
-        <select class="form-control" name="<%= APARTMENTS%>">
+        <select class="form-control" name="<%= APARTMENT%>">
           <c:forEach items="${apartments}" var="apartment">
             <option value="${apartment.getId()}">${apartment.getAddress()}</option>
           </c:forEach>

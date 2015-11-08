@@ -14,9 +14,10 @@ import java.util.Date;
 public class Reservation implements com.flatstock.model.Id<Integer>,Serializable {
 
     public static final String RESERVATIONS = "reservations";
+    public static final String RESERVATION = "reservation";
 
-    public static final String START_TIME = "start_time";
-    public static final String END_TIME = "end_time";
+    public static final String START_TIME = "startTime";
+    public static final String END_TIME = "endTime";
 
     @GeneratedValue
     @Id
@@ -29,10 +30,10 @@ public class Reservation implements com.flatstock.model.Id<Integer>,Serializable
     @Column(name = END_TIME)
     private Date endTime;
 
-    @OneToOne(cascade = {CascadeType.ALL})
+    @ManyToOne()
     private Apartment apartment;
 
-    @OneToOne(cascade = {CascadeType.ALL})
+    @ManyToOne()
     private User user;
 
     public Date getStartTime() {

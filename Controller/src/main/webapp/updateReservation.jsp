@@ -1,13 +1,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
 <%@ page import="com.flatstock.model.Reservation"%>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="static com.flatstock.model.User.*"%>
 <%@ page import="static com.flatstock.model.Reservation.*"%>
-<%@ page import="static com.flatstock.controller.reservations.UpdateReservationController.*"%>
+<%@ page import="static com.flatstock.model.Apartment.*"%>
+<%@ page import="static com.flatstock.controller.reservations.ReservationsController.*"%>
 <html>
- <%Reservation reservation = (Reservation)request.getAttribute(RESERVATIONS);%>
+ <%Reservation reservation = (Reservation)request.getAttribute(RESERVATION);%>
 <html>
 <head>
   <title></title>
@@ -47,7 +47,7 @@
     <div class="row">
       <div class="col-md-2">User: </div>
       <div class="col-md-10">
-        <select class="form-control" name="">
+        <select class="form-control" name="<%= USER%>">
           <c:forEach items="${users}" var="user">
             <option value="${user.getId()}" <c:if test="${reservations.getUserId() eq user.getId()}">selected</c:if>>${user.getFirstName()} ${user.getLastName()} (${user.getEmail()})</option>
           </c:forEach>
@@ -57,7 +57,7 @@
     <div class="row">
       <div class="col-md-2">Apartments: </div>
       <div class="col-md-10">
-        <select class="form-control" name="">
+        <select class="form-control" name="<%= APARTMENT%>">
           <c:forEach items="${apartments}" var="apartment">
             <option value="${apartment.getId()}" <c:if test="${reservations.getApartmentId() eq apartment.getId()}">selected</c:if>>${apartment.getAddress()}</option>
           </c:forEach>
@@ -84,7 +84,6 @@
       <input  class="btn" type="submit" value="Submit"/>
     </div>
   </div>
-
 </form>
 </body>
 </html>

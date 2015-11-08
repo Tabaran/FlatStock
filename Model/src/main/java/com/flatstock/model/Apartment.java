@@ -14,6 +14,7 @@ import java.util.Set;
 public class Apartment implements com.flatstock.model.Id<Integer>, Serializable {
 
     public static final String APARTMENTS = "apartments";
+    public static final String APARTMENT = "apartment";
 
     public static final String PRICE = "price";
     public static final String ADDRESS = "address";

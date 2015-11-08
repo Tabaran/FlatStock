@@ -80,6 +80,7 @@
                 <entry key="com.flatstock.model.Gender" value="com.flatstock.converter.GenderEnumConverter" />
                 <entry key="com.flatstock.model.Role" value="com.flatstock.converter.RoleEnumConverter" />
                 <entry key="com.flatstock.model.User" value="com.flatstock.converter.UserConverter" />
+                <entry key="com.flatstock.model.Apartment" value="com.flatstock.converter.ApartmentsConverter" />
             </map>
         </property>
     </bean>
