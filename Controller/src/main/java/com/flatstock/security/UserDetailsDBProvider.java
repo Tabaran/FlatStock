@@ -33,19 +33,19 @@ public class UserDetailsDBProvider implements UserDetailsService {
         boolean accountNonLocked = true;
 
 
-        //com.flatstock.model.User domainUser = //userDao.getUserByLogin(login);
-        return new User(/*domainUser.getLogin()*/"admin",
-                /*domainUser.getPassword()*/"pass",
+        com.flatstock.model.User domainUser = userDao.getUserByLogin(login);
+        return new User(domainUser.getLogin(),
+                domainUser.getPassword(),
                 enabled,
                 accountNonExpired,
                 credentialsNonExpired,
                 accountNonLocked,
-                getRoles(/*domainUser.getRole()*/Role.ADMINISTRATOR));
+                getRoles(domainUser.getRole()));
     }
 
     public List<SimpleGrantedAuthority> getRoles(Role role){
         List<SimpleGrantedAuthority> roles = new ArrayList<>();
-        roles.add(new SimpleGrantedAuthority(/*role.toString()*/"ADMIN"));
+        roles.add(new SimpleGrantedAuthority(role.getCode()));
         return roles;
     }
 

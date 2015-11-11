@@ -22,4 +22,9 @@ public enum Role {
     public String toString(){
         return name;
     }
+
+    public String getCode() {
+        if(this.equals(ADMINISTRATOR)) return "ROLE_ADMIN";
+        return "ROLE_USER";
+    }
 }

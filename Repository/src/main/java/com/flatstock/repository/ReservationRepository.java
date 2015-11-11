@@ -1,14 +1,10 @@
 package com.flatstock.repository;
 
 import com.flatstock.dao.ReservationDao;
-import com.flatstock.model.Apartment;
 import com.flatstock.model.Reservation;
-import com.flatstock.model.User;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
-
 import java.util.List;
-
 import static com.flatstock.model.Id.ID;
 
 /**

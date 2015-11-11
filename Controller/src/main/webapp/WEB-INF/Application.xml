@@ -104,10 +104,6 @@
 
     <security:authentication-manager>
         <security:authentication-provider user-service-ref="userDetailsDBProvider"/>
-            <!--<security:user-service>
-                <security:user name="admin" password="pass" authorities="administrator,customer"/>
-            </security:user-service>
-        </security:authentication-provider>-->
     </security:authentication-manager>
 
 </beans>
