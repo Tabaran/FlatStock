@@ -6,10 +6,8 @@ import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-
 import static com.flatstock.model.Id.*;
-
+import static com.flatstock.model.User.*;
 import java.util.List;
 
 /**
@@ -38,6 +36,13 @@ public class UserRepository implements UserDao {
     public User getUser(Integer id) {
         Criteria criteria =
                 sessionFactory.getCurrentSession().createCriteria(User.class).add(Restrictions.eq(ID, id));
+        return  (User) criteria.uniqueResult();
+    }
+
+    @Override
+    public User getUserByLogin(String login) {
+        Criteria criteria =
+                sessionFactory.getCurrentSession().createCriteria(User.class).add(Restrictions.eq(LOGIN, login));
         return  (User) criteria.uniqueResult();
     }
 

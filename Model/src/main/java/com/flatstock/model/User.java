@@ -1,5 +1,7 @@
 package com.flatstock.model;
 
+import org.springframework.context.annotation.Primary;
+
 import javax.persistence.*;
 import javax.persistence.Id;
 import java.io.Serializable;
@@ -28,7 +30,7 @@ public class User implements Person, com.flatstock.model.Id<Integer>,Serializabl
 
     @Id
     @GeneratedValue
-    @Column(name = ID)
+    @Column(name = ID, unique = true)
     private Integer id;
 
     @Column(name = FIRST_NAME)
@@ -37,7 +39,7 @@ public class User implements Person, com.flatstock.model.Id<Integer>,Serializabl
     @Column(name = LAST_NAME)
     private String lastName;
 
-    @Column(name = EMAIL)
+    @Column(name = EMAIL, unique = true)
     private String email;
 
     @Column(name = PHOTO_URL)
@@ -46,7 +48,7 @@ public class User implements Person, com.flatstock.model.Id<Integer>,Serializabl
     @Column(name = GENDER)
     private Gender gender;
 
-    @Column(name = LOGIN)
+    @Column(name = LOGIN, unique = true)
     private String login;
 
     @Column(name = PASSWORD)
