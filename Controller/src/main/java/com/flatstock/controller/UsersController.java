@@ -1,4 +1,4 @@
-package com.flatstock.controller.users;
+package com.flatstock.controller;
 
 
 import com.flatstock.converter.GenderEnumConverter;

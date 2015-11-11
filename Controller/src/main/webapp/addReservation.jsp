@@ -1,9 +1,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="static com.flatstock.model.Apartment.*"%>
-<%@ page import="static com.flatstock.controller.reservations.ReservationsController.*"%>
+<%@ page import="static com.flatstock.controller.ReservationsController.*"%>
 <%@ page import="static com.flatstock.model.Reservation.*"%>
 <%@ page import="static com.flatstock.model.User.*"%>
-<%@ page import="static com.flatstock.model.Apartment.*"%>
 
 
 <html>
@@ -18,26 +17,26 @@
   <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
   <link rel="stylesheet" href="/resources/demos/style.css">
   <script>
-    $(function() {
-      $( "#from" ).datepicker({
+    $(function () {
+      $("#from").datepicker({
         defaultDate: "+1w",
         changeMonth: true,
         numberOfMonths: 1,
-        onClose: function( selectedDate ) {
-          $( "#to" ).datepicker( "option", "minDate", selectedDate );
+        onClose: function (selectedDate) {
+          $("#to").datepicker("option", "minDate", selectedDate);
         }
       });
-      $( "#to" ).datepicker({
+      $("#to").datepicker({
         defaultDate: "+1w",
         changeMonth: true,
         numberOfMonths: 1,
-        onClose: function( selectedDate ) {
-          $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+        onClose: function (selectedDate) {
+          $("#from").datepicker("option", "maxDate", selectedDate);
         }
       });
     });
   </script>
- </head>
+</head>
 <body>
 <form method="POST" action="<%= ADD_RESERVATION_PATH%>" class="navbar-form">
   <div class="form-group container">

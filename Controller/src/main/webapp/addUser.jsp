@@ -1,5 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page import="static com.flatstock.controller.users.UsersController.*"%>
+<%@ page import="static com.flatstock.controller.UsersController.*"%>
 <%@ page import="static com.flatstock.model.User.*"%>
 <%@ page import="com.flatstock.model.Role" %>
 <html>

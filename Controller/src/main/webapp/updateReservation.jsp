@@ -5,7 +5,7 @@
 <%@ page import="static com.flatstock.model.User.*"%>
 <%@ page import="static com.flatstock.model.Reservation.*"%>
 <%@ page import="static com.flatstock.model.Apartment.*"%>
-<%@ page import="static com.flatstock.controller.reservations.ReservationsController.*"%>
+<%@ page import="static com.flatstock.controller.ReservationsController.*"%>
 <html>
  <%Reservation reservation = (Reservation)request.getAttribute(RESERVATION);%>
 <html>
@@ -43,7 +43,7 @@
 <body>
 <form method="POST" action="<%= UPDATE_RESERVATION_PATH%>" class="navbar-form">
   <div class="form-group container">
-  <input type="hidden" name="<%= ID%>" value="${reservations.getId()}" />
+  <input type="hidden" name="<%= ID%>" value="${reservation.getId()}" />
     <div class="row">
       <div class="col-md-2">User: </div>
       <div class="col-md-10">

@@ -1,7 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="h" %>
-<%@ page import="static com.flatstock.controller.apartments.ApartmentsController.*" %>
-<%@ page import="static com.flatstock.controller.apartments.ApartmentsController.*" %>
+<%@ page import="static com.flatstock.controller.ApartmentsController.*" %>
 <html>
 <head>
   <title></title>
@@ -12,9 +11,9 @@
 </head>
 <body>
 <div class="navbar-form">
-<div class="form-group container">
-  <div class="row">
-    <h:navigation/>
+  <div class="form-group container">
+    <div class="row">
+      <h:navigation/>
   </div>
   <div class="row">
     <h:apartments_list apartments="${apartments}" remove="<%= REMOVE_APARTMENTS_PATH%>" update="<%= UPDATE_APARTMENTS_PATH%>"/>

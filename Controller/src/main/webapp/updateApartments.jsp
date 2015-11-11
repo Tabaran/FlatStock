@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ page import="static com.flatstock.controller.apartments.ApartmentsController.*"%>
+<%@ page import="static com.flatstock.controller.ApartmentsController.*"%>
 <%@ page import="static com.flatstock.model.Apartment.*"%>
 
 <html>

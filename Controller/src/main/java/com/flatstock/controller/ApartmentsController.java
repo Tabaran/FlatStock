@@ -1,4 +1,4 @@
-package com.flatstock.controller.apartments;
+package com.flatstock.controller;
 
 
 import com.flatstock.converter.UserConverter;
