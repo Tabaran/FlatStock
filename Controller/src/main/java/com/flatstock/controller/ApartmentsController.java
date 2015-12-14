@@ -19,13 +19,13 @@ import static com.flatstock.model.User.USERS;
 @Controller
 @Scope("request")
 public class ApartmentsController {
-
-    public static final String APARTMENTS_PATH = "/apartments";
-    public static final String ADD_APARTMENTS_PATH = "/add_apartments";
+    public static final String ADMIN_PATH = "admin/";
+    public static final String APARTMENTS_PATH = "/admin/apartments";
+    public static final String ADD_APARTMENTS_PATH = "/admin/add_apartments";
     public static final String ADD_APARTMENTS = "addApartments";
     public static final String UPDATE_APARTMENTS = "updateApartments";
-    public static final String REMOVE_APARTMENTS_PATH = "/remove_apartments";
-    public static final String UPDATE_APARTMENTS_PATH = "/update_apartments";
+    public static final String REMOVE_APARTMENTS_PATH = "/admin/remove_apartments";
+    public static final String UPDATE_APARTMENTS_PATH = "/admin/update_apartments";
 
     @InitBinder
     public void initBinder(WebDataBinder dataBinder) {
@@ -40,7 +40,7 @@ public class ApartmentsController {
 
     @RequestMapping(value=APARTMENTS_PATH)
     public ModelAndView showApartments() throws IOException {
-        return new ModelAndView(APARTMENTS, APARTMENTS, apartmentService.getAllApartments());
+        return new ModelAndView(ADMIN_PATH + APARTMENTS, APARTMENTS, apartmentService.getAllApartments());
     }
 
     @RequestMapping(value = ADD_APARTMENTS_PATH, method = RequestMethod.GET)
@@ -64,7 +64,7 @@ public class ApartmentsController {
 
     @RequestMapping(value = UPDATE_APARTMENTS_PATH, method = RequestMethod.GET)
     public ModelAndView showUpdateApartmentsForm(@RequestParam(ID) String id){
-        ModelAndView model = new ModelAndView(UPDATE_APARTMENTS);
+        ModelAndView model = new ModelAndView(ADMIN_PATH + UPDATE_APARTMENTS);
         model.addObject(APARTMENTS, apartmentService.getApartment(Integer.parseInt(id)));
         model.addObject(USERS, userService.getAllUsers());
         return model;

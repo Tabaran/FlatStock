@@ -5,7 +5,10 @@ package com.flatstock.model;
  */
 public enum Role {
     CUSTOMER("customer"),
+    OWNER("owner"),
     ADMINISTRATOR("administrator");
+
+    private static final String PREFIX = "ROLE_";
 
     String name;
 
@@ -24,7 +27,6 @@ public enum Role {
     }
 
     public String getCode() {
-        if(this.equals(ADMINISTRATOR)) return "ROLE_ADMIN";
-        return "ROLE_USER";
+        return PREFIX + name.toUpperCase();
     }
 }

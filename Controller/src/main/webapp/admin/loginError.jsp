@@ -6,7 +6,7 @@
 </head>
 <body>
   <H4>Incorrect login or password :(</H4>
-  <a href='/login.jsp'>
+  <a href='/admin/login.jspin.jsp'>
     <button type="button" class="btn btn-primary">Try Again</button>
   </a>
 </body>

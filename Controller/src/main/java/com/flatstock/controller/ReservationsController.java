@@ -22,10 +22,11 @@ import javax.servlet.http.*;
 @Scope("request")
 public class ReservationsController extends HttpServlet {
 
-    public static final String RESERVATIONS_PATH = "/reservations";
-    public static final String ADD_RESERVATION_PATH = "/add_reservation";
-    public static final String REMOVE_RESERVATION_PATH = "/remove_reservation";
-    public static final String UPDATE_RESERVATION_PATH = "/update_reservation";
+    public static final String ADMIN_PATH = "admin/";
+    public static final String RESERVATIONS_PATH = "/admin/reservations";
+    public static final String ADD_RESERVATION_PATH = "/admin/add_reservation";
+    public static final String REMOVE_RESERVATION_PATH = "/admin/remove_reservation";
+    public static final String UPDATE_RESERVATION_PATH = "/admin/update_reservation";
     public static final String ADD_RESERVATION = "addReservation";
     public static final String UPDATE_RESERVATION = "updateReservation";
 
@@ -46,7 +47,7 @@ public class ReservationsController extends HttpServlet {
 
     @RequestMapping(value=RESERVATIONS_PATH)
     public ModelAndView showReservations() throws IOException {
-        return new ModelAndView(RESERVATIONS, RESERVATIONS, reservationService.getAllReservation());
+        return new ModelAndView(ADMIN_PATH + RESERVATIONS, RESERVATIONS, reservationService.getAllReservation());
     }
 
     @RequestMapping(value = ADD_RESERVATION_PATH, method = RequestMethod.GET)
@@ -71,7 +72,7 @@ public class ReservationsController extends HttpServlet {
 
     @RequestMapping(value = UPDATE_RESERVATION_PATH, method = RequestMethod.GET)
     public ModelAndView showUpdateReservationForm(@RequestParam(ID) String id){
-        ModelAndView model = new ModelAndView(UPDATE_RESERVATION);
+        ModelAndView model = new ModelAndView(ADMIN_PATH + UPDATE_RESERVATION);
         model.addObject(RESERVATION, reservationService.getReservation(Integer.parseInt(id)));
         model.addObject(APARTMENTS, apartmentService.getAllApartments());
         model.addObject(USERS, userService.getAllUsers());

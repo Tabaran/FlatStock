@@ -22,11 +22,13 @@ import java.io.*;
 @Scope("request")
 public class UsersController {
 
-    public static final String USERS_PATH = "/users";
-    public static final String ADD_USER_PATH = "/add_user";
-    public static final String REMOVE_USER_PATH = "/remove_user";
-    public static final String UPDATE_USER_PATH = "/update_user";
+    public static final String ADMIN_PATH = "admin/";
+    public static final String USERS_PATH = "/admin/users";
+    public static final String ADD_USER_PATH = "/admin/add_user";
+    public static final String REMOVE_USER_PATH = "/admin/remove_user";
+    public static final String UPDATE_USER_PATH = "/admin/update_user";
     public static final String UPDATE_USER = "updateUser";
+    public static final String SIGN_UP_PATH = "/sign_up";
 
     static Logger LOG = Logger.getLogger(UsersController.class.getName());
 
@@ -41,7 +43,7 @@ public class UsersController {
 
     @RequestMapping(value=USERS_PATH)
     public ModelAndView showUsers() throws IOException{
-        return new ModelAndView(USERS, USERS, service.getAllUsers());
+        return new ModelAndView( ADMIN_PATH + USERS, USERS, service.getAllUsers());
     }
 
     @RequestMapping(value = ADD_USER_PATH)
@@ -58,7 +60,7 @@ public class UsersController {
 
     @RequestMapping(value = UPDATE_USER_PATH, method = RequestMethod.GET)
     public ModelAndView showUpdateUserForm(@RequestParam(ID) String id){
-        ModelAndView model = new ModelAndView(UPDATE_USER);
+        ModelAndView model = new ModelAndView(ADMIN_PATH + UPDATE_USER);
         model.addObject(USER, service.getUser(Integer.parseInt(id)));
         return model;
     }
@@ -69,5 +71,9 @@ public class UsersController {
         return "redirect:" + USERS_PATH;
     }
 
-
+    @RequestMapping(value = SIGN_UP_PATH, method = RequestMethod.POST)
+    public String signUp(@ModelAttribute User user){
+        service.addUser(user);
+        return "redirect:" + "home.jsp";
+    }
 }

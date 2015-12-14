@@ -12,7 +12,7 @@
 <head>
   <title></title>
   <link rel='stylesheet' href='webjars/bootstrap/3.2.0/css/bootstrap.min.css'>
-  <link rel='stylesheet' href='main.css'>
+  <link rel='stylesheet' href='../styles/main.css'>
   <script type="text/javascript" src="webjars/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="webjars/jquery/2.1.1/jquery.min.js"></script>
   <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -42,6 +42,7 @@
 </head>
 <body>
 <form method="POST" action="<%= UPDATE_RESERVATION_PATH%>" class="navbar-form">
+  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
   <div class="form-group container">
   <input type="hidden" name="<%= ID%>" value="${reservation.getId()}" />
     <div class="row">

@@ -34,13 +34,14 @@ public class UserDetailsDBProvider implements UserDetailsService {
 
 
         com.flatstock.model.User domainUser = userDao.getUserByLogin(login);
-        return new User(domainUser.getLogin(),
+        User user = new User(domainUser.getLogin(),
                 domainUser.getPassword(),
                 enabled,
                 accountNonExpired,
                 credentialsNonExpired,
                 accountNonLocked,
                 getRoles(domainUser.getRole()));
+        return user;
     }
 
     public List<SimpleGrantedAuthority> getRoles(Role role){
