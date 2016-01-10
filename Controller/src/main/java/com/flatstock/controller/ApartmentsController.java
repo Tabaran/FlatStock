@@ -22,8 +22,8 @@ public class ApartmentsController {
     public static final String ADMIN_PATH = "admin/";
     public static final String APARTMENTS_PATH = "/admin/apartments";
     public static final String ADD_APARTMENTS_PATH = "/admin/add_apartments";
-    public static final String ADD_APARTMENTS = "addApartments";
-    public static final String UPDATE_APARTMENTS = "updateApartments";
+    public static final String ADD_APARTMENTS = "/admin/addApartments";
+    public static final String UPDATE_APARTMENTS = "/admin/updateApartments";
     public static final String REMOVE_APARTMENTS_PATH = "/admin/remove_apartments";
     public static final String UPDATE_APARTMENTS_PATH = "/admin/update_apartments";
 
@@ -64,7 +64,7 @@ public class ApartmentsController {
 
     @RequestMapping(value = UPDATE_APARTMENTS_PATH, method = RequestMethod.GET)
     public ModelAndView showUpdateApartmentsForm(@RequestParam(ID) String id){
-        ModelAndView model = new ModelAndView(ADMIN_PATH + UPDATE_APARTMENTS);
+        ModelAndView model = new ModelAndView(UPDATE_APARTMENTS);
         model.addObject(APARTMENTS, apartmentService.getApartment(Integer.parseInt(id)));
         model.addObject(USERS, userService.getAllUsers());
         return model;

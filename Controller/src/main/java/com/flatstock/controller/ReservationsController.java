@@ -27,8 +27,8 @@ public class ReservationsController extends HttpServlet {
     public static final String ADD_RESERVATION_PATH = "/admin/add_reservation";
     public static final String REMOVE_RESERVATION_PATH = "/admin/remove_reservation";
     public static final String UPDATE_RESERVATION_PATH = "/admin/update_reservation";
-    public static final String ADD_RESERVATION = "addReservation";
-    public static final String UPDATE_RESERVATION = "updateReservation";
+    public static final String ADD_RESERVATION = "/admin/addReservation";
+    public static final String UPDATE_RESERVATION = "/admin/updateReservation";
 
     @Autowired
     ReservationService reservationService;
@@ -72,7 +72,7 @@ public class ReservationsController extends HttpServlet {
 
     @RequestMapping(value = UPDATE_RESERVATION_PATH, method = RequestMethod.GET)
     public ModelAndView showUpdateReservationForm(@RequestParam(ID) String id){
-        ModelAndView model = new ModelAndView(ADMIN_PATH + UPDATE_RESERVATION);
+        ModelAndView model = new ModelAndView(UPDATE_RESERVATION);
         model.addObject(RESERVATION, reservationService.getReservation(Integer.parseInt(id)));
         model.addObject(APARTMENTS, apartmentService.getAllApartments());
         model.addObject(USERS, userService.getAllUsers());

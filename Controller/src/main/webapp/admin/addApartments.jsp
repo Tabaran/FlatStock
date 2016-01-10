@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="static com.flatstock.model.Apartment.*"%>
+<%@ page import="static com.flatstock.controller.ApartmentsController.*"%>
 <html>
 <head>
     <title></title>
@@ -10,7 +11,7 @@
   <script type="text/javascript" src="webjars/jquery/2.1.1/jquery.min.js"></script>
 </head>
 <body>
-<form method="POST" action="/add_apartments" class="navbar-form">
+<form method="POST" action="<%= ADD_APARTMENTS_PATH%>" class="navbar-form">
   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
   <div class="form-group container">
     <div class="row">
