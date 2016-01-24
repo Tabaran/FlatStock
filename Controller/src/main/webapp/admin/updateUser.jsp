@@ -17,8 +17,7 @@
 </head>
 
 <body>
-<form method="POST" action="<%= UPDATE_USER_PATH%>" class="navbar-form" <%--enctype="multipart/form-data"--%>>
-    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+<form method="POST" action="<%= UPDATE_USER_PATH%>?${_csrf.parameterName}=${_csrf.token}" class="navbar-form" enctype="multipart/form-data">
     <input type="hidden" name="id" value="${user.getId()}"/>
     <div class="container form-group">
         <div class="row">
